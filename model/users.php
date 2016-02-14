@@ -22,6 +22,32 @@ include('connection.php');
         
         $pw = md5($pw);
         
+        
+        $chquery = "SELECT * FROM users WHERE email = :email";
+        
+        $ch = $db->prepare($chquery);
+        
+        $ch->execute(array(':email' => $email));
+        
+        $chresult = $ch->fetchAll(PDO::FETCH_ASSOC);
+        
+        if($chresult == null){
+           
+            $query = "INSERT INTO users (username, password, avi, status, email) VALUES (:un, :pw, :avi, :status, :email);";
+        
+            $result = $db->prepare($query);
+        
+            $result->execute(array(':un' => $un, ':pw' => $pw, ':avi'=> $avi, ':status' => $status, ':email' => $email));
+
+            echo json_encode('inserted');
+            
+        }else{
+           echo json_encode(array(status => 'hasaccount', info => $chresult)); 
+        }
+        
+        
+        
+        /*
         $query = "INSERT INTO users (username, password, avi, status, email) VALUES (:un, :pw, :avi, :status, :email);";
         
         $result = $db->prepare($query);
@@ -29,6 +55,7 @@ include('connection.php');
         $result->execute(array(':un' => $un, ':pw' => $pw, ':avi'=> $avi, ':status' => $status, ':email' => $email));
 
         echo json_encode('inserted');
+        */
          
     }
 /*
