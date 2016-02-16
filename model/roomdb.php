@@ -34,6 +34,22 @@ include('connection.php');
         
     }
 
+    function update_room(){
+        
+        $cid = $_POST['cid'];
+        $name = $_POST['name'];
+        
+        $query = "UPDATE chat SET name = :name, WHERE id =:cid";
+        
+        $result = $db->prepare($query);
+        
+        $result->execute(array(':name' => $name, ':cid' => $id));
+        
+        echo json_encode('updated chatroom name');
+        
+        
+    }
+
 
     function deleteRoom(){
 

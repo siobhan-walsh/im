@@ -47,10 +47,35 @@ $(document).ready(function(){
                         
                         for(var i = 0; i < allUsers.length; i++){
                             
+                            var li = document.createElement('li');
                             var p = document.createElement('p');
                             p.innerHTML = allUsers[i].username;
-                            document.getElementById('listusers').appendChild(p);
                             
+                            p.addEventListener('click', bindClick(i))
+                                             
+			
+                            li.appendChild(p);
+                            document.getElementById('listusers').appendChild(li);
+                            
+                            
+                        }
+                        
+                        
+                        function bindClick(i) {	
+				            return function(){
+                                console.log('clicked', i);
+                                
+                                
+                                this.remove();
+                                var inp  = document.createElement('input');
+                                inp.value = allUsers[i].username;
+                                li.appendChild(inp);
+                                inp.onkeypress = function(e){
+                                    console.log('key', e.keyCode);
+                                };
+                                
+                                
+                            }
                         }
                       
                     },
@@ -117,6 +142,15 @@ $(document).ready(function(){
             }
         });
     };
-     
+     function objectSize(the_object) {
+							  /* function to validate the existence of each key in the object to get the number of valid keys. */
+					  var object_size = 0;
+					  for (key in the_object){
+						if (the_object.hasOwnProperty(key)) {
+						  object_size++;
+						}
+					  }
+					  return object_size;
+				};
 
  });

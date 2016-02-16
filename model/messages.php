@@ -48,22 +48,36 @@ include('connection.php');
     }
 
 /* check if last message == last message in db */
-    function get_msg(){
-        
-        //read user information
-        
-    }
 
     function update_msg(){
         
-        //update user information
-   
-    }
-    
-    function delete_msg(){
+        $mid = $_POST['msg_id'];
+        $msg = $_POST['msg'];
         
-        //delete user
-        //remove a row of user from the users table
+        
+        $query = "UPDATE messages SET msg = :msg, WHERE msg_id =:mid";
+        
+        $result = $db->prepare($query);
+        
+        $result->execute(array(':msg' => $msg, ':mid' => $mid));
+        
+        echo json_encode('updated message');
+        
+        
     }
 
+    function delete_msg(){
+        
+        $mid = $_POST['msg_id'];
+       
+        
+        $query = "DELETE FROM messages WHERE msg_id = :mid";
+        
+        $result = $db->prepare($query);
+        
+        $result->execute(array(':mid' => $mid));
+        
+        echo json_encode('deleted msg');
+        
+    }
 ?>
