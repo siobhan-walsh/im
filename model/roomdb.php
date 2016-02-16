@@ -20,12 +20,27 @@ include('connection.php');
         
         //for admin list
         global $db;
-       
-        $query = "INSERT INTO chatRoom (chat, name, recipiant) VALUES (:un, :avi, :status, :c);";
-        $result->execute(array(':un' => $un, ':avi' => $avi, ":status" => $status, ":c" => $c));
+        $chat = $_POST['chat'];
+        $name = $_POST['name'];
+        $recipiant = $_POST['recipiant'];
+        $query = "INSERT INTO chatRoom (chat, name, recipiant) VALUES (:chat, :name, :recipiant);";
+        $result->execute(array(':chat' => $chat, ':name' => $name, ":recipiant" => $recipiant));
         $result = $db->prepare($query);
         
         echo json_encode($result);
+        
+    }
+
+
+    function insertRoom(){
+
+        //for admin list
+        global $db;
+        $ID = $_POST['roomID'];
+        $query = "DELETE FROM chatRoom WHERE id = :ID";
+        $result = $db->prepare($query);
+        $result->execute(array(':ID' => $ID));
+        echo json_encode('deleted user');
         
     }
 

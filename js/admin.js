@@ -65,27 +65,46 @@ $(document).ready(function(){
             url:'../cont/chatroom.php',
             dataType:'JSON',
             data:{
-                method:'insertRoom'
+                method:'insertRoom',
+                chat:"hi",
+                name:"id1",
+                recipiant:"id2":
                 
             },
             type:'POST',
             success:function(rooms){
-                for (i=0;1<rooms.length;i++){
-                    var p = document.createElement(p);
-                    p.innerHTML="chat name"+rooms[i].name+""
-                    //can you left join all user to the room
-                    document.body.appendChild(listi);       
-                }
+               console.log("worked");
             },
             error:function(sessionid){
                 console.log("Error");
 
             }
         });
-        
     };
      
      
+    insertRoom();
+    
+    function insertRoom (){
+        
+        $.ajax({
+            url:'../cont/chatroom.php',
+            dataType:'JSON',
+            data:{
+                method:'deleteRoom',
+                roomID:"2",
+                
+            },
+            type:'POST',
+            success:function(rooms){
+               console.log("worked");
+            },
+            error:function(sessionid){
+                console.log("Error");
+
+            }
+        });
+    };
      
      
      
