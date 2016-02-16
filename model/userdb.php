@@ -11,23 +11,42 @@ include('connection.php');
         
         global $db;
         
-        
-        
         $un = $_POST['un'];
+        $pw = $_POST['pw'];
         $avi = $_POST['avi'];
-        $c = $_POST['c'];
         $status = $_POST['status'];
-        
-        $query = "INSERT INTO users (username, avi, status, c) VALUES (:un, :avi, :status, :c);";
-        
-        $result = $db->prepare($query);
-        
-        $result->execute(array(':un' => $un, ':avi' => $avi, ":status" => $status, ":c" => $c));
+        $c = $_POST['c'];
+        $email = $_POST['email'];
         
         
-        get_user();
+        $pw = md5($pw);
+        
+        //SELECT * FROM users WHERE email = 
+        $chquery = "SELECT * FROM users WHERE email = :email";
+        
+        $ch = $db->prepare($chquery);
+        
+        $ch->execute(array(':email' => $email));
+        
+        $chresult = $ch->fetchAll(PDO::FETCH_ASSOC);
+        
+        if($chresult == null){
+            
+            //INSERT INTO users (username, password, avi, status, c, email) VALUES ('me', 'test', 'pic', '2', '#fff', 'ya@ya.com');
+           
+            $query = "INSERT INTO users (username, password, avi, status, c, email) VALUES (:un, :pw, :avi, :status, :c, :email);";
+        
+            $result = $db->prepare($query);
+        
+            $result->execute(array(':un' => $un, ':pw' => $pw, ':avi'=> $avi, ':status' => $status, ':c' => $c, ':email' => $email));
+            
+            echo json_encode(array('account' => 'new', 'info' => $result));
+            
+        } else {
+           echo json_encode(array('account' => 'hasaccount', 'info' => $chresult)); 
+        }
        
-         
+  
     }
 
     function get_user(){
@@ -36,22 +55,29 @@ include('connection.php');
         
         global $db;
         
-        $un = $_POST['un'];
+        $email = $_POST['email'];
        
-        $query = "SELECT user_id FROM users WHERE username = :un;";
+        //SELECT user_id, status FROM users WHERE username = 'fdsa';
+        
+        $query = "SELECT user_id, status FROM users WHERE email = :email;";
         
         $result = $db->prepare($query);
         
-        $result->execute(array(':un' => $un));
+        $result->execute(array(':email' => $email));
         
         $lresult = $result->fetchAll();
-        
-        $_SESSION['user_id'] = $lresult[0]['user_id'];
-        
-        $uid = $_SESSION['user_id'];
-        
-        echo json_encode($uid);
-        
+       
+           
+            $_SESSION['user_id'] = $lresult[0]['user_id'];
+
+            $uid = $_SESSION['user_id'];
+
+            $_SESSION['status'] = $lresult[0]['status'];
+
+            $status = $_SESSION['status'];
+
+            echo json_encode(array('user_id' => $uid, 'status' => $status));
+            
     }
 
 
