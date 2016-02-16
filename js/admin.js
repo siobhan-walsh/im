@@ -31,10 +31,34 @@ $(document).ready(function(){
     };
 
     //show all users
-    
+    showAllUsers();
     
     function showAllUsers(){
         
+         $.ajax({
+                    url:'../cont/user.php',
+                    dataType:'JSON',
+                    data:{
+                        method:'showAllUsers'
+                    },
+                    type:'POST',
+                    success:function(allUsers){
+                        console.log('allUsers is', allUsers);
+                        
+                        for(var i = 0; i < allUsers.length; i++){
+                            
+                            var p = document.createElement('p');
+                            p.innerHTML = allUsers[i].username;
+                            document.getElementById('listusers').appendChild(p);
+                            
+                        }
+                      
+                    },
+                    error:function(allUsers){
+                        console.log('allUsers error', allUsers);
+
+                    }
+                });
         
     };
     

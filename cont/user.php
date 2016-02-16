@@ -24,7 +24,7 @@ include('../model/userdb.php');
 
  if($_POST['method'] == 'showAllUsers'){
       
-     // showAllUsers();
+     showAllUsers();
       
   }
 

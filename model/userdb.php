@@ -96,6 +96,22 @@ include('connection.php');
 
     }
 
+ function showAllUsers(){
+       
+         global $db;
+     
+        $query = "SELECT * FROM users;";
+        
+        $result = $db->prepare($query);
+     
+        
+        $result->execute();
+        $users =  $result->fetchAll(PDO::FETCH_ASSOC);
+        
+        echo json_encode($users);
+        
+        
+    }
 
     function update_user(){
         
