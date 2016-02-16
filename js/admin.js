@@ -68,7 +68,7 @@ $(document).ready(function(){
                 method:'insertRoom',
                 chat:"hi",
                 name:"id1",
-                recipiant:"id2":
+                recipiant:"id2"
                 
             },
             type:'POST',
