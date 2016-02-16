@@ -1,42 +1,35 @@
 <?php
 
-include('../model/userdb.php');
+include('../model/chatdb.php');
 
-    //CRUD users
+//CRUD Chat
 
-  if($_POST['method'] == 'insert'){
+if($_POST['method'] == 'insertRoom'){
       
-      insert_user();
+    inserRoom();
+      
+}
+
+if($_POST['method'] == 'showAllRooms'){
+      
+    showAllRooms();
+      
+  }
+if($_POST['method'] == 'showRoomsWhereId'){
+      
+    showRoomsWhereId();
       
   }
 
-    if($_POST['method'] == 'getsession'){
+if($_POST['method'] == 'updateRoom'){
       
-      check_session();
-      
-    }
-
- if($_POST['method'] == 'getUser'){
-      
-      get_user();
+     updateRoom();
       
   }
 
- if($_POST['method'] == 'showAllUsers'){
+if($_POST['method'] == 'deleteRoom'){
       
-     // showAllUsers();
-      
-  }
-
-if($_POST['method'] == 'updateUser'){
-      
-     // updateUser();
-      
-  }
-
-if($_POST['method'] == 'deleteUser'){
-      
-     // deleteUser();
+    deleteRoom();
       
   }
    
