@@ -30,7 +30,13 @@ $(document).ready(function(){
         });
     };
 
-    showAllRooms();
+    //show all users
+    
+    
+    function showAllUsers(){
+        
+        
+    };
     
     function showAllRooms (){
         
@@ -41,23 +47,29 @@ $(document).ready(function(){
                 method:'showAllRooms'
             },
             type:'POST',
-            success:function(rooms){
+            success:function(showrooms){
+                
+                console.log('showrooms', showrooms);
+                
+                
+                /*
                 for (i=0;1<rooms.length;i++){
                     var p = document.createElement(p);
                     p.innerHTML="chat name"+rooms[i].name+""
                     //can you left join all user to the room
                     document.body.appendChild(listi);       
                 }
+                */
             },
-            error:function(sessionid){
-                console.log("Error");
+            error:function(showrooms){
+                console.log("showroom Error", showrooms);
 
             }
         });
         
     };
  
-    insertRoom();
+    
     
     function insertRoom (){
         
@@ -68,52 +80,19 @@ $(document).ready(function(){
                 method:'insertRoom',
                 chat:"hi",
                 name:"id1",
-                recipiant:"id2"
+                recipient:"id2"
                 
             },
             type:'POST',
-            success:function(rooms){
-               console.log("worked");
+            success:function(newroom){
+               console.log("newroom", newroom);
             },
             error:function(sessionid){
-                console.log("Error");
+                console.log("newroom Error", newroom);
 
             }
         });
     };
      
-     
-    insertRoom();
-    
-    function insertRoom (){
-        
-        $.ajax({
-            url:'../cont/chatroom.php',
-            dataType:'JSON',
-            data:{
-                method:'deleteRoom',
-                roomID:"2",
-                
-            },
-            type:'POST',
-            success:function(rooms){
-               console.log("worked");
-            },
-            error:function(sessionid){
-                console.log("Error");
 
-            }
-        });
-    };
-     
-     
-     
-     
-     
- 
- 
- 
- 
- 
- 
  });

@@ -6,7 +6,7 @@ include('../model/roomdb.php');
 
 if($_POST['method'] == 'insertRoom'){
       
-    inserRoom();
+    insertRoom();
       
 }
 

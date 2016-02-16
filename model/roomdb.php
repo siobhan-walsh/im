@@ -8,8 +8,9 @@ include('connection.php');
         //for admin list
         global $db;
        
-        $query = "SELECT * FROM chatRoom";
+            $query = "SELECT * FROM chatRoom";
             $result = $db->prepare($query);
+            $result->execute();
             $lresult = $result->fetchAll();
         echo json_encode($lresult);
         
@@ -22,17 +23,19 @@ include('connection.php');
         global $db;
         $chat = $_POST['chat'];
         $name = $_POST['name'];
-        $recipiant = $_POST['recipiant'];
-        $query = "INSERT INTO chatRoom (chat, name, recipiant) VALUES (:chat, :name, :recipiant);";
-        $result->execute(array(':chat' => $chat, ':name' => $name, ":recipiant" => $recipiant));
-        $result = $db->prepare($query);
+        $recipient = $_POST['recipient'];
+        $query = "INSERT INTO chatRoom (chat, name, recipient) VALUES (:chat, :name, :recipient);";
         
-        echo json_encode($result);
+        $result = $db->prepare($query);
+        $result->execute(array(':chat' => $chat, ':name' => $name, ":recipient" => $recipient));
+        
+        
+        echo json_encode('newroom inserted');
         
     }
 
 
-    function insertRoom(){
+    function deleteRoom(){
 
         //for admin list
         global $db;
