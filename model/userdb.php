@@ -73,14 +73,33 @@ include('connection.php');
 
     function update_user(){
         
-        //update user information
+        $uid = $_POST['user_id'];
+        $un = $_POST['un'];
+        
+        $query = "UPDATE users SET username = :un, WHERE user_id =:uid";
+        
+        $result = $db->prepare($query);
+        
+        $result->execute(array(':un' => $un, ':uid' => $uid));
+        
+        echo json_encode('updated username');
+        
         
     }
     
     function delete_user(){
         
-        //delete user
-        //remove a row of user from the users table
+        $uid = $_POST['user_id'];
+       
+        
+        $query = "DELETE FROM users WHERE user_id = :uid";
+        
+        $result = $db->prepare($query);
+        
+        $result->execute(array(':uid' => $uid));
+        
+        echo json_encode('deleted user');
+        
     }
 
 ?>
