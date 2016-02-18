@@ -13,7 +13,7 @@
         
         <div ng-controller = 'userlist'>
             
-            <button ng-click = 'getUsers()'>yo</button>
+            <button ng-click = 'getUsers()'>List users</button>
             
             <div ng-hide = {{hidden}} ng-repeat='user in allUsers'>
             
@@ -44,8 +44,12 @@
                         success:function(allUsers){
                             console.log('allUsers is', allUsers);
                             
-                            $scope.allUsers = allUsers;
-                            $scope.hidden = false;
+                            $scope.$apply(function(){
+                                
+                                $scope.allUsers = allUsers;
+                                $scope.hidden = false;
+                                
+                            });
 
                             /*
 
