@@ -45,6 +45,8 @@ $(document).ready(function(){
                     success:function(allUsers){
                         console.log('allUsers is', allUsers);
                         
+                        /*
+                        
                         for(var i = 0; i < allUsers.length; i++){
                             
                             var li = document.createElement('li');
@@ -59,7 +61,7 @@ $(document).ready(function(){
                             
                             
                         }
-                        
+                        */
                         
                         function bindClick(i) {	
 				            return function(){

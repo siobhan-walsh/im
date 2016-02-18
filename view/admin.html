@@ -1,21 +1,101 @@
-
-
 <!DOCTYPE html>
-<html>
+<html ng-app='chat'>
     <head>
         <title>im | admin</title>
     </head>
     <script src = 'https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
-    <script src = '../js/admin.js'></script>
+            <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <!--<script src = '../js/admin.js'></script>-->
     <link href='https://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
     <link href='../css/style.css' rel='stylesheet' type='text/css'>
 
     <body>
-        <h1>All users:</h1>
-        <ul id = 'listusers'>
-            
         
-        </ul>
-       
+        <div ng-controller = 'userlist'>
+            
+            <button ng-click = 'getUsers()'>yo</button>
+            
+            <div ng-hide = {{hidden}} ng-repeat='user in allUsers'>
+            
+                <img src='{{user.avi}}' class = 'smallavi'>
+                <span style='color:{{user.c}}'>{{user.username}}</span>
+            
+            </div>
+
+        </div>
+        <script>
+        
+ 
+            var adminchat = angular.module("chat", []);
+            
+            
+            adminchat.controller('userlist', ["$scope", function($scope){
+                
+                $scope.hidden = true
+                $scope.getUsers = function(){
+                  
+                    $.ajax({
+                        url:'../cont/user.php',
+                        dataType:'JSON',
+                        data:{
+                            method:'showAllUsers'
+                        },
+                        type:'POST',
+                        success:function(allUsers){
+                            console.log('allUsers is', allUsers);
+                            
+                            $scope.allUsers = allUsers;
+                            $scope.hidden = false;
+
+                            /*
+
+                            for(var i = 0; i < allUsers.length; i++){
+
+                                var li = document.createElement('li');
+                                var p = document.createElement('p');
+                                p.innerHTML = allUsers[i].username;
+
+                                p.addEventListener('click', bindClick(i))
+
+
+                                li.appendChild(p);
+                                document.getElementById('listusers').appendChild(li);
+
+
+                            }
+                            
+
+                            function bindClick(i) {	
+                                return function(){
+                                    console.log('clicked', i);
+
+
+                                    this.remove();
+                                    var inp  = document.createElement('input');
+                                    inp.value = allUsers[i].username;
+                                    li.appendChild(inp);
+                                    inp.onkeypress = function(e){
+                                        console.log('key', e.keyCode);
+                                    };
+
+
+                                }
+                            }
+                            
+                            */
+
+                        },
+                        error:function(allUsers){
+                            console.log('allUsers error', allUsers);
+
+                        }
+                    });
+        
+                };
+
+                    
+             }]);
+        
+        </script>
     </body>
 </html>
