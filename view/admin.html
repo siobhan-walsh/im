@@ -6,10 +6,29 @@
     <script src = 'https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
             <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <!--<script src = '../js/admin.js'></script>-->
-    <link href='https://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Maven+Pro' rel='stylesheet' type='text/css'>
     <link href='../css/style.css' rel='stylesheet' type='text/css'>
 
     <body>
+        
+        
+        <div class='header'>
+        
+        
+        </div>
+        
+        <div class='content'>
+        
+            <div ng-controller = 'chatroomlist' class = 'addnew'>
+
+                <h1 ng-click = 'showinp()'>+ add new chatroom</h1>
+                 <input ng-model = 'inp' ng-show='{{hideinp}}' class = 'listinp' type = 'text' autofocus>
+
+            </div>
+        </div>
+         
+        
+   <!--
         
         <div ng-controller = 'userlist'>
             
@@ -26,8 +45,30 @@
             </div>
 
         </div>
-        <script>
         
+        -->
+        <script>
+            
+            
+            var adminchat = angular.module("chat", []);
+            
+            
+            adminchat.controller('chatroomlist', ["$scope", function($scope){
+                
+                $scope.hideinp = 'true';
+                
+                $scope.showinp = function(){
+                    $scope.hideinp = 'false';
+                    
+                }
+            
+            }]);
+                
+                
+                
+                
+        
+            /*
  
             var adminchat = angular.module("chat", []);
             
@@ -95,7 +136,7 @@
                                 }
                             }
                             
-                            */
+                          
 
                         },
                         error:function(allUsers){
@@ -107,9 +148,10 @@
                 };
                 
                 
-
+  
                     
              }]);
+             */
         
         </script>
     </body>
