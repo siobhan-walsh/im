@@ -15,10 +15,13 @@
             
             <button ng-click = 'getUsers()'>List users</button>
             
-            <div ng-hide = {{hidden}} ng-repeat='user in allUsers'>
+            <div ng-click = 'moreinfo()' ng-hide = {{hidden}} ng-repeat='user in allUsers'>
             
-                <img src='{{user.avi}}' class = 'smallavi'>
-                <span style='color:{{user.c}}'>{{user.username}}</span>
+                <div >
+                    <img src='{{user.avi}}' class = 'smallavi'>
+                    <span style='color:{{user.c}}'>{{user.username}}</span>
+                    <p ng-hide = {{showmore}}>{{user.email}}</p>
+                </div>
             
             </div>
 
@@ -31,7 +34,8 @@
             
             adminchat.controller('userlist', ["$scope", function($scope){
                 
-                $scope.hidden = true
+                $scope.hidden = true;
+                $scope.showmore = true;
                 $scope.getUsers = function(){
                   
                     $.ajax({
@@ -50,6 +54,11 @@
                                 $scope.hidden = false;
                                 
                             });
+                            
+                            
+                            $scope.moreinfo = function(){
+                                $scope.showmore = false;
+                            };
 
                             /*
 
@@ -96,6 +105,8 @@
                     });
         
                 };
+                
+                
 
                     
              }]);
