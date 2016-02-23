@@ -76,12 +76,12 @@
             
             var e_file = allfiles[i];
             
-            /*
-            if(!e_file.type.match('images/*')){
+           
+            if(!e_file.type.match('image/*')){
                 console.log('not an image file');
                 return false;
             }
-            */
+            
             
             formData.append('images[]', e_file, e_file.name);
             formData.append('message', 'my post message');
