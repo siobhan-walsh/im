@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>im | profile</title>
+    </head>
+    <script src = 'https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
+            <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <!--<script src = '../js/admin.js'></script>-->
+    <link href='https://fonts.googleapis.com/css?family=Maven+Pro' rel='stylesheet' type='text/css'>
+    <link href='../css/style.css' rel='stylesheet' type='text/css'>
+
+    <body>
+        
+        
+        <div class='header'>
+        
+        
+        </div>
+        
+        <div class='content'>
+            
+            
+            <form id='myform'>
+
+                <input type='file' id='filesinp' multiple >
+                <button id='upload'>upload</button>
+
+            </form>
+
+        </div>
+
+<script>
+
+    var upload = document.getElementById('upload');
+    var files = document.getElementById('filesinp');
+    var sess = '';
+    
+    
+    sessiondata();
+
+    function sessiondata(){
+
+        $.ajax({
+            url:'../cont/user.php',
+            dataType:'JSON',
+            data:{
+                method:'getsession'
+            },
+            type:'POST',
+            success:function(sessionid){
+                console.log('sessionid is', sessionid);
+                $( "body" ).data( "uid", sessionid );
+
+            },
+            error:function(sessionid){
+                console.log('sessionid', sessionid);
+
+            }
+        });
+    };
+    
+    
+    upload.onclick = function(e){
+        
+        console.log('hi');
+        e.preventDefault();
+        
+        //upload the files here using another form of ajax
+        
+        var formData = new FormData();
+        var allfiles = files.files;
+        console.log('files', allfiles);
+        var xhr = new XMLHttpRequest();
+        
+        for(var i =0; i < allfiles.length; i++){
+            
+            var e_file = allfiles[i];
+            
+            /*
+            if(!e_file.type.match('images/*')){
+                console.log('not an image file');
+                return false;
+            }
+            */
+            
+            formData.append('images[]', e_file, e_file.name);
+            formData.append('message', 'my post message');
+            formData.append('userid', $( "body" ).data( "uid"));
+            
+            xhr.open('POST', '../model/imgupload.php', true);
+            xhr.onload = function(){
+                
+                if(xhr.status == 200){
+                    console.log('loaded properly');
+                }
+                
+            };
+            
+            xhr.send(formData);
+        };
+        
+        
+    };
+    
+    
+    
+    //show profile pic 
+    
+    
+    
+
+        </script>
+    </body>
+</html>
