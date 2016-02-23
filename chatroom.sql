@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 16, 2016 at 09:25 PM
+-- Generation Time: Feb 23, 2016 at 09:20 PM
 -- Server version: 5.5.42
 -- PHP Version: 5.6.10
 
@@ -75,7 +75,7 @@ CREATE TABLE `users` (
   `c` varchar(7) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -109,7 +109,8 @@ INSERT INTO `users` (`user_id`, `username`, `avi`, `status`, `c`, `email`, `pass
 (25, 'fdsa', 'asdf', 2, '#000000', 'qqsqssw@werwsdhdfe.com', 'd41d8cd98f00b204e9800998ecf8427e'),
 (26, 'me', 'pic', 2, '#fff', 'ya@ya.com', 'test'),
 (27, 'fdsa', 'asdf', 2, '#000000', 'qqsqssw@werwssdhdfe.com', 'd41d8cd98f00b204e9800998ecf8427e'),
-(28, 'siobhan', 'http://assets.worldwildlife.org/photos/144/images/hero_small/Giant_Panda_Hero_image_%28c%29_Michel_Gunther_WWF_Canon.jpg?1345515244', 2, '#00ff92', 'me@siobhan.ca', '912ec803b2ce49e4a541068d495ab570');
+(28, 'siobhan', 'http://assets.worldwildlife.org/photos/144/images/hero_small/Giant_Panda_Hero_image_%28c%29_Michel_Gunther_WWF_Canon.jpg?1345515244', 2, '#00ff92', 'me@siobhan.ca', '912ec803b2ce49e4a541068d495ab570'),
+(29, 'sio', '../img/29/847d4a6.jpeg', 1, '#28ff1d', 'siobhanemmarose@gmail.com', '5e40d09fa0529781afd1254a42913847');
 
 -- --------------------------------------------------------
 
@@ -174,7 +175,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
 --
 -- Constraints for dumped tables
 --
