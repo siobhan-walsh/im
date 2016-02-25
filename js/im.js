@@ -1,5 +1,6 @@
 var im = angular.module('im', [
     'ngRoute', 
+    'allctrls'
 ]);
 
 
@@ -9,7 +10,8 @@ im.config([
         $routeProvider.when(
             '/admin',
             {
-                templateUrl:'view/admin.html'
+                templateUrl:'view/admin.html',
+                controller:'chatroomCtrl'
             }
         )
         
