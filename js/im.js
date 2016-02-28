@@ -14,6 +14,12 @@ im.config([
                 controller:'chatroomCtrl'
             }
         )
-        
+        $routeProvider.when(
+            '/signup',
+            {
+                templateUrl:'view/signup.html',
+                controller:'signupCtrl'
+            }
+        )
     }
 ]);

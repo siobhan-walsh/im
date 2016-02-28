@@ -1,4 +1,6 @@
  $(document).ready(function(){  
+     
+     /*
             var un = document.getElementById('un');
             var pw = document.getElementById('pw');
             var email = document.getElementById('email');
@@ -74,4 +76,6 @@
                 });
                
             };
+     
+     */
  });
