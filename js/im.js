@@ -21,5 +21,11 @@ im.config([
                 controller:'signupCtrl'
             }
         )
+        $routeProvider.when(
+            '/profile',
+            {
+                templateUrl:'view/profile.html'
+            }
+        )
     }
 ]);
