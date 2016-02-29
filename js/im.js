@@ -8,10 +8,10 @@ im.config([
     '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
         
         $routeProvider.when(
-            '/admin',
+            '/newadmin',
             {
-                templateUrl:'view/admin.html',
-                controller:'chatroomCtrl'
+                templateUrl:'view/newadmin.html',
+                controller:'adminSignupCtrl'
             }
         )
         $routeProvider.when(
@@ -25,6 +25,13 @@ im.config([
             '/profile',
             {
                 templateUrl:'view/profile.html'
+            }
+        )
+        $routeProvider.when(
+            '/dashboard',
+            {
+                templateUrl:'view/dashboard.html',
+                controller:'chatroomCtrl'
             }
         )
     }

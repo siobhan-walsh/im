@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.10
+-- version 4.4.1.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 23, 2016 at 09:20 PM
+-- Generation Time: Feb 29, 2016 at 01:35 AM
 -- Server version: 5.5.42
--- PHP Version: 5.6.10
+-- PHP Version: 5.6.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -27,15 +27,6 @@ CREATE TABLE `chatRoom` (
   `recipient` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `chatRoom`
---
-
-INSERT INTO `chatRoom` (`id`, `chat`, `name`, `recipient`) VALUES
-(1, 'hi', 'id1', 0),
-(2, 'hi', 'id1', 0),
-(3, 'hi', 'id1', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -48,18 +39,6 @@ CREATE TABLE `messages` (
   `msg` varchar(500) NOT NULL,
   `msg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `messages`
---
-
-INSERT INTO `messages` (`msg_id`, `user_id`, `msg`, `msg_time`) VALUES
-(1, 8, 'fdsa', '2016-02-15 19:57:18'),
-(2, 9, 'hi', '2016-02-16 18:51:45'),
-(3, 16, 'hi', '2016-02-16 19:00:12'),
-(4, 27, 'ji', '2016-02-16 19:28:06'),
-(5, 28, 'hola', '2016-02-16 20:21:06'),
-(6, 9, 'hi', '2016-02-16 20:21:09');
 
 -- --------------------------------------------------------
 
@@ -75,42 +54,14 @@ CREATE TABLE `users` (
   `c` varchar(7) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`user_id`, `username`, `avi`, `status`, `c`, `email`, `password`) VALUES
-(1, 'asdf', 'http://www.wildlifedepartment.com/wildlifemgmt/turtles/Common%20Map%20Turtle.jpg', 0, '#1bffe1', '', ''),
-(2, 'test2', 'http://www.wildlifedepartment.com/wildlifemgmt/turtles/Common%20Map%20Turtle.jpg', 1, '#23ff31', '', ''),
-(3, 'test3', 'http://www.wildlifedepartment.com/wildlifemgmt/turtles/Common%20Map%20Turtle.jpg', 2, '#ec73ff', '', ''),
-(4, 'tesingcustomer', 'http://www.wildlifedepartment.com/wildlifemgmt/turtles/Common%20Map%20Turtle.jpg', 2, '#7a8afe', '', ''),
-(5, 'asdf', 'fdsa', 2, '#30ff33', '', ''),
-(6, 'asdf', 'fdsa', 2, '#30ff33', '', ''),
-(7, 'sesstest', 'asdf', 2, '#00f927', '', ''),
-(8, 'testsess2', 'fds', 2, '#000000', '', ''),
-(9, 'hihi', 'asdf', 1, '#000000', '', ''),
-(10, 'hihi', 'img', 1, '#69ff7a', '', ''),
-(11, 'tuestest', 'img', 1, '#000000', 'me@me.com', '5ebe2294ecd0e0f08eab7690d2a6ee69'),
-(12, 'rwwerwe', 'ssdf', 1, '#000000', 'adsf@fdsa.com', 'd41d8cd98f00b204e9800998ecf8427e'),
-(13, 'rwwerwe', 'ssdf', 1, '#000000', 'asdsf@fdsa.com', 'd41d8cd98f00b204e9800998ecf8427e'),
-(14, 'siobhan', 'http://www.backwaterreptiles.com/images/turtles/red-eared-slider-turtle-for-sale.jpg', 2, '#003dff', 'emaillly@yllliame.com', '660330d60fbc1a241be39280696b2942'),
-(15, 'siobhanagain', 'img', 2, '#ff00ce', 'woao@woao.com', '22af645d1859cb5ca6da0c484f1f37ea'),
-(16, 'fdsa', 'asdf', 2, '#000000', 'fdsa@rew.com', '912ec803b2ce49e4a541068d495ab570'),
-(17, 'fdsa', 'asdf', 2, '#000000', 'ww@rew.com', 'd41d8cd98f00b204e9800998ecf8427e'),
-(18, 'fdsa', 'asdf', 2, '#000000', 'qqw@rew.com', 'd41d8cd98f00b204e9800998ecf8427e'),
-(19, 'fdsa', 'asdf', 2, '#000000', 'qqw@werwe.com', 'd41d8cd98f00b204e9800998ecf8427e'),
-(20, 'fdsa', 'asdf', 2, '#000000', 'qqqw@werwe.com', 'fc2baa1a20b4d5190b122b383d7449fd'),
-(21, 'fdsa', 'asdf', 2, '#000000', 'qqqsw@werwe.com', 'd41d8cd98f00b204e9800998ecf8427e'),
-(22, 'fdsa', 'asdf', 2, '#000000', 'qqqssw@werwsdfe.com', 'd41d8cd98f00b204e9800998ecf8427e'),
-(23, 'fdsa', 'asdf', 2, '#000000', 'qqqssw@werwsdhfe.com', 'd41d8cd98f00b204e9800998ecf8427e'),
-(24, 'fdsa', 'asdf', 2, '#000000', 'qqqssw@werwsdhdfe.com', 'd41d8cd98f00b204e9800998ecf8427e'),
-(25, 'fdsa', 'asdf', 2, '#000000', 'qqsqssw@werwsdhdfe.com', 'd41d8cd98f00b204e9800998ecf8427e'),
-(26, 'me', 'pic', 2, '#fff', 'ya@ya.com', 'test'),
-(27, 'fdsa', 'asdf', 2, '#000000', 'qqsqssw@werwssdhdfe.com', 'd41d8cd98f00b204e9800998ecf8427e'),
-(28, 'siobhan', 'http://assets.worldwildlife.org/photos/144/images/hero_small/Giant_Panda_Hero_image_%28c%29_Michel_Gunther_WWF_Canon.jpg?1345515244', 2, '#00ff92', 'me@siobhan.ca', '912ec803b2ce49e4a541068d495ab570'),
-(29, 'sio', '../img/29/847d4a6.jpeg', 1, '#28ff1d', 'siobhanemmarose@gmail.com', '5e40d09fa0529781afd1254a42913847');
+(30, 'super_admin', './img/default/admin-avi-default.jpg', 1, 'rgba(24', 'admincity@gmail.com', '912ec803b2ce49e4a541068d495ab570');
 
 -- --------------------------------------------------------
 
@@ -175,7 +126,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=31;
 --
 -- Constraints for dumped tables
 --

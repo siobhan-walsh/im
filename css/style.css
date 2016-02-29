@@ -1,6 +1,7 @@
 body {
     margin:0;
     padding:0;
+    background-color:rgba(119,36,87,1)
 }
 body, p, button, input {
     font-family: 'Maven Pro', sans-serif;
@@ -20,7 +21,7 @@ h3 {
 }
 
 .header {
-    background-color:rgba(64,192,203,1);
+    background-color:#9C528C;
     height:10vh;
 
 }
@@ -31,14 +32,30 @@ h3 {
 }
 
 #signin {
-    background-color:#128074;
-    position:fixed;
-    top:10%;
-    left:25%;
-    width:50%;
+    
+    width:70%;
+    margin:0 10%;
     padding:5%;
-    z-index:1;
-    box-shadow: 4px 4px 4px 4px rgba(0,0,0,0.2);
+    
+
+}
+
+.blackinp {
+
+
+    
+    background-color:rgba(36,22,29,1);
+    color:#fff;
+    width:80%;
+    padding:5%;
+    margin:2% 5%;
+    
+    border-style:solid;
+    border-width: 2px;
+    border-color: rgba(216,90,211,1);
+    border-radius:6px;
+    
+
 }
 
 #signin p {
@@ -64,11 +81,13 @@ h3 {
     margin:2% 5%;
     border-radius:10px;
     border:none;
-    background-color:#5BD8A9;
+    background-color:rgba(197,98,143,1);
+    color:#fff;
 }
 
 #subm:hover{
-    background-color:#20C995;
+
+    background-color:rgba(156,82,140,1);
 }
 
 #msgcenter {
