@@ -13,18 +13,88 @@
         </div>
 
 <script>
+    
+    
+    
+  
+    sessiondata();
 
+    function sessiondata(){
+
+        $.ajax({
+            url:'cont/user.php',
+            dataType:'JSON',
+            data:{
+                method:'getsession',
+            },
+            type:'POST',
+            success:function(sessionid){
+                var textbox = false;
+                //var inputh3 = document.createElement("input");
+                var div1 = document.createElement("div");
+                div1.className='box';
+                var div2 = document.createElement("div");
+                div2.className='box';
+                var div = document.createElement("div");
+                var h3 = document.createElement("h3");
+                h3.className="boxclick";
+                h3.innerHTML=sessionid.name;
+                var p = document.createElement("p");
+                p.className="boxclick";
+                p.innerHTML=sessionid.email;
+                var but = document.createElement("button");
+                but.innerHTML="update";
+                var color = document.createElement("input");
+                color.type = "color";
+                color.nodeValue = sessionid.c;
+                div1.appendChild(h3);
+                div2.appendChild(p);
+                div.appendChild(color);
+                div.appendChild(div1);
+                div.appendChild(div2);
+                div.appendChild(but);
+                $(".content").append(div);
+                
+                $('.boxclick').click(function(){  
+                    
+                        var inputh3 = document.createElement("input");
+                        var textbox = true;
+                        inputh3.id = "inputh3";
+                        inputh3.value = this.innerHTML;
+                        this.parentNode.appendChild(inputh3);
+                        textbox=true;
+                        
+                });
+                   
+            },
+            error:function(sessionid){
+                console.log('sessionid', sessionid);
+                
+
+            }
+        });
+    };
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*
     var upload = document.getElementById('upload');
     var files = document.getElementById('filesinp');
     var sess = '';
     
     
-    /* for next week
+     for next week
     
         users have to be able to login, and put up something (imgs, messages, etc)
         update user information
         
-        */
+      
     
     sessiondata();
 
@@ -92,7 +162,7 @@
         
     };
     
-    
+    */
     
     //show profile pic 
     

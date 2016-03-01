@@ -20,7 +20,7 @@ ctrl.controller('adminSignupCtrl', ['$scope', function($scope){
             var pw = document.getElementById('pw');
             var email = document.getElementById('email');
             var avi = './img/default/admin-avi-default.jpg';
-            var c = 'rgba(244,22,131,1)';
+            var c = '#772457';
             
             var subm = document.getElementById('subm');
 
