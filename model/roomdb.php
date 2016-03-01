@@ -8,13 +8,15 @@ include('connection.php');
         //for admin list
         global $db;
        
-            $query = "SELECT * FROM chatRoom";
+            $query = "SELECT * FROM chatroom";
             $result = $db->prepare($query);
             $result->execute();
             $lresult = $result->fetchAll();
-        echo json_encode($lresult);
+            echo json_encode($lresult);
         
     }
+
+
 
     
     function insertRoom(){
@@ -25,7 +27,7 @@ include('connection.php');
         $name = $_POST['name'];
         $host_id = $_SESSION['user_id'];
 
-        $query = "INSERT INTO chatRoom (name, host_id) VALUES ( :name, :host_id);";
+        $query = "INSERT INTO chatroom (name, host_id) VALUES ( :name, :host_id);";
         
         $result = $db->prepare($query);
         $result->execute(array(':name' => $name, ":host_id" => $host_id));
