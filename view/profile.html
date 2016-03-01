@@ -2,171 +2,47 @@
         
         <div class='content'>
             
+            <div ng-controller= 'profileCtrl' class='userinfo'>
+                
+                
+                
+                
+                
+                <img class = 'profilepic' ng-click = 'update()' src='{{info.avi}}'>
+                
+                
+                <form id='myform'>
+
+                    <input  type='file' id='filesinp' multiple >
+                    <button ng-click = 'updateAvi($event)' id='upload'>upload</button>
+
+                </form>
+                
+                
+                <input value= '{{info.c}}' type="color">
+                
+                <div class="box">
+                    
+                    <h3 class="boxclick">{{info.name}}</h3>
+                </div>
+                
+                <div class="box">
+                    <p class="boxclick">{{info.email}}</p>
+                </div>
+                
+                <button>update</button>
             
-            <form id='myform'>
-
-                <input type='file' id='filesinp' multiple >
-                <button id='upload'>upload</button>
-
-            </form>
+            
+            
+            </div>
+     
+            
+            
+            
 
         </div>
 
 <script>
-    
-    
-    
-  
-    sessiondata();
-
-    function sessiondata(){
-
-        $.ajax({
-            url:'cont/user.php',
-            dataType:'JSON',
-            data:{
-                method:'getsession',
-            },
-            type:'POST',
-            success:function(sessionid){
-                var textbox = false;
-                //var inputh3 = document.createElement("input");
-                var div1 = document.createElement("div");
-                div1.className='box';
-                var div2 = document.createElement("div");
-                div2.className='box';
-                var div = document.createElement("div");
-                var h3 = document.createElement("h3");
-                h3.className="boxclick";
-                h3.innerHTML=sessionid.name;
-                var p = document.createElement("p");
-                p.className="boxclick";
-                p.innerHTML=sessionid.email;
-                var but = document.createElement("button");
-                but.innerHTML="update";
-                var color = document.createElement("input");
-                color.type = "color";
-                color.nodeValue = sessionid.c;
-                div1.appendChild(h3);
-                div2.appendChild(p);
-                div.appendChild(color);
-                div.appendChild(div1);
-                div.appendChild(div2);
-                div.appendChild(but);
-                $(".content").append(div);
-                
-                $('.boxclick').click(function(){  
-                    
-                        var inputh3 = document.createElement("input");
-                        var textbox = true;
-                        inputh3.id = "inputh3";
-                        inputh3.value = this.innerHTML;
-                        this.parentNode.appendChild(inputh3);
-                        textbox=true;
-                        
-                });
-                   
-            },
-            error:function(sessionid){
-                console.log('sessionid', sessionid);
-                
-
-            }
-        });
-    };
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /*
-    var upload = document.getElementById('upload');
-    var files = document.getElementById('filesinp');
-    var sess = '';
-    
-    
-     for next week
-    
-        users have to be able to login, and put up something (imgs, messages, etc)
-        update user information
-        
-      
-    
-    sessiondata();
-
-    function sessiondata(){
-
-        $.ajax({
-            url:'../cont/user.php',
-            dataType:'JSON',
-            data:{
-                method:'getsession'
-            },
-            type:'POST',
-            success:function(sessionid){
-                console.log('sessionid is', sessionid);
-                $( "body" ).data( "uid", sessionid );
-
-            },
-            error:function(sessionid){
-                console.log('sessionid', sessionid);
-
-            }
-        });
-    };
-    
-    
-    upload.onclick = function(e){
-        
-        console.log('hi');
-        e.preventDefault();
-        
-        //upload the files here using another form of ajax
-        
-        var formData = new FormData();
-        var allfiles = files.files;
-        console.log('files', allfiles);
-        var xhr = new XMLHttpRequest();
-        
-        for(var i =0; i < allfiles.length; i++){
-            
-            var e_file = allfiles[i];
-            
-           
-            if(!e_file.type.match('image/*')){
-                console.log('not an image file');
-                return false;
-            }
-            
-            
-            formData.append('images[]', e_file, e_file.name);
-            formData.append('message', 'my post message');
-            formData.append('userid', $( "body" ).data( "uid"));
-            
-            xhr.open('POST', '../model/imgupload.php', true);
-            xhr.onload = function(){
-                
-                if(xhr.status == 200){
-                    console.log('loaded properly');
-                }
-                
-            };
-            
-            xhr.send(formData);
-        };
-        
-        
-    };
-    
-    */
-    
-    //show profile pic 
-    
-    
     
     
     

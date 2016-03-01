@@ -22,9 +22,17 @@ im.config([
             }
         )
         $routeProvider.when(
+            '/chat',
+            {
+                templateUrl:'view/chat.html',
+                controller:'chatCtrl'
+            }
+        )
+        $routeProvider.when(
             '/profile',
             {
-                templateUrl:'view/profile.html'
+                templateUrl:'view/profile.html',
+                controller:'profileCtrl'
             }
         )
         $routeProvider.when(
@@ -32,6 +40,7 @@ im.config([
             {
                 templateUrl:'view/dashboard.html',
                 controller:'chatroomCtrl'
+                
             }
         )
     }

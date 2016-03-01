@@ -29,7 +29,7 @@ include('connection.php');
        
          // insert the path to the database ../img/uid/avatar.jpg
        
-     $path = '../img/'. $uid . '/' . $filename . '.' . $type  ;
+     $path = './img/'. $uid . '/' . $filename . '.' . $type  ;
        
       
        
@@ -38,6 +38,8 @@ include('connection.php');
             $result = $db->prepare($query);
         
             $result->execute(array(':uid' => $uid, ':avi'=> $path));
+       
+            $_SESSION['avi'] = $path;
             
             echo json_encode('wow');
         

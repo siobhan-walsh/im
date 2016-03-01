@@ -59,7 +59,7 @@ include('connection.php');
        
         //SELECT user_id, status FROM users WHERE username = 'fdsa';
         ////////lahiru backup of 63 $query = "SELECT user_id, status FROM users WHERE email = :email;";
-        $query = "SELECT user_id,username,c,email, status FROM users WHERE email = :email;";
+        $query = "SELECT user_id,username,c,email, status, avi FROM users WHERE email = :email;";
         
         $result = $db->prepare($query);
         
@@ -67,7 +67,6 @@ include('connection.php');
         
         $lresult = $result->fetchAll();
        
-           
             $_SESSION['user_id'] = $lresult[0]['user_id'];
 
             $uid = $_SESSION['user_id'];
@@ -87,7 +86,13 @@ include('connection.php');
             $_SESSION['c'] = $lresult[0]['c'];
 
             $c = $_SESSION['c'];
+        
+            $_SESSION['avi'] = $lresult[0]['avi'];
+
+            $avi = $_SESSION['avi'];
             
+            
+           
             echo json_encode(array('user_id' => $uid, 'status' => $status));
             
     }
