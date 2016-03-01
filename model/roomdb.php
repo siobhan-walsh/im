@@ -21,13 +21,14 @@ include('connection.php');
         
         //for admin list
         global $db;
-        $chat = $_POST['chat'];
+      
         $name = $_POST['name'];
-        $recipient = $_POST['recipient'];
-        $query = "INSERT INTO chatRoom (chat, name, recipient) VALUES (:chat, :name, :recipient);";
+        $host_id = $_SESSION['user_id'];
+
+        $query = "INSERT INTO chatRoom (name, host_id) VALUES ( :name, :host_id);";
         
         $result = $db->prepare($query);
-        $result->execute(array(':chat' => $chat, ':name' => $name, ":recipient" => $recipient));
+        $result->execute(array(':name' => $name, ":host_id" => $host_id));
         
         
         echo json_encode('newroom inserted');

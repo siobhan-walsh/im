@@ -2,77 +2,45 @@ var ctrl = angular.module('allctrls', []);
 
 ctrl.controller('chatroomCtrl', ['$scope', function($scope){
 
-                $scope.hideinp = 'true';
+                $scope.hideinp = true;
                 
                 $scope.showinp = function(){
                     
-                    console.log('wow you clicked that h1');
-                    $scope.hideinp = 'false';
+                    console.log('wow you clicked that h1', $scope.inp);
+                    $scope.hideinp = true;
                     
+                   } 
+                
+                $scope.add = function(){
                     
-                    $.ajax({
-                        url:'./cont/chatroom.php',
-                        dataType:'JSON',
-                        data:{
-                            un:un.value,
-                            pw:pw.value,
-                            avi:avi,
-                            status:status,
-                            c:c,
-                            email:email,
-                            method:'insert'
-                        },
-                        type:'POST',
-                        success:function(resp){
-                            console.log('resp is', resp);
+                    console.log('hi', $scope.inp);
+                    
+                    if($scope.inp == undefined || $scope.inp == ''){
+                        
+                        console.log('no name');
+                        
+                    } else {
+                        
+                        $.ajax({
+                            url:'./cont/chatroom.php',
+                            dataType:'JSON',
+                            data:{
+                                method:'insertRoom',
+                                name:$scope.inp
+                            },
+                            type:'POST',
+                            success:function(crresp){
 
-                            if(resp.account == 'hasaccount'){
-                                console.log('you already have an account bro');
-
-                                alert('you already have an account with that email');
-                            } else {
-                                console.log('ok thne new account');
-
-
-                                $.ajax({
-                                    url:'./cont/user.php',
-                                    dataType:'JSON',
-                                    data:{
-                                        email:email,
-                                        method:'getUser'
-                                    },
-                                    type:'POST',
-                                    success:function(sessresp){
-
-                                        console.log('sessresp', sessresp);
-
-                                        if(status == 1){
-                                            window.location = '#/dashboard'
-                                        } else{
-
-                                            console.log('hmm', sessresp);
-                                            //window.location = '#/signup';
-                                        }
-
-
-                                    },
-                                    error:function(sessresp){
-                                        console.log('sessresperr', sessresp);
-                                    }
-
-
-                                });
+                            },
+                            error:function(crresp){
+                                console.log('crresp error', crresp);
 
                             }
-                        },
-                        error:function(resp){
-                            console.log('resp error', resp);
-
-                        }
-                    });
+                        });
+                        
+                    }
                     
-                    
-                }
+                };
               
 }]);
 
@@ -525,7 +493,6 @@ ctrl.controller('chatCtrl', ['$scope', function($scope){
                         dataType:'JSON',
                         data:{
                             msg:msgbox.value,
-                            uid:$( "body" ).data( "uid" ),
                             method:'insertmsg'
                         },
                         type:'POST',

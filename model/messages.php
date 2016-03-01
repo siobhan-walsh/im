@@ -12,14 +12,15 @@ include('connection.php');
         global $db;
         
         $msg = $_POST['msg'];
-        $uid = $_POST['uid'];
+        $uid = $_SESSION['user_id'];
        
-        //INSERT INTO messages (msg, user_id) VALUES ('hey man', 1);
-        $query = "INSERT INTO messages (msg, user_id) VALUES (:msg, :uid);";
+        //INSERT INTO chatroom (host_id, name) VALUES (1, 'joe');
+        //INSERT INTO messages (msg, user_id, chatroom_id) VALUES ('hey man', 1, 1);
+        $query = "INSERT INTO messages (msg, user_id, chatroom_id) VALUES (:msg, :uid, :chid);";
         
         $result = $db->prepare($query);
         
-        $result->execute(array(':msg' => $msg, ':uid' => $uid));
+        $result->execute(array(':msg' => $msg, ':uid' => $uid, ':chid' => 1));
         
         echo json_encode('message inserted');
          

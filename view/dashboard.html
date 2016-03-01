@@ -5,7 +5,8 @@
           <div ng-controller = 'chatroomCtrl' class = 'addnew'>
    
               <h1 ng-click = 'showinp()'>+ add new chatroom</h1>
-                 <input ng-model = 'inp' ng-hide='{{hideinp}}' class = 'listinp' type = 'text' autofocus>
+              <input ng-model = 'inp' ng-show='{{hideinp}}' class = 'listinp' type = 'text' autofocus>
+              <button ng-click = 'add()'>add new</button>
 
             </div> 
         </div>
