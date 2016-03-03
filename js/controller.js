@@ -1,5 +1,40 @@
 var ctrl = angular.module('allctrls', []);
 
+ctrl.controller('headerCtrl', ['$scope', function($scope){
+    
+    console.log('head');
+
+        $.ajax({
+            url:'./cont/user.php',
+            dataType:'JSON',
+            data:{
+                method:'getsession'
+            },
+            type:'POST',
+            success:function(sessinfo){
+
+                console.log('sessinfo', sessinfo);
+                
+                $scope.$apply(function(){
+                        $scope.info = sessinfo;
+                 });
+
+            },
+            error:function(sessinfo){
+                console.log('sessinfo', sessinfo);
+            }
+
+
+        });
+    
+    
+        $scope.menuops = function(){
+            
+            
+            
+        }
+}]);
+
 ctrl.controller('chatroomCtrl', ['$scope', function($scope){
 
                 $scope.hideinp = true;
@@ -257,11 +292,34 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
     
     
     
-    
-    
-    
-    
-    
+           $scope.logout = function(){
+
+               $.ajax({
+                    url:'cont/user.php',
+                    dataType:'JSON',
+                    data:{
+                        method:'logout',
+                    },
+                    type:'POST',
+                    success:function(logoutresp){
+
+                        console.log('logoutresp', logoutresp);
+
+                        $scope.$apply(function(){
+                                $scope.logoutresp = logoutresp;
+                         });
+
+                    },
+                    error:function(logoutresp){
+                        console.log('logoutresp error', logoutresp);
+
+
+                    }
+                });
+
+
+           }
+   
     /*
     
     

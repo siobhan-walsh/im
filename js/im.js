@@ -1,6 +1,7 @@
 var im = angular.module('im', [
     'ngRoute', 
     'allctrls'
+    
 ]);
 
 

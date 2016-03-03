@@ -34,6 +34,13 @@ if($_POST['method'] == 'updateUser'){
       
   }
 
+if($_POST['method'] == 'logout'){
+      
+      logoutUser();
+      
+  }
+
+
 if($_POST['method'] == 'deleteUser'){
       
      // deleteUser();

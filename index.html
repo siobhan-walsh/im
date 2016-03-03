@@ -21,13 +21,33 @@
     <body > 
         
     
-         <div class='header'>
-             <a href = '#/newadmin'>newadmin</a>
-             <a href = '#/dashboard'>dashboard</a>
-             <a href = '#/signup'>signup</a>
-             <a href = '#/profile'>profile</a>
-             <a href = '#/chat'>chat</a>
-        </div>   
+         <div ng-controller= 'headerCtrl' class='header'>
+             
+             <div class = 'links'>
+                <a href = '#/newadmin'>newadmin</a>
+                 <a href = '#/dashboard'>dashboard</a>
+                 <a href = '#/signup'>signup</a>
+                 <a href = '#/profile'>profile</a>
+                 <a href = '#/chat'>chat</a>
+             
+             </div>
+             
+             <a href = '#/profile'>
+                 
+                <div id='userpic'>
+                 
+                     <img src = '{{info.avi}}'>
+                     <p>{{info.name}}</p>
+                </div>
+          
+             
+             
+             </a>
+                
+             
+             
+        </div>
+      
            
        
         

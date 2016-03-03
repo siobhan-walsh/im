@@ -22,13 +22,28 @@ h3 {
 
 .header {
     background-color:#9C528C;
-    height:10vh;
+    float:left;
+    width:100%;
 
 }
 
+.links {
+    float:left;
+    width:80%;
+}
+#userpic {
+    float:left;
+    width:20%;
+}
+
+#userpic img {
+    border-radius:50%;
+    width:40%;
+}
 .content {
     width:90%;
     margin:5%;
+    float:left;
 }
 
 #signin {
