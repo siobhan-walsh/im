@@ -571,8 +571,46 @@ ctrl.controller('chatCtrl', ['$scope', function($scope){
 
                 
 }]);
-                
 
+
+
+ctrl.controller('adminloginCtrl', ['$scope', function($scope){
+    
+    
+            var un = document.getElementById('un');
+            var pw = document.getElementById('pw');
+           
+            
+            var subm = document.getElementById('subm');
+
+            subm.onclick = function(){
+                var status = 1;
+                
+                email = email.value;
+                
+                $.ajax({
+                    url:'./cont/user.php',
+                    dataType:'JSON',
+                    data:{
+                        un:un.value,
+                        pw:pw.value,
+                        method:'login'
+                    },
+                    type:'POST',
+                    success:function(lresp){
+                        console.log('lresp is', lresp);
+                        
+                    
+                    },
+                    error:function(lresp){
+                        console.log('lresp error', lresp);
+
+                    }
+                });
+               
+            };
+    
+}]);
 
 ctrl.controller('userlist', ["$scope", function($scope){
                 

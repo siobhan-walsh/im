@@ -16,6 +16,13 @@ im.config([
             }
         )
         $routeProvider.when(
+            '/admin',
+            {
+                templateUrl:'view/admin.html',
+                controller:'adminLoginCtrl'
+            }
+        )
+        $routeProvider.when(
             '/signup',
             {
                 templateUrl:'view/signup.html',

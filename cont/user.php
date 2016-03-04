@@ -34,6 +34,12 @@ if($_POST['method'] == 'updateUser'){
       
   }
 
+if($_POST['method'] == 'login'){
+      
+      loginUser();
+      
+  }
+
 if($_POST['method'] == 'logout'){
       
       logoutUser();

@@ -147,6 +147,26 @@ include('connection.php');
     }
 
 
+    function loginUser(){
+        
+        $pw = $_POST['pw'];
+        $pw = md5($pw);
+        
+        $un = $_POST['un'];
+        
+        $query = "SELECT * FROM users WHERE username = :un";
+        
+        $result = $db->prepare($query);
+        
+        $result->execute(array(':un' => $un, ':uid' => $uid));
+        
+        $userinfo =  $result->fetchAll(PDO::FETCH_ASSOC);
+        
+       
+        
+        echo json_encode('login');
+    }
+
     function logoutUser(){
         
 
