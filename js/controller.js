@@ -2,8 +2,10 @@ var ctrl = angular.module('allctrls', []);
 
 ctrl.controller('headerCtrl', ['$scope', function($scope){
     
-    console.log('head');
 
+
+    console.log('head');
+    /*     
         $.ajax({
             url:'./cont/user.php',
             dataType:'JSON',
@@ -29,14 +31,15 @@ ctrl.controller('headerCtrl', ['$scope', function($scope){
     
     
         $scope.menuops = function(){
-            
-            
-            
+           
         }
+        */
 }]);
 
 ctrl.controller('chatroomCtrl', ['$scope', function($scope){
-
+        console.log('chatroom');
+    
+        /*
                 $scope.hideinp = true;
                 
                 $scope.showinp = function(){
@@ -76,12 +79,12 @@ ctrl.controller('chatroomCtrl', ['$scope', function($scope){
                     }
                     
                 };
-              
+             */ 
 }]);
 
 ctrl.controller('adminSignupCtrl', ['$scope', function($scope){
     
-    
+    /*
      var un = document.getElementById('un');
             var pw = document.getElementById('pw');
             var email = document.getElementById('email');
@@ -157,13 +160,13 @@ ctrl.controller('adminSignupCtrl', ['$scope', function($scope){
                 });
                
             };
-    
+    */
 }]);
          
 
 ctrl.controller('profileCtrl', ['$scope', function($scope){
     
-    
+ /*
   
     sessiondata();
     
@@ -232,54 +235,7 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
                 $scope.$apply(function(){
                         $scope.info = sessionid;
                  });
-                
-                
-                
-                
-                /*
-                
-                var textbox = false;
-                //var inputh3 = document.createElement("input");
-                var div1 = document.createElement("div");
-                div1.className='box';
-                
-                var div2 = document.createElement("div");
-                div2.className='box';
-                var div = document.createElement("div");
-                var h3 = document.createElement("h3");
-                h3.className="boxclick";
-                h3.innerHTML=sessionid.name;
-                var p = document.createElement("p");
-                p.className="boxclick";
-                p.innerHTML=sessionid.email;
-                var but = document.createElement("button");
-                but.innerHTML="update";
-                var color = document.createElement("input");
-                color.type = "color";
-                
-                var img = document.createElement('img');
-                
-                
-                color.nodeValue = sessionid.c;
-                div1.appendChild(h3);
-                div2.appendChild(p);
-                div.appendChild(color);
-                div.appendChild(div1);
-                div.appendChild(div2);
-                div.appendChild(but);
-                $(".content").append(div);
-                
-                $('.boxclick').click(function(){  
-                    
-                        var inputh3 = document.createElement("input");
-                        var textbox = true;
-                        inputh3.id = "inputh3";
-                        inputh3.value = this.innerHTML;
-                        this.parentNode.appendChild(inputh3);
-                        textbox=true;
-                        
-                });
-                */   
+              
             },
             error:function(sessionid){
                 console.log('sessionid', sessionid);
@@ -308,6 +264,8 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
                         $scope.$apply(function(){
                                 $scope.logoutresp = logoutresp;
                          });
+                        
+                        window.location = '/#/';
 
                     },
                     error:function(logoutresp){
@@ -319,138 +277,13 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
 
 
            }
-   
-    /*
-    
-    
-    
-     for next week
-    
-        users have to be able to login, and put up something (imgs, messages, etc)
-        update user information
-        
-      
-    
-    sessiondata();
-
-    function sessiondata(){
-
-        $.ajax({
-            url:'../cont/user.php',
-            dataType:'JSON',
-            data:{
-                method:'getsession'
-            },
-            type:'POST',
-            success:function(sessionid){
-                console.log('sessionid is', sessionid);
-                $( "body" ).data( "uid", sessionid );
-
-            },
-            error:function(sessionid){
-                console.log('sessionid', sessionid);
-
-            }
-        });
-    };
-    
-    
-    
-    
-    */
-    
-    //show profile pic 
-    
-    
-    
-    
-    
+     */
 }]);
 
-ctrl.controller('adminSignupCtrl', ['$scope', function($scope){
-    
-    
-     var un = document.getElementById('un');
-            var pw = document.getElementById('pw');
-            var email = document.getElementById('email');
-            var avi = './img/default/admin-avi-default.jpg';
-            var c = '#772457';
-            
-            var subm = document.getElementById('subm');
-
-            subm.onclick = function(){
-                var status = 1;
-                
-                email = email.value;
-                
-                $.ajax({
-                    url:'./cont/user.php',
-                    dataType:'JSON',
-                    data:{
-                        un:un.value,
-                        pw:pw.value,
-                        avi:avi,
-                        status:status,
-                        c:c,
-                        email:email,
-                        method:'insert'
-                    },
-                    type:'POST',
-                    success:function(resp){
-                        console.log('resp is', resp);
-                        
-                        if(resp.account == 'hasaccount'){
-                            console.log('you already have an account bro');
-                            
-                            alert('you already have an account with that email');
-                        } else {
-                            console.log('ok thne new account');
-                            
-                        
-                            $.ajax({
-                                url:'./cont/user.php',
-                                dataType:'JSON',
-                                data:{
-                                    email:email,
-                                    method:'getUser'
-                                },
-                                type:'POST',
-                                success:function(sessresp){
-                                    
-                                    console.log('sessresp', sessresp);
-                                    
-                                    if(status == 1){
-                                        window.location = '#/dashboard'
-                                    } else{
-                                        
-                                        console.log('hmm', sessresp);
-                                        //window.location = '#/signup';
-                                    }
-                            
-                                    
-                                },
-                                error:function(sessresp){
-                                    console.log('sessresperr', sessresp);
-                                }
-                            
-                                     
-                            });
-                        
-                        }
-                    },
-                    error:function(resp){
-                        console.log('resp error', resp);
-
-                    }
-                });
-               
-            };
-    
-}]);
 
 ctrl.controller('chatCtrl', ['$scope', function($scope){
   console.log('hey ready');
-            
+    /*        
             
             var test = document.getElementById('test');
             var msgbox = document.getElementById('msgbox');
@@ -568,7 +401,7 @@ ctrl.controller('chatCtrl', ['$scope', function($scope){
                  }
                 
             });
-
+*/
                 
 }]);
 
@@ -576,18 +409,19 @@ ctrl.controller('chatCtrl', ['$scope', function($scope){
 
 ctrl.controller('adminloginCtrl', ['$scope', function($scope){
     
-    
+    console.log('na na na nana');
+       
             var un = document.getElementById('un');
             var pw = document.getElementById('pw');
            
             
             var subm = document.getElementById('subm');
 
-            subm.onclick = function(){
-                var status = 1;
+            $scope.login = function(){
                 
-                email = email.value;
-                
+                console.log('un', un.value);
+                console.log('pw', pw.value);
+               
                 $.ajax({
                     url:'./cont/user.php',
                     dataType:'JSON',
@@ -607,86 +441,84 @@ ctrl.controller('adminloginCtrl', ['$scope', function($scope){
 
                     }
                 });
-               
+                
             };
-    
+  
 }]);
 
 ctrl.controller('userlist', ["$scope", function($scope){
-                
-                $scope.hidden = true;
-                $scope.showmore = true;
-                $scope.getUsers = function(){
-                  
-                    $.ajax({
-                        url:'./cont/user.php',
-                        dataType:'JSON',
-                        data:{
-                            method:'showAllUsers'
-                        },
-                        type:'POST',
-                        success:function(allUsers){
-                            console.log('allUsers is', allUsers);
-                            
-                            $scope.$apply(function(){
-                                
-                                $scope.allUsers = allUsers;
-                                $scope.hidden = false;
-                                
-                            });
-                            
-                            
-                            $scope.moreinfo = function(){
-                                $scope.showmore = false;
+        /*     
+        $scope.hidden = true;
+        $scope.showmore = true;
+        $scope.getUsers = function(){
+
+            $.ajax({
+                url:'./cont/user.php',
+                dataType:'JSON',
+                data:{
+                    method:'showAllUsers'
+                },
+                type:'POST',
+                success:function(allUsers){
+                    console.log('allUsers is', allUsers);
+
+                    $scope.$apply(function(){
+
+                        $scope.allUsers = allUsers;
+                        $scope.hidden = false;
+
+                    });
+
+
+                    $scope.moreinfo = function(){
+                        $scope.showmore = false;
+                    };
+
+
+
+                    for(var i = 0; i < allUsers.length; i++){
+
+                        var li = document.createElement('li');
+                        var p = document.createElement('p');
+                        p.innerHTML = allUsers[i].username;
+
+                        p.addEventListener('click', bindClick(i))
+
+
+                        li.appendChild(p);
+                        document.getElementById('listusers').appendChild(li);
+
+
+                    }
+
+
+                    function bindClick(i) {	
+                        return function(){
+                            console.log('clicked', i);
+
+
+                            this.remove();
+                            var inp  = document.createElement('input');
+                            inp.value = allUsers[i].username;
+                            li.appendChild(inp);
+                            inp.onkeypress = function(e){
+                                console.log('key', e.keyCode);
                             };
 
-                          
-
-                            for(var i = 0; i < allUsers.length; i++){
-
-                                var li = document.createElement('li');
-                                var p = document.createElement('p');
-                                p.innerHTML = allUsers[i].username;
-
-                                p.addEventListener('click', bindClick(i))
-
-
-                                li.appendChild(p);
-                                document.getElementById('listusers').appendChild(li);
-
-
-                            }
-                            
-
-                            function bindClick(i) {	
-                                return function(){
-                                    console.log('clicked', i);
-
-
-                                    this.remove();
-                                    var inp  = document.createElement('input');
-                                    inp.value = allUsers[i].username;
-                                    li.appendChild(inp);
-                                    inp.onkeypress = function(e){
-                                        console.log('key', e.keyCode);
-                                    };
-
-
-                                }
-                            }
-                            
-                          
-
-                        },
-                        error:function(allUsers){
-                            console.log('allUsers error', allUsers);
 
                         }
-                    });
+                    }
+
+
+
+                },
+                error:function(allUsers){
+                    console.log('allUsers error', allUsers);
+
+                }
+            });
+
+        };
         
-                };
-                
-                
-  
-                    
-             }]);
+        */
+ }]);

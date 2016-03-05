@@ -14,36 +14,31 @@ im.config([
                 templateUrl:'view/newadmin.html',
                 controller:'adminSignupCtrl'
             }
-        )
-        $routeProvider.when(
+        ).when(
             '/admin',
             {
                 templateUrl:'view/admin.html',
-                controller:'adminLoginCtrl'
+                controller:'adminloginCtrl'
             }
-        )
-        $routeProvider.when(
+        ).when(
             '/signup',
             {
                 templateUrl:'view/signup.html',
                 controller:'signupCtrl'
             }
-        )
-        $routeProvider.when(
+        ).when(
             '/chat',
             {
                 templateUrl:'view/chat.html',
                 controller:'chatCtrl'
             }
-        )
-        $routeProvider.when(
+        ).when(
             '/profile',
             {
                 templateUrl:'view/profile.html',
                 controller:'profileCtrl'
             }
-        )
-        $routeProvider.when(
+        ).when(
             '/dashboard',
             {
                 templateUrl:'view/dashboard.html',
