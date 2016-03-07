@@ -30,7 +30,7 @@ include('../model/userdb.php');
 
 if($_POST['method'] == 'updateUser'){
       
-      updateUser();
+      update_user();
       
   }
 

@@ -23,14 +23,17 @@
                 
                 <div class="box">
                     
-                    <h3 class="boxclick">{{info.name}}</h3>
+                    <h3 ng-click='showInp($event)' class="boxclick">{{info.name}}</h3>
+                    
+                    <input type='text' id='un' class=" hideinp boxclick" value='{{info.name}}'>
+                    
                 </div>
                 
                 <div class="box">
                     <p class="boxclick">{{info.email}}</p>
                 </div>
                 
-                <button>update</button>
+                <button ng-click='updateUn()'>update</button>
             
             
                 

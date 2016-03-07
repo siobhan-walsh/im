@@ -5,7 +5,7 @@ ctrl.controller('headerCtrl', ['$scope', function($scope){
 
 
     console.log('head');
-    /*     
+    
         $.ajax({
             url:'./cont/user.php',
             dataType:'JSON',
@@ -33,13 +33,13 @@ ctrl.controller('headerCtrl', ['$scope', function($scope){
         $scope.menuops = function(){
            
         }
-        */
+
 }]);
 
 ctrl.controller('chatroomCtrl', ['$scope', function($scope){
         console.log('chatroom');
     
-        /*
+   
                 $scope.hideinp = true;
                 
                 $scope.showinp = function(){
@@ -79,12 +79,12 @@ ctrl.controller('chatroomCtrl', ['$scope', function($scope){
                     }
                     
                 };
-             */ 
+  
 }]);
 
 ctrl.controller('adminSignupCtrl', ['$scope', function($scope){
     
-    /*
+    
      var un = document.getElementById('un');
             var pw = document.getElementById('pw');
             var email = document.getElementById('email');
@@ -160,14 +160,11 @@ ctrl.controller('adminSignupCtrl', ['$scope', function($scope){
                 });
                
             };
-    */
+
 }]);
          
 
 ctrl.controller('profileCtrl', ['$scope', function($scope){
-    
- /*
-  
     sessiondata();
     
     
@@ -217,7 +214,44 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
         };
      
     };
-   
+    
+    $scope.showInp = function($event){
+       
+        var thiss = $event.target;
+
+        thiss.style.display = 'none';
+
+        
+        var thisinp = document.querySelector('h3 + input');
+        
+        thisinp.style.display = 'block';
+       
+        
+        
+    };
+    
+    $scope.updateUn = function($event){
+        
+        var un = document.getElementById('un').value;
+        
+        
+         $.ajax({
+            url:'./cont/user.php',
+            dataType:'JSON',
+            data:{
+                un:un,
+                method:'updateUser'
+            },
+            type:'POST',
+            success:function(unup){
+                console.log('unup', unup);
+            },
+            error:function(unup){
+                console.log('unup error', unup);
+            }
+         });
+    
+    };
 
     function sessiondata(){
 
@@ -276,14 +310,14 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
                 });
 
 
-           }
-     */
+           };
+
 }]);
 
 
 ctrl.controller('chatCtrl', ['$scope', function($scope){
   console.log('hey ready');
-    /*        
+    
             
             var test = document.getElementById('test');
             var msgbox = document.getElementById('msgbox');
@@ -401,8 +435,7 @@ ctrl.controller('chatCtrl', ['$scope', function($scope){
                  }
                 
             });
-*/
-                
+          
 }]);
 
 

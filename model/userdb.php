@@ -132,7 +132,7 @@ include('connection.php');
 
     function update_user(){
         
-        $uid = $_POST['user_id'];
+        $uid = $_SESSION['user_id'];
         $un = $_POST['un'];
         
         $query = "UPDATE users SET username = :un, WHERE user_id =:uid";
