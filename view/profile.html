@@ -23,17 +23,18 @@
                 
                 <div class="box">
                     
-                    <h3 ng-click='showInp($event)' class="boxclick">{{info.name}}</h3>
+                    <h3 id='hname' ng-click='showInp($event)' class="boxclick">{{info.name}}</h3>
                     
-                    <input type='text' id='un' class=" hideinp boxclick" value='{{info.name}}'>
+                    <input ng-blur='showH($event);' type='text' id='un' class=" hideinp boxclick" value='{{info.name}}'>
                     
                 </div>
                 
                 <div class="box">
-                    <p class="boxclick">{{info.email}}</p>
+                    <p ng-click='showeInp($event)' id='pemail' class="boxclick">{{info.email}}</p>
+                    <input ng-blur='showP($event);' type='text' id='email' class=" hideinp boxclick" value='{{info.email}}'>
                 </div>
                 
-                <button ng-click='updateUn()'>update</button>
+                <button ng-click='update()'>update</button>
             
             
                 

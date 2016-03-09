@@ -132,14 +132,19 @@ include('connection.php');
 
     function update_user(){
         
+        global $db;
+        
         $uid = $_SESSION['user_id'];
         $un = $_POST['un'];
+        $email = $_POST['email'];
         
-        $query = "UPDATE users SET username = :un, WHERE user_id =:uid";
+        //UPDATE users SET username = 'tuesdayy', email = 'tuesday@tuesdayy' WHERE user_id =7;
+        
+        $query = "UPDATE users SET username = :un, email = :email, WHERE user_id =:uid";
         
         $result = $db->prepare($query);
         
-        $result->execute(array(':un' => $un, ':uid' => $uid));
+        $result->execute(array(':un' => $un, ':uid' => $uid, ':email' => $email));
         
         echo json_encode('updated username');
         

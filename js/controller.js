@@ -205,6 +205,7 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
                 
                 if(xhr.status == 200){
                     console.log('loaded properly');
+                    location.reload(); 
                    
                 }
                 
@@ -225,14 +226,54 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
         var thisinp = document.querySelector('h3 + input');
         
         thisinp.style.display = 'block';
-       
-        
-        
+         
     };
     
-    $scope.updateUn = function($event){
+    $scope.showH = function($event){
+       
+        var thiss = $event.target;
+
+        thiss.style.display = 'none';
+
+        
+        var thish = document.querySelector('#hname');
+        
+        thish.innerHTML = thiss.value;
+        thish.style.display = 'block';
+         
+    };
+    
+    $scope.showeInp = function($event){
+       
+        var thiss = $event.target;
+
+        thiss.style.display = 'none';
+
+        
+        var thisinp = document.querySelector('#email');
+        
+        thisinp.style.display = 'block';
+         
+    };
+    
+    $scope.showP = function($event){
+       
+        var thiss = $event.target;
+
+        thiss.style.display = 'none';
+
+        
+        var thish = document.querySelector('#pemail');
+        
+        thish.innerHTML = thiss.value;
+        thish.style.display = 'block';
+         
+    };
+    
+    $scope.update = function($event){
         
         var un = document.getElementById('un').value;
+        var email = document.getElementById('email').value;
         
         
          $.ajax({
@@ -240,6 +281,7 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
             dataType:'JSON',
             data:{
                 un:un,
+                email:email,
                 method:'updateUser'
             },
             type:'POST',
