@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>VMS - Login</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		
+            <link href='https://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/jquery.dropotron.min.js"></script>
+		<script src="../js/skel.min.js"></script>
+		<script src="../js/skel-layers.min.js"></script>
+		<script src="../js/init.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-wide.css" />
+		</noscript>
+	
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div class="wrapper style1">
+
+				<!-- Header -->
+					<div id="header" class="skel-panels-fixed">
+						<div id="logo">
+							
+						</div>
+						<nav id="nav">
+						
+						</nav>
+					</div>
+
+				<!-- Banner -->
+					<div id="banner" class="container">
+						<section>
+						
+							
+						</section>
+					</div>
+
+    		<div id="footer" class="wrapper style2">
+			<div class="container">
+				<section>
+					<header class="major">
+						<h2>Final Assignment</h2>
+				<span class="byline">Please Login</span>
+					</header>
+					<form method="post" action="#">
+						<div class="row half">
+							<div class="12u">
+								<input class="text" type="text" name="name" id="username" placeholder="User" />
+							</div>
+						</div>
+						<div class="row half">
+							<div class="12u">
+								<input class="text" type="text" name="password" id="password" placeholder="Password" />
+							</div>
+						</div>
+					
+						<div class="row half">
+							<div class="12u">
+								<ul class="actions">
+									<li>
+										<input id = 'sub' value="Login" class="button alt"/>
+
+
+        	
+			
+				</div>
+			</div>
+		</div>
+
+
+    </body>
+
+<script>
+    
+    $(document).ready(function(){
+     var user_id = -1; 
+    //modify later
+        
+        document.getElementById("sub").onclick = function(){
+        console.log("I work");
+    
+        $.ajax({
+          
+          
+          url:"../controller/user.php",
+          type:"post",
+          dataType: "json",
+          data: {
+          
+          method: "login",
+          username: document.getElementById("username").value,
+          password: document.getElementById("password").value,
+          
+            },
+             
+        success: function(resp) {
+          alert("Logged in!");
+            
+    window.location.href = "dashboard.html";
+        user_id = resp[0].id;
+           
+        
+            }
+  
+        
+        });
+    
+   
+        }
+        
+
+       
+    
+    }); 
+            
+        
+
+    
+    </script>
+
+
+</html>

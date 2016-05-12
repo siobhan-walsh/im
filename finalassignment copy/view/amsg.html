@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+
+<head> 
+    
+   <title> all messages</title> 
+    
+    
+</head>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+    
+    <body>
+    
+    
+    </body>
+
+<script>
+    
+    $(document).ready(function(){
+
+        
+
+         
+    
+        $.ajax({
+          
+          
+          url:"../controller/message.php",
+          type:"POST",
+          dataType: "json",
+          data: {
+          
+          method:"getall"
+          
+          
+            },
+             
+        success: function(resp) {
+       
+          console.log(resp);
+          for(var i = 0; i<resp.length; i++){
+           var h3 = document.createElement("h3");
+            h3.innerHTML = resp[i].username + ":"+resp[i].message;
+            document.body.appendChild(h3);
+              h3.onclick = function() {
+                  
+              }
+            }
+  
+          }
+  
+        
+        });
+
+    
+    }); 
+    
+   
+    
+    
+    </script>
+
+
+</html>
