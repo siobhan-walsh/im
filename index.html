@@ -6,91 +6,44 @@
     <base href="/im/" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="description" content="" />
-     <meta name="keywords" content="" />
+    <meta name="keywords" content="" />
   
     <script src = 'https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
     <script src="js/angular.min.js"></script>
     <script src="js/angular-route.js"></script>
     <script src="js/im.js"></script>
     <script src="js/controller.js"></script>
-    <script src="js/jquery.dropotron.min.js"></script>
-    <script src="js/skel.min.js"></script>
-    <script src="js/skel-layers.min.js"></script>
-    <script src="js/init.js"></script>
+  
     <link href='https://fonts.googleapis.com/css?family=Maven+Pro' rel='stylesheet' type='text/css'>
     <link href='css/style.css' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="css/skel.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/style-wide.css" />
-
     
     </head>
 
 
-    <body > 
-        <div class="wrapper style1">
+    <body> 
+     
         <div id="logo">
             <img src="img/logo.png" class="logo">
             </div>
-    	<div id="header" class="skel-panels-fixed">
-						
-				
-						
+    		
          <div ng-controller= 'headerCtrl'  id="header" class="skel-panels-fixed">
-             
-             
-             <nav>
-						
-						
-             <div class = 'links' id="nav">
-                <a href = '#/newadmin'>newadmin</a>
-                 <a href = '#/dashboard'>dashboard</a>
-                 <a href = '#/admin'>admin login</a>
-                 <a href = '#/profile'>profile</a>
-                 <a href = '#/chat'>chat</a>
-                 <a href = '#/profile'>
-                  </div>
-                <div id='userpic'>
-                 
-                     <img src = '{{info.avi}}'>
-                     <p>{{info.name}}</p>
-                </div>
-          
-             
-             
-                                 </a>
-
-                                
-
-
-                                    </nav>
-
-                                        </div>
-                                    </div>
-            
-                                </div>
-            
-         
-         
-             
-             
-     
-        
-        	<!-- Footer -->
-		
-			<div class="container">
-				<section>
-				
-				</section>
-			</div>
-		
-      
            
-       
-        
-        <div ng-view>
+        <!-- these links will be deleted, they are just for convinience for us now -->
+             <div class = 'links' id="nav">
+                 
+                 <a href = '#/admin'>admin</a>
+                 <a href = '#/signup'>signup</a>
+                 <a href = '#/profile'>profile</a>
+                 <a href = '#/mychats'>mychats</a>
+                 <a href = '#/chat'>chat</a>
+                 <a href = '#/new'>new chat</a>
+
+            </div>
+             
+        <div ng-view class = 'content'>
           
         </div>
+           
     </body>
 </html>
 

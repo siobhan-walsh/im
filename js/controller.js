@@ -36,8 +36,8 @@ ctrl.controller('headerCtrl', ['$scope', function($scope){
 
 }]);
 
-ctrl.controller('chatroomCtrl', ['$scope', function($scope){
-        console.log('chatroom');
+ctrl.controller('newchatCtrl', ['$scope', function($scope){
+        console.log('newchat');
     
    
                 $scope.hideinp = true;
@@ -81,88 +81,6 @@ ctrl.controller('chatroomCtrl', ['$scope', function($scope){
                 };
   
 }]);
-
-ctrl.controller('adminSignupCtrl', ['$scope', function($scope){
-    
-    
-     var un = document.getElementById('un');
-            var pw = document.getElementById('pw');
-            var email = document.getElementById('email');
-            var avi = './img/default/admin-avi-default.jpg';
-            var c = '#772457';
-            
-            var subm = document.getElementById('subm');
-
-            subm.onclick = function(){
-                var status = 1;
-                
-                email = email.value;
-                
-                $.ajax({
-                    url:'./cont/user.php',
-                    dataType:'JSON',
-                    data:{
-                        un:un.value,
-                        pw:pw.value,
-                        avi:avi,
-                        status:status,
-                        c:c,
-                        email:email,
-                        method:'insert'
-                    },
-                    type:'POST',
-                    success:function(resp){
-                        console.log('resp is', resp);
-                        
-                        if(resp.account == 'hasaccount'){
-                            console.log('you already have an account bro');
-                            
-                            alert('you already have an account with that email');
-                        } else {
-                            console.log('ok thne new account');
-                            
-                        
-                            $.ajax({
-                                url:'./cont/user.php',
-                                dataType:'JSON',
-                                data:{
-                                    email:email,
-                                    method:'getUser'
-                                },
-                                type:'POST',
-                                success:function(sessresp){
-                                    
-                                    console.log('sessresp', sessresp);
-                                    
-                                    if(status == 1){
-                                        window.location = '#/dashboard'
-                                    } else{
-                                        
-                                        console.log('hmm', sessresp);
-                                        //window.location = '#/signup';
-                                    }
-                            
-                                    
-                                },
-                                error:function(sessresp){
-                                    console.log('sessresperr', sessresp);
-                                }
-                            
-                                     
-                            });
-                        
-                        }
-                    },
-                    error:function(resp){
-                        console.log('resp error', resp);
-
-                    }
-                });
-               
-            };
-
-}]);
-         
 
 ctrl.controller('profileCtrl', ['$scope', function($scope){
     sessiondata();
@@ -356,36 +274,12 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
 
 }]);
 
-
-ctrl.controller('chatCtrl', ['$scope', function($scope){
-  console.log('hey ready');
+ctrl.controller('createCtrl', ['$scope', function($scope){
     
-            
-            var test = document.getElementById('test');
-            var msgbox = document.getElementById('msgbox');
-            var msgcenter = document.getElementById('msgcenter');
-     
-     
-        sessiondata();
-        getmsgs();
-     
-        function sessiondata(){
-            
-            $.ajax({
-                    url:'./cont/user.php',
-                    dataType:'JSON',
-                    data:{
-                        method:'getsession'
-                    },
-                    type:'POST',
-                    success:function(sessionid){
-                        console.log('sessionid is', sessionid);
-                        $( "body" ).data( "uid", sessionid.user_id );
-                        if(sessionid.status==1){
-                            $(".admip").show();
-                            /*lahiru*/
+      $(".admip").show();
+   /*lahiru*/
                             
-                            var size = ["contain",
+var size = ["contain",
             "auto",
             "cover"];
     
@@ -450,6 +344,36 @@ var ali = ["top left",
     })
                             
                             /*lahiruend*/
+    
+}]);
+
+
+ctrl.controller('chatCtrl', ['$scope', function($scope){
+  console.log('hey ready');
+    
+            
+            var test = document.getElementById('test');
+            var msgbox = document.getElementById('msgbox');
+            var msgcenter = document.getElementById('msgcenter');
+     
+     
+        sessiondata();
+        getmsgs();
+     
+        function sessiondata(){
+            
+            $.ajax({
+                    url:'./cont/user.php',
+                    dataType:'JSON',
+                    data:{
+                        method:'getsession'
+                    },
+                    type:'POST',
+                    success:function(sessionid){
+                        console.log('sessionid is', sessionid);
+                        $( "body" ).data( "uid", sessionid.user_id );
+                        if(sessionid.status==1){
+                          
                         }
                     },
                     error:function(sessionid){
@@ -590,79 +514,4 @@ ctrl.controller('adminloginCtrl', ['$scope', function($scope){
   
 }]);
 
-ctrl.controller('userlist', ["$scope", function($scope){
-        /*     
-        $scope.hidden = true;
-        $scope.showmore = true;
-        $scope.getUsers = function(){
-
-            $.ajax({
-                url:'./cont/user.php',
-                dataType:'JSON',
-                data:{
-                    method:'showAllUsers'
-                },
-                type:'POST',
-                success:function(allUsers){
-                    console.log('allUsers is', allUsers);
-
-                    $scope.$apply(function(){
-
-                        $scope.allUsers = allUsers;
-                        $scope.hidden = false;
-
-                    });
-
-
-                    $scope.moreinfo = function(){
-                        $scope.showmore = false;
-                    };
-
-
-
-                    for(var i = 0; i < allUsers.length; i++){
-
-                        var li = document.createElement('li');
-                        var p = document.createElement('p');
-                        p.innerHTML = allUsers[i].username;
-
-                        p.addEventListener('click', bindClick(i))
-
-
-                        li.appendChild(p);
-                        document.getElementById('listusers').appendChild(li);
-
-
-                    }
-
-
-                    function bindClick(i) {	
-                        return function(){
-                            console.log('clicked', i);
-
-
-                            this.remove();
-                            var inp  = document.createElement('input');
-                            inp.value = allUsers[i].username;
-                            li.appendChild(inp);
-                            inp.onkeypress = function(e){
-                                console.log('key', e.keyCode);
-                            };
-
-
-                        }
-                    }
-
-
-
-                },
-                error:function(allUsers){
-                    console.log('allUsers error', allUsers);
-
-                }
-            });
-
-        };
-        
-        */
- }]);
+}]);
