@@ -154,6 +154,8 @@ include('connection.php');
 
     function loginUser(){
         
+         global $db;
+        
          $pw = $_POST['pw'];
          $pw = md5($pw);
         
