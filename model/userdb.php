@@ -20,7 +20,7 @@ include('connection.php');
         
         
         $pw = md5($pw);
-        
+        //098f6bcd4621d373cade4e832627b4f6
         //SELECT * FROM users WHERE email = 
         $chquery = "SELECT * FROM users WHERE email = :email";
         
@@ -153,10 +153,54 @@ include('connection.php');
 
 
     function loginUser(){
+
+        global $db;
         
-         global $db;
+        $email = $_POST['email'];
+        $pw = $_POST['pw'];
+        $pw = md5($pw);
+       
+        $query = "SELECT user_id,username,c,email, status, avi FROM users WHERE email = :email AND password = :pw;";
         
-         $pw = $_POST['pw'];
+        $result = $db->prepare($query);
+        
+        $result->execute(array(':email' => $email, ':pw' => $pw));
+        
+        $lresult = $result->fetchAll();
+        
+        if($lresult[0]['user_id'] == null){
+            echo json_encode('user not found');
+        } else {
+       
+            $_SESSION['user_id'] = $lresult[0]['user_id'];
+
+            $uid = $_SESSION['user_id'];
+
+            $_SESSION['status'] = $lresult[0]['status'];
+
+            $status = $_SESSION['status'];
+        
+            $_SESSION['name'] = $lresult[0]['username'];
+
+            $name = $_SESSION['name'];
+        
+            $_SESSION['email'] = $lresult[0]['email'];
+
+            $email = $_SESSION['email'];
+        
+            $_SESSION['c'] = $lresult[0]['c'];
+
+            $c = $_SESSION['c'];
+        
+            $_SESSION['avi'] = $lresult[0]['avi'];
+
+            $avi = $_SESSION['avi'];
+            
+            
+           
+            echo json_encode($lresult[0]);
+        }
+       /*  $pw = $_POST['pw'];
          $pw = md5($pw);
         
         $un = $_POST['un'];
@@ -169,7 +213,7 @@ include('connection.php');
         
         $userinfo =  $result->fetchAll(PDO::FETCH_ASSOC); 
         
-        echo json_encode($userinfo);
+        echo json_encode($userinfo); */
     }
 
     function logoutUser(){

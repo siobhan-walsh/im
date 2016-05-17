@@ -9,6 +9,13 @@ im.config([
     '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
         
         $routeProvider.when(
+            
+            '/',
+            {
+                templateUrl:'view/login.html',
+                controller:'loginCtrl'
+            }
+        ).when(
             '/admin',
             {
                 templateUrl:'view/admin.html',

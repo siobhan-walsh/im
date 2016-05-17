@@ -2,7 +2,17 @@ var ctrl = angular.module('allctrls', []);
 
 ctrl.controller('headerCtrl', ['$scope', function($scope){
     
+Storage.prototype.setObject = function(key, value) {
 
+    this.setItem(key, JSON.stringify(value));
+
+}
+
+Storage.prototype.getObject = function(key) {
+
+    var value = this.getItem(key);
+    return value && JSON.parse(value);
+}
 
     console.log('head');
     
@@ -16,7 +26,9 @@ ctrl.controller('headerCtrl', ['$scope', function($scope){
             success:function(sessinfo){
 
                 console.log('sessinfo', sessinfo);
-                
+                sessionStorage.setObject('userinfo', sessinfo);
+                console.log('html5 sto', sessionStorage.getObject('userinfo'));
+             
                 $scope.$apply(function(){
                         $scope.info = sessinfo;
                  });
@@ -36,19 +48,70 @@ ctrl.controller('headerCtrl', ['$scope', function($scope){
 
 }]);
 
+
+ctrl.controller('loginCtrl', ['$scope', function($scope){
+
+            var email = document.getElementById('email');
+            var pw = document.getElementById('pw');
+            var subm = document.getElementById('subm');
+            
+            var userinfo = sessionStorage.getObject('userinfo', sessinfo);
+               
+                if(userinfo.status == 1){
+                    window.location = '#/admin'
+                } else if (userinfo.status == 2) {
+                    window.location = '#/mychats';
+                } else {
+                    $scope.login = function(){
+              
+                    $.ajax({
+                        url:'./cont/user.php',
+                        dataType:'JSON',
+                        data:{
+                            email:email.value,
+                            pw:pw.value,
+                            method:'login'
+                        },
+                        type:'POST',
+                        success:function(lresp){
+                            console.log('lresp is', lresp);
+                            if(lresp == "user not found"){
+
+                                console.log('it is null');
+                                $('#error').html('Sorry, that is the wrong username or password');
+                            } else {
+                                console.log('yes we found them');
+
+                                if(lresp.status == 1){
+                                    console.log('go to admin page');
+                                    window.location = '#/admin';
+                                } else {
+                                    window.location = '#/mychats';
+                                }
+                            }
+                        },
+                        error:function(lresp){
+                            console.log('lresp error', lresp);
+
+                        }
+                    });
+
+                };
+                    
+            }
+            
+  
+}]);
+
 ctrl.controller('newchatCtrl', ['$scope', function($scope){
         console.log('newchat');
-    
-   
-                $scope.hideinp = true;
-                
-                $scope.showinp = function(){
-                    
-                    console.log('wow you clicked that h1', $scope.inp);
-                    $scope.hideinp = true;
-                    
-                   } 
-                
+        var userinfo =  sessionStorage.getObject('userinfo');
+
+        if(userinfo.status != 1){
+            $('.restricted').remove();
+            $('.message').html('You do not have permission to view this page');
+        } else {
+          
                 $scope.add = function(){
                     
                     console.log('hi', $scope.inp);
@@ -79,6 +142,40 @@ ctrl.controller('newchatCtrl', ['$scope', function($scope){
                     }
                     
                 };
+            
+             $scope.hidden = true;
+            $scope.showmore = true;
+          
+                $.ajax({
+                    url:'./cont/user.php',
+                    dataType:'JSON',
+                    data:{
+                        method:'showAllUsers'
+                    },
+                    type:'POST',
+                    success:function(allUsers){
+                        console.log('allUsers is', allUsers);
+
+                        $scope.$apply(function(){
+
+                            $scope.allUsers = allUsers;
+                            $scope.hidden = false;
+
+                        });
+
+
+                        $scope.moreinfo = function(){
+                            $scope.showmore = false;
+                        };
+
+
+                    },
+                    error:function(allUsers){
+                        console.log('allUsers error', allUsers);
+
+                    }
+                });
+        }
   
 }]);
 
@@ -475,43 +572,18 @@ ctrl.controller('chatCtrl', ['$scope', function($scope){
 
 
 
-ctrl.controller('adminloginCtrl', ['$scope', function($scope){
+ctrl.controller('adminCtrl', ['$scope', function($scope){
     
-    console.log('na na na nana');
+    console.log('na na na nana', sessionStorage.getObject('userinfo'));
+    var userinfo =  sessionStorage.getObject('userinfo');
+    
+    if(userinfo.status != 1){
+        $('.restricted').remove();
+        $('.message').html('You do not have permission to view this page');
+    } else {
+        
+    }
        
-            var un = document.getElementById('un');
-            var pw = document.getElementById('pw');
-           
-            
-            var subm = document.getElementById('subm');
-
-            $scope.login = function(){
-                
-                console.log('un', un.value);
-                console.log('pw', pw.value);
-               
-                $.ajax({
-                    url:'./cont/user.php',
-                    dataType:'JSON',
-                    data:{
-                        un:un.value,
-                        pw:pw.value,
-                        method:'login'
-                    },
-                    type:'POST',
-                    success:function(lresp){
-                        console.log('lresp is', lresp);
-                        
-                    
-                    },
-                    error:function(lresp){
-                        console.log('lresp error', lresp);
-
-                    }
-                });
-                
-            };
+          
   
-}]);
-
 }]);

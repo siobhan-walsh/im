@@ -1,73 +1,33 @@
+<div ng-controller= 'newchatCtrl'>
+    <p class='message'></p>
+    <div class='restricted'>
+        <div>create a new chatroom</div>
+        
+        <div class = 'addnew'>
+   
+            
+              <input ng-show='{{hideinp}}' class = 'listinp' type = 'text' autofocus>
+              <button ng-click = 'add()'>add new</button>
 
-<div id = 'msgcenter'>
-</div>
-<input id = 'msgbox' type = 'text' placeholder = 'type a message here' >
-<div class="admip" style="display:none">
-    
-    <div class="tools">
-        <div class="img">
-            <form class="imglinke">
-                <label>Img<br>
-                    <input id="imgurl" type="text">
-                    <input value="ADD" type="button" id="imgadd"><br>
-                    <input name="size" id="sizeS" type="range" value="40"><br>
-                </label>
-            </form>
-            <form id="size">
-                <label>Size<br>
-                    <input name="size" checked class="size" type="radio" value="0">contain<br>
-                    <input name="size" class="size" type="radio" value="1">auto<br>
-                    <input name="size" class="size" type="radio" value="2">cover
-                </label>
-            </form>
-            <form class="alignment">
-                <label>Alignment<br>
-                <input name="alignmentO" checked class="alignmentO" type="radio" value="0">
-                <input name="alignmentO" class="alignmentO" type="radio" value="1">
-                <input name="alignmentO" class="alignmentO" type="radio" value="2"><br>
-                <input name="alignmentO" class="alignmentO" type="radio" value="3">
-                <input name="alignmentO" class="alignmentO" type="radio" value="4">
-                <input name="alignmentO" class="alignmentO" type="radio" value="5"><br>
-                <input name="alignmentO" class="alignmentO" type="radio" value="6">
-                <input name="alignmentO" class="alignmentO" type="radio" value="7">
-                <input name="alignmentO" class="alignmentO" type="radio" value="8">
-                </label>
-            </form>
-            <br>
-        </div> <br>  
-
-        <div class="Ihead">HEADER<br>
-            <form>
-                <label>ADD TEXT<br>
-                    <input id="headt" type="text">
-                    <input id="headb" value="ADD" type="button" ><br>
-                </label>
-            </form>
-            <form>
-                <label>size, color<br>
-                    <input id="heads" type="range" value="40"><br>
-                    <input id="headc" value="fff" type=color ><br>
-                </label>
-            </form>
+        </div> 
+        
+        <div>
+            Select from users:
+            <div class='userlist'>
+            
+            <div ng-repeat='user in allUsers'>
+            
+                <div>
+                    <input type='checkbox' class='check' data-userid = '{{user.id}}'>
+                    <img src='{{user.avi}}' class = 'smallavi'>
+                    <span style='color:{{user.c}}'>{{user.username}}</span>
+                    <p ng-hide = {{showmore}}>{{user.email}}</p>
+                </div>
+            
+            </div>
+            
+            </div>
         </div>
-        <div class="Ifotter">FOTTER<br>
-            <form>
-                <label>ADD TEXT<br>
-                    <input id="foott" type="text">
-                    <input id="footb" value="ADD" type="button" ><br>
-                </label>
-            </form>
-            <form>
-                <label>size, color<br>
-                    <input id="foots" type="range" value="0"><br>
-                    <input id="footc" value="fff" type=color ><br>
-                </label>
-            </form>
-        </div>
-    </div>
-    <div id="canvas">
-        <h1 class="imghead" ></h1>
-        <div class="imgfoot"><p><P></div>
-    </div>
-
+        
+    </div>   
 </div>
