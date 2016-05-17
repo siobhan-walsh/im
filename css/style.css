@@ -793,5 +793,62 @@ span {
     footer.major {
         padding-top: 3em;
     }
+/************************************lahiru************************/
+
+    #canvas {
+        position: relative;
+        text-align: center;
+        display: block;
+        float: left;
+        clear: both;
+        width: 96vw;
+        height: 96vw;
+        background:black;
+        background: linear-gradient(135deg, red, blue);
+        background-image:url("https://i.ytimg.com/vi/664VCs3c1HU/maxresdefault.jpg");
+        background-repeat :no-repeat;
+        background-position: top left;
+        background-size: contain;
+    }
+
+    .alignment {
+        width: 64px;
+    }
+
+
+    .tools form {
+        display:block;
+        clear: none;
+        float: left;
+    }
+
+    .imglinke {
+        width: 140px;
+    }
+
+    #size {
+        width: 74px;
+    }
+
+    .Ihead {
+        display: block;
+        float: left;
+        clear: left;
+        margin-right: 30px;
+    }
+    .Ifotter {
+        display: block;
+        float: left;
+        margin-right: 30px;
+    }
+    .imgfoot{
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        
+    }
+    .imghead{
+        
+    }
 
 
