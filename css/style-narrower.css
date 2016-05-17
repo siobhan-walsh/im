@@ -6,7 +6,8 @@
 	}
 
 	#skel-layers-wrapper {
-		padding-top: 44px;
+		padding-top: 25px;
+        height: 30%;
 	}
 
 	header.major h2 {
