@@ -381,7 +381,76 @@ ctrl.controller('chatCtrl', ['$scope', function($scope){
                     success:function(sessionid){
                         console.log('sessionid is', sessionid);
                         $( "body" ).data( "uid", sessionid.user_id );
-                        
+                        if(sessionid.status==1){
+                            $(".admip").show();
+                            /*lahiru*/
+                            
+                            var size = ["contain",
+            "auto",
+            "cover"];
+    
+var ali = ["top left",
+           "top center",
+           "top right",
+           "center left",
+           "center center",
+           "center right",
+           "bottom left",
+           "bottom center",
+           "bottom right"];
+    
+    //background
+    
+    $("#imgadd").click(function(){
+        $("#canvas").css({backgroundImage : "url("+$("#imgurl").val()+")"});
+    });
+
+    $("#sizeS").change(function(){
+        $("#canvas").css({backgroundSize : 25+(parseFloat($("#sizeS").val()*2))+"%"})
+    })
+    
+    $("#size").change(function(){
+        $("#canvas").css({backgroundSize : size[$(".size:checked").val()]})
+        console.log($(".size:checked").val())
+    })
+    
+    $(".alignment").change(function(){
+        $("#canvas").css({backgroundPosition : ali[$(".alignmentO:checked").val()]})
+        console.log($(".alignmentO:checked").val())
+    })
+    
+    //head
+    
+    $("#headb").click(function(){
+        $(".imghead").html($("#headt").val());
+    });
+    
+    $("#heads").change(function(){
+        $(".imghead").css({fontSize : 16+(parseFloat($("#heads").val()))+"px"})
+    })
+    
+    $("#headc").change(function(){
+        console.log($("#headc").val())
+        $(".imghead").css({color : ""+$("#headc").val()+""})
+    })
+    
+    //foot
+    
+    $("#footb").click(function(){
+        $(".imgfoot").html($("#foott").val());
+    });
+    
+    $("#foots").change(function(){
+        $(".imgfoot").css({fontSize : 16+(parseFloat($("#foots").val()))+"px"})
+    })
+    
+    $("#footc").change(function(){
+        console.log($("#footc").val())
+        $(".imgfoot").css({color : ""+$("#foot  c").val()+""})
+    })
+                            
+                            /*lahiruend*/
+                        }
                     },
                     error:function(sessionid){
                         console.log('sessionid', sessionid);
