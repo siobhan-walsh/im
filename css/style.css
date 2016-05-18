@@ -23,3 +23,20 @@ body, span, input, select, textarea {
 #error {
     color:red;
 }
+
+.header {
+    background-color:#9C528C;
+    float:right;
+    width:100%;
+
+}
+
+.content {
+    width:90%;
+    margin:5%;
+    float:left;
+}
+
+.hideinp {
+    display:none;
+}

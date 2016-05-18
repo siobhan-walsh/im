@@ -14,8 +14,6 @@ ctrl.controller('headerCtrl', ['$scope', function($scope){
         return value && JSON.parse(value);
     }
 
-    console.log('head');
-    
         $.ajax({
             url:'./cont/user.php',
             dataType:'JSON',
@@ -24,8 +22,7 @@ ctrl.controller('headerCtrl', ['$scope', function($scope){
             },
             type:'POST',
             success:function(sessinfo){
-            
-                console.log('sessinfo', sessinfo);
+
                 sessionStorage.setObject('userinfo', sessinfo);
                 console.log('html5 sto', sessionStorage.getObject('userinfo'));
 
@@ -203,7 +200,7 @@ ctrl.controller('loginCtrl', ['$scope', function($scope){
                         type:'POST',
                         success:function(lresp){
                             console.log('lresp is', lresp);
-                            sessionStorage.setObject('userinfo', lresp);
+                            sessionStorage.setObject('userinfo', lresp);    
                             
                             if(lresp == "user not found"){
 
@@ -448,6 +445,7 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
         var thish = document.querySelector('#hname');
         
         thish.innerHTML = thiss.value;
+        console.log('this cal', thiss.value);
         thish.style.display = 'block';
          
     };
@@ -484,7 +482,7 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
         var un = document.getElementById('un').value;
         var email = document.getElementById('email').value;
         
-        
+        console.log('u', un);
          $.ajax({
             url:'./cont/user.php',
             dataType:'JSON',
@@ -584,6 +582,7 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
        if(userinfo.status==1){
                             $(".admip").show();
                             /*lahiru*/
+                            
                             
                             var size = ["contain",
                                         "auto",

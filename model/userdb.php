@@ -75,9 +75,9 @@ include('connection.php');
 
             $status = $_SESSION['status'];
         
-            $_SESSION['name'] = $lresult[0]['username'];
+            $_SESSION['username'] = $lresult[0]['username'];
 
-            $name = $_SESSION['name'];
+            $name = $_SESSION['username'];
         
             $_SESSION['email'] = $lresult[0]['email'];
 
@@ -99,7 +99,7 @@ include('connection.php');
 
 
     function check_session(){
-        
+        session_start();
         if ($_SESSION['user_id'] == '') {
            
             echo json_encode ('nouser');
@@ -138,13 +138,16 @@ include('connection.php');
         $un = $_POST['un'];
         $email = $_POST['email'];
         
-        //UPDATE users SET username = 'tuesdayy', email = 'tuesday@tuesdayy' WHERE user_id =7;
+        //UPDATE users SET username = 'barya', email = 'arya@arya' WHERE user_id =3;
         
-        $query = "UPDATE users SET username = :un, email = :email, WHERE user_id =:uid";
+        $query = "UPDATE users SET username = :un, email = :email WHERE user_id =:uid";
         
         $result = $db->prepare($query);
         
         $result->execute(array(':un' => $un, ':uid' => $uid, ':email' => $email));
+        
+        $_SESSION['username'] = $un;
+        $_SESSION['email'] = $email;
         
         echo json_encode('updated username');
         
@@ -160,7 +163,7 @@ include('connection.php');
         $pw = $_POST['pw'];
         $pw = md5($pw);
        
-        $query = "SELECT user_id,username,c,email, status, avi FROM users WHERE email = :email AND password = :pw;";
+        $query = "SELECT user_id, username,c,email, status, avi FROM users WHERE email = :email AND password = :pw;";
         
         $result = $db->prepare($query);
         
@@ -180,9 +183,9 @@ include('connection.php');
 
             $status = $_SESSION['status'];
         
-            $_SESSION['name'] = $lresult[0]['username'];
+            $_SESSION['username'] = $lresult[0]['username'];
 
-            $name = $_SESSION['name'];
+            $name = $_SESSION['username'];
         
             $_SESSION['email'] = $lresult[0]['email'];
 
