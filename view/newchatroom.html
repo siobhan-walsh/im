@@ -1,4 +1,4 @@
-<div ng-controller= 'newchatCtrl'>
+<div ng-controller= 'newchatroomCtrl'>
     <p class='message'></p>
     <div class='restricted'>
         <div>chatroom name:</div>
@@ -20,7 +20,7 @@
                     <input type='checkbox' class='check' data-userid = '{{user.user_id}}'>
                     <img src='{{user.avi}}' class = 'smallavi'>
                     <span style='color:{{user.c}}'>{{user.username}}</span>
-                    <p ng-hide = {{showmore}}>{{user.email}}</p>
+                   
                 </div>
             
             </div>

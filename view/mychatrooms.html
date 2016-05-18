@@ -1,0 +1,16 @@
+
+<div class='mychatrooms'>
+
+    <p>My chatrooms:</p>
+    
+    <div class='listrooms'>
+    
+        <div ng-repeat='room in myrooms'>
+            
+            <div ng-click = 'goToRoom($event)' data-roomid = '{{room.chatroom_id}}'>{{room.name}}
+            </div>
+            
+            </div>
+        
+    </div>
+</div>

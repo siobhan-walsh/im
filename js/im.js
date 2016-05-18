@@ -28,7 +28,7 @@ im.config([
                 controller:'signupCtrl'
             }
         ).when(
-            '/chat',
+            '/chat/:id',
             {
                 templateUrl:'view/chat.html',
                 controller:'chatCtrl'
@@ -42,15 +42,15 @@ im.config([
         ).when(
             '/mychats',
             {
-                templateUrl:'view/mychats.html',
-                controller:'mychatsCtrl'
+                templateUrl:'view/mychatrooms.html',
+                controller:'mychatroomsCtrl'
                 
             }
         ).when(
             '/new',
             {
-                templateUrl:'view/newchat.html',
-                controller:'newchatCtrl'
+                templateUrl:'view/newchatroom.html',
+                controller:'newchatroomCtrl'
                 
            
                 }

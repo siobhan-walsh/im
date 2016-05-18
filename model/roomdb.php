@@ -16,8 +16,22 @@ include('connection.php');
         
     }
 
+    function showMyRooms(){
 
-
+        global $db;
+        $uid = $_POST['uid'];
+        
+        $query = "SELECT chatroom.name, chatroom_users.chatroom_id
+                FROM chatroom_users
+                INNER JOIN chatroom ON chatroom.chatroom_id = chatroom_users.chatroom_id
+                WHERE chatroom_users.user_id = :uid";
+        
+            $result = $db->prepare($query);
+            $result->execute(array(":uid" => $uid));
+            $crresult = $result->fetchAll();
+            echo json_encode($crresult);
+        
+    }
     
     function insertRoom(){
         

@@ -15,9 +15,9 @@ if($_POST['method'] == 'showAllRooms'){
     showAllRooms();
       
   }
-if($_POST['method'] == 'showRoomsWhereId'){
+if($_POST['method'] == 'showMyRooms'){
       
-    showRoomsWhereId();
+    showMyRooms();
       
   }
 

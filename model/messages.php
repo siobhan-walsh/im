@@ -13,14 +13,15 @@ include('connection.php');
         
         $msg = $_POST['msg'];
         $uid = $_SESSION['user_id'];
+        $crid = $_POST['crid'];
        
         //INSERT INTO chatroom (host_id, name) VALUES (1, 'joe');
         //INSERT INTO messages (msg, user_id, chatroom_id) VALUES ('hey man', 1, 1);
-        $query = "INSERT INTO messages (msg, user_id, chatroom_id) VALUES (:msg, :uid, :chid);";
+        $query = "INSERT INTO messages (msg, user_id, chatroom_id) VALUES (:msg, :uid, :crid);";
         
         $result = $db->prepare($query);
         
-        $result->execute(array(':msg' => $msg, ':uid' => $uid, ':chid' => 1));
+        $result->execute(array(':msg' => $msg, ':uid' => $uid, ':crid' => $crid));
         
         echo json_encode('message inserted');
          
@@ -41,6 +42,25 @@ include('connection.php');
         $result = $db->prepare($query);
         
         $result->execute();
+        
+        $messages = $result->fetchAll(PDO::FETCH_ASSOC);
+        
+        echo json_encode($messages);
+         
+    }
+    function showMsgsFromChatRoom(){
+      
+        
+        global $db;
+       
+        
+        $crid = $_POST['crid'];
+        
+        $query = "SELECT messages.msg, users.user_id, users.username, users.avi, users.c FROM messages LEFT JOIN users ON users.user_id = messages.user_id WHERE messages.chatroom_id = :crid";
+        
+        $result = $db->prepare($query);
+        
+        $result->execute(array(":crid" => $crid));
         
         $messages = $result->fetchAll(PDO::FETCH_ASSOC);
         

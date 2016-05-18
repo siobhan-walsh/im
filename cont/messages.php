@@ -16,5 +16,10 @@ include('../model/messages.php');
       
   }
 
+if($_POST['method'] == 'showMsgsFromChatRoom'){
+      
+      showMsgsFromChatRoom();
+      
+  }
    
 ?>

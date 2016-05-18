@@ -233,7 +233,7 @@ ctrl.controller('loginCtrl', ['$scope', function($scope){
   
 }]);
 
-ctrl.controller('newchatCtrl', ['$scope', function($scope){
+ctrl.controller('newchatroomCtrl', ['$scope', function($scope){
         console.log('newchat');
         var userinfo =  sessionStorage.getObject('userinfo');
 
@@ -274,6 +274,24 @@ ctrl.controller('newchatCtrl', ['$scope', function($scope){
                                     console.log('crid', crid);
                                     
                                       console.log('checks' , checks);
+                            
+                                    $.ajax({
+                                            url:'./cont/chatroom.php',
+                                            dataType:'JSON',
+                                            data:{
+                                                method:'addUserToRoom',
+                                                crid:crid,
+                                                userid:userinfo.user_id
+                                            },
+                                            type:'POST', 
+                                            success:function(thisuseraddresp){
+                                                console.log('thisuseraddresp', thisuseraddresp);
+                                               
+                                            }, 
+                                            error:function(thisuseraddresp){
+                                                console.log('error thisuseraddresp', thisuseraddresp);
+                                            }
+                                        });
                                     
                                     for(var i = 0; i < checks.length; i++){
                                       
@@ -288,22 +306,6 @@ ctrl.controller('newchatCtrl', ['$scope', function($scope){
                                             type:'POST',
                                             success:function(useraddresp){
                                                 console.log('useraddresp', useraddresp);
-                                                var div = document.createElement('div');
-                                                var button = document.createElement('button');
-                                                var p = document.createElement('p');
-                                                p.innerHTML = 'Chatroom created!';
-                                                button.innerHTML = 'View my chatrooms';
-                                                button.addEventListener('click', function(){div.remove(); window.location = '#/mychats';});
-                                                div.style.position ='fixed';
-                                                div.style.width = '40vw';
-                                                div.style.padding = '5vw';
-                                                div.style.backgroundColor = 'rgba(0, 0, 0, 0.8)'
-                                                div.style.color = '#fff';
-                                                div.style.left = '30vw';
-                                                div.style.top = '10vh';
-                                                div.appendChild(p);
-                                                div.appendChild(button);
-                                                document.body.appendChild(div);
                                                 
                                             }, error:function(useraddresp){
                                                 console.log('error useraddresp', useraddresp);
@@ -311,6 +313,27 @@ ctrl.controller('newchatCtrl', ['$scope', function($scope){
                                         });
                                        
                                     }
+                                    var div = document.createElement('div');
+                                    var button = document.createElement('button');
+                                    var p = document.createElement('p');
+                                    p.innerHTML = 'Chatroom created!';
+                                    button.innerHTML = 'View my chatrooms';
+                                    button.addEventListener('click', function(){
+                                        document.getElementById('confirmpop').remove(); 
+                                        window.location = '#/mychats';
+                                    });
+                                    div.id = 'confirmpop'
+                                    div.style.position ='fixed';
+                                    div.style.width = '40vw';
+                                    div.style.padding = '5vw';
+                                    div.style.backgroundColor = 'rgba(0, 0, 0, 0.8)'
+                                    div.style.color = '#fff';
+                                    div.style.left = '30vw';
+                                    div.style.top = '10vh';
+                                    div.appendChild(p);
+                                    div.appendChild(button);
+                                    document.body.appendChild(div);
+                                                
                                 }
                             },
                             error:function(crresp){
@@ -322,10 +345,7 @@ ctrl.controller('newchatCtrl', ['$scope', function($scope){
                     }
                     
                 };
-            
-             $scope.hidden = true;
-            $scope.showmore = true;
-          
+        
                 $.ajax({
                     url:'./cont/user.php',
                     dataType:'JSON',
@@ -339,14 +359,9 @@ ctrl.controller('newchatCtrl', ['$scope', function($scope){
                         $scope.$apply(function(){
 
                             $scope.allUsers = allUsers;
-                            $scope.hidden = false;
+                          
 
                         });
-
-
-                        $scope.moreinfo = function(){
-                            $scope.showmore = false;
-                        };
 
 
                     },
@@ -358,7 +373,6 @@ ctrl.controller('newchatCtrl', ['$scope', function($scope){
         }
   
 }]);
-
 ctrl.controller('profileCtrl', ['$scope', function($scope){
     sessiondata();
     
@@ -551,31 +565,23 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
 
 }]);
 
-ctrl.controller('chatCtrl', ['$scope', function($scope){
-  console.log('hey ready');
+ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routeParams){
+ 
+    var currentId = $routeParams.id;
     
-            
+    var crid =  currentId.slice(15);
+    console.log('crid is', crid);
+    
+   var userinfo = sessionStorage.getObject('userinfo');
+   
             var test = document.getElementById('test');
             var msgbox = document.getElementById('msgbox');
             var msgcenter = document.getElementById('msgcenter');
      
      
-        sessiondata();
         getmsgs();
-     
-        function sessiondata(){
-            
-            $.ajax({
-                    url:'./cont/user.php',
-                    dataType:'JSON',
-                    data:{
-                        method:'getsession'
-                    },
-                    type:'POST',
-                    success:function(sessionid){
-                        console.log('sessionid is', sessionid);
-                        $( "body" ).data( "uid", sessionid.user_id );
-                        if(sessionid.status==1){
+    
+       if(userinfo.status==1){
                             $(".admip").show();
                             /*lahiru*/
                             
@@ -642,14 +648,8 @@ ctrl.controller('chatCtrl', ['$scope', function($scope){
                                     console.log($("#footc").val())
                                     $(".imgfoot").css({color : ""+$("#foot  c").val()+""})
                                 });
-                        }
-                    },
-                    error:function(sessionid){
-                        console.log('sessionid', sessionid);
-                    }
-                });
-        };
-
+                        } 
+    
          function getmsgs(){
             
                 //setInterval(function(){
@@ -658,8 +658,9 @@ ctrl.controller('chatCtrl', ['$scope', function($scope){
                         url:'./cont/messages.php',
                         dataType:'JSON',
                         data:{
-
-                            method:'showmsg'
+                            method:'showMsgsFromChatRoom',
+                            crid:crid
+                          
                         },
                         type:'POST',
                         success:function(smresp){
@@ -713,21 +714,20 @@ ctrl.controller('chatCtrl', ['$scope', function($scope){
                  
                  if(which == 13){
                      
-                     console.log('send ze message', $( "body" ).data( "uid" ));
-                     
-                    
                      $.ajax({
                         url:'./cont/messages.php',
                         dataType:'JSON',
                         data:{
                             msg:msgbox.value,
-                            method:'insertmsg'
+                            method:'insertmsg',
+                            crid:crid
                         },
                         type:'POST',
                         success:function(mresp){
                             console.log('mresp is', mresp);
                             
                             getmsgs();
+                            $("#msgbox").val("");
                         },
                         error:function(mresp){
                             console.log('mresp error', mresp);
@@ -738,14 +738,12 @@ ctrl.controller('chatCtrl', ['$scope', function($scope){
                  }
                 
             });
-          
 }]);
 
 
 
 ctrl.controller('adminCtrl', ['$scope', function($scope){
     
-    console.log('na na na nana', sessionStorage.getObject('userinfo'));
     var userinfo =  sessionStorage.getObject('userinfo');
     
     if(userinfo.status != 1){
@@ -754,7 +752,51 @@ ctrl.controller('adminCtrl', ['$scope', function($scope){
     } else {
         
     }
+
+}]);
+
+ctrl.controller('mychatroomsCtrl', ['$scope', function($scope){
+   
+    var userinfo =  sessionStorage.getObject('userinfo');
+    showrooms();
+    
+    function showrooms(){
+        $.ajax({
+                url:'./cont/chatroom.php',
+                dataType:'JSON',
+                data:{
+                    method:'showMyRooms',
+                    uid:userinfo.user_id
+                },
+                type:'POST',
+                success:function(myrooms){
+                    console.log('myrooms is', myrooms);
+
+                    $scope.$apply(function(){
+
+                        $scope.myrooms = myrooms;
        
-          
-  
+                    });
+
+                },
+                error:function(myrooms){
+                    console.log('myrooms error', myrooms);
+
+                }
+            });
+    }
+    
+   $scope.goToRoom = function($event){
+        
+       var thiss = $event.target;
+       console.log('this is', thiss.getAttribute('data-roomid'));
+       var crid = thiss.getAttribute('data-roomid');
+       var en =  btoa("hello world");
+       en = en.replace("=", crid);
+       window.location.href = '#/chat/'+en;
+       
+    };
+    
+   
+
 }]);
