@@ -1,11 +1,61 @@
+<style>
+    #canvas {
+        overflow: hidden;
+        position: relative;
+        text-align: center;
+        display: block;
+        float: left;
+        clear: both;
+        width: 89vw;
+        height: 89vw;
+        background:black;
+        background: linear-gradient(135deg, red, blue);
+        background-image:url("https://i.ytimg.com/vi/664VCs3c1HU/maxresdefault.jpg");
+        background-repeat :no-repeat;
+        background-position: top left;
+        background-size: contain;
+    }
+    
+    .tools form {
+        display:block;
+        clear: none;
+        float: left;
+    }
 
+    .imglinke {
+        width: 140px;
+    }
+
+    .Ihead {
+        display: block;
+        float: left;
+        clear: left;
+        margin-right: 30px;
+    }
+    .Ifotter {
+        display: block;
+        float: left;
+        margin-right: 30px;
+    }
+    .imgfoot{
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        
+    }
+    .img{
+        width: 100%
+    }
+</style>
 <div id = 'msgcenter'>
 </div>
 <input id = 'msgbox' type = 'text' placeholder = 'type a message here' >
 <div class="admip" style="display:none">
     
     <div class="tools">
-        <div class="img">
+        <table class="img">
+            <tr>
+            <td>
             <form class="imglinke">
                 <label>Img<br>
                     <input id="imgurl" type="text">
@@ -13,6 +63,7 @@
                     <input name="size" id="sizeS" type="range" value="40"><br>
                 </label>
             </form>
+            <td>
             <form id="size">
                 <label>Size<br>
                     <input name="size" checked class="size" type="radio" value="0">contain<br>
@@ -20,6 +71,8 @@
                     <input name="size" class="size" type="radio" value="2">cover
                 </label>
             </form>
+            </td>
+            <td>
             <form class="alignment">
                 <label>Alignment<br>
                 <input name="alignmentO" checked class="alignmentO" type="radio" value="0">
@@ -33,8 +86,9 @@
                 <input name="alignmentO" class="alignmentO" type="radio" value="8">
                 </label>
             </form>
-            <br>
-        </div> <br>  
+            </td> 
+            </tr>
+        </table> <br>  
 
         <div class="Ihead">HEADER<br>
             <form>
@@ -69,5 +123,5 @@
         <h1 class="imghead" ></h1>
         <div class="imgfoot"><p><P></div>
     </div>
-
 </div>
+    
