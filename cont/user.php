@@ -48,7 +48,7 @@ if($_POST['method'] == 'logout'){
 
 if($_POST['method'] == 'deleteUser'){
       
-     // deleteUser();
+     deleteUser();
       
   }
    

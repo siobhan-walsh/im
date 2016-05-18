@@ -31,6 +31,7 @@ $(document).ready(function(){
     };
 
     //show all users
+    
     showAllUsers();
     
     function showAllUsers(){
@@ -39,11 +40,28 @@ $(document).ready(function(){
                     url:'../cont/user.php',
                     dataType:'JSON',
                     data:{
-                        method:'showAllUsers'
+                        method:"view"
                     },
                     type:'POST',
-                    success:function(allUsers){
-                        console.log('allUsers is', allUsers);
+                    success:function(resp){
+                        console.log(resp);
+                        
+                        //loop through the users in the db
+                        for (var i = 0; i<resp.length i++){
+                       var all_users = document.createElement("div");
+                        all_users.innerHTML = resp[i].userid;
+                             document.getElementById("all_chatters").appendChild(all_users);
+                        
+                        
+                        }
+                        
+                        
+                     }
+                });
+        
+            };
+                        
+                        
                         
                         /*
                         
@@ -61,7 +79,7 @@ $(document).ready(function(){
                             
                             
                         }
-                        */
+                      
                         
                         function bindClick(i) {	
 				            return function(){
@@ -87,7 +105,7 @@ $(document).ready(function(){
                     }
                 });
         
-    };
+    };  */
     
     function showAllRooms (){
         

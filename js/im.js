@@ -59,6 +59,14 @@ im.config([
                 templateUrl:'view/newchat.html',
                 controller:'newchatCtrl'
                 
+           
+                }
+        ).when(
+            '/viewusers',
+            {
+                templateUrl:'view/viewusers.html',
+                controller:'newchatCtrl'
+                
             }
         )
     }
