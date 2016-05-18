@@ -646,7 +646,7 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
 
                                 $("#footc").change(function(){
                                     console.log($("#footc").val())
-                                    $(".imgfoot").css({color : ""+$("#foot  c").val()+""})
+                                   $(".imgfoot").css({color : ""+$("#footc").val()+""})
                                 });
                         } 
     
