@@ -40,13 +40,6 @@ im.config([
                 controller:'profileCtrl'
             }
         ).when(
-            '/create',
-            {
-                templateUrl:'view/create.html',
-                controller:'createCtrl'
-                
-            }
-        ).when(
             '/mychats',
             {
                 templateUrl:'view/mychats.html',

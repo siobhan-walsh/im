@@ -44,7 +44,139 @@ ctrl.controller('headerCtrl', ['$scope', function($scope){
 
 }]);
 
+ctrl.controller('signupCtrl', ['$scope', function($scope){
+    
+   console.log('signup');
+    
+     
+            var un = document.getElementById('un');
+            var pw = document.getElementById('pw');
+            var email = document.getElementById('email');
+            var avi = './img/default/avi-default.jpg';
+            var c = '#772457';
+            var status = 2;
+            
+            var subm = document.getElementById('subm');
+            var showadmin = document.getElementById('showadmin');
+            
+            showadmin.onclick = function(){
+                var div = document.createElement('div');
+                var button = document.createElement('button');
+                var p = document.createElement('p');
+                var inp = document.createElement('input');
+                inp.type = 'password';
+                
+                p.innerHTML = 'Please Enter the admin password';
+                
+                button.innerHTML = 'Signup';
+                button.addEventListener('click', function(){
+                    verify();
+                });
+                div.id = 'adminpopup';
+                div.style.position ='fixed';
+                div.style.width = '70vw';
+                div.style.padding = '5vw';
+                div.style.backgroundColor = 'rgba(0, 0, 0, 1)'
+                div.style.color = '#fff';
+                div.style.left = '10vw';
+                div.style.top = '10vh';
+                div.appendChild(p);
+                div.appendChild(inp);
+                div.appendChild(button);
+                document.body.appendChild(div);
+                
+                function verify(){
+                    var entered = inp.value;
+                    var actual = 'secretvevoadmin';
+                    
+                    if(entered == actual){
+                       
+                        status = 1;
+                        avi = './img/default/admin-avi-default.jpg';
+                        signup();
+                    } else {
+                        p.innerHTML = "Sorry, that is not the right password";
+                    }
+                }
+                
+            }
 
+            subm.onclick = function(){
+                signup();
+               
+            };
+
+    function signup(){
+                               
+             
+                email = email.value;
+                
+                $.ajax({
+                    url:'./cont/user.php',
+                    dataType:'JSON',
+                    data:{
+                        un:un.value,
+                        pw:pw.value,
+                        avi:avi,
+                        status:status,
+                        c:c,
+                        email:email,
+                        method:'insert'
+                    },
+                    type:'POST',
+                    success:function(resp){
+                        console.log('resp is', resp);
+                        
+                        if(resp.account == 'hasaccount'){
+                            console.log('you already have an account bro');
+                            
+                            alert('you already have an account with that email');
+                        } else {
+                            console.log('ok thne new account');
+                            
+                        
+                            $.ajax({
+                                url:'./cont/user.php',
+                                dataType:'JSON',
+                                data:{
+                                    email:email,
+                                    pw:pw.value,
+                                    method:'login'
+                                },
+                                type:'POST',
+                                success:function(sessresp){
+                                    
+                                    console.log('sessresp', sessresp);
+                                
+                                    if(status == 1){
+                                        sessionStorage.setObject('userinfo', sessresp);
+                                        document.getElementById('adminpopup').remove();
+                                        window.location = '#/admin'
+                                    } else{
+                                       
+                                        window.location = '#/signup';
+                                    }
+                            
+                                 
+                                },
+                                error:function(sessresp){
+                                    console.log('sessresperr', sessresp);
+                                }
+                            
+                                     
+                            }); 
+                        
+                        } 
+                    },
+                    error:function(resp){
+                        console.log('resp error', resp);
+
+                    }
+                });
+            }; 
+          
+  
+}]);
 ctrl.controller('loginCtrl', ['$scope', function($scope){
 
             var email = document.getElementById('email');
@@ -418,80 +550,6 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
            };
 
 }]);
-
-ctrl.controller('createCtrl', ['$scope', function($scope){
-    
-      $(".admip").show();
-   /*lahiru*/
-                            
-var size = ["contain",
-            "auto",
-            "cover"];
-    
-var ali = ["top left",
-           "top center",
-           "top right",
-           "center left",
-           "center center",
-           "center right",
-           "bottom left",
-           "bottom center",
-           "bottom right"];
-    
-    //background
-    
-    $("#imgadd").click(function(){
-        $("#canvas").css({backgroundImage : "url("+$("#imgurl").val()+")"});
-    });
-
-    $("#sizeS").change(function(){
-        $("#canvas").css({backgroundSize : 25+(parseFloat($("#sizeS").val()*2))+"%"})
-    })
-    
-    $("#size").change(function(){
-        $("#canvas").css({backgroundSize : size[$(".size:checked").val()]})
-        console.log($(".size:checked").val())
-    })
-    
-    $(".alignment").change(function(){
-        $("#canvas").css({backgroundPosition : ali[$(".alignmentO:checked").val()]})
-        console.log($(".alignmentO:checked").val())
-    })
-    
-    //head
-    
-    $("#headb").click(function(){
-        $(".imghead").html($("#headt").val());
-    });
-    
-    $("#heads").change(function(){
-        $(".imghead").css({fontSize : 16+(parseFloat($("#heads").val()))+"px"})
-    })
-    
-    $("#headc").change(function(){
-        console.log($("#headc").val())
-        $(".imghead").css({color : ""+$("#headc").val()+""})
-    })
-    
-    //foot
-    
-    $("#footb").click(function(){
-        $(".imgfoot").html($("#foott").val());
-    });
-    
-    $("#foots").change(function(){
-        $(".imgfoot").css({fontSize : 16+(parseFloat($("#foots").val()))+"px"})
-    })
-    
-    $("#footc").change(function(){
-        console.log($("#footc").val())
-        $(".imgfoot").css({color : ""+$("#foot  c").val()+""})
-    })
-                            
-                            /*lahiruend*/
-    
-}]);
-
 
 ctrl.controller('chatCtrl', ['$scope', function($scope){
   console.log('hey ready');

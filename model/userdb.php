@@ -166,7 +166,7 @@ include('connection.php');
         
         $result->execute(array(':email' => $email, ':pw' => $pw));
         
-        $lresult = $result->fetch();
+        $lresult = $result->fetchAll(PDO::FETCH_ASSOC); 
         
         if($lresult[0]['user_id'] == null){
             echo json_encode('user not found');
