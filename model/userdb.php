@@ -65,7 +65,7 @@ include('connection.php');
         
         $result->execute(array(':email' => $email));
         
-        $lresult = $result->fetchAll();
+        $lresult = $result->fetch();
        
             $_SESSION['user_id'] = $lresult[0]['user_id'];
 
@@ -166,7 +166,7 @@ include('connection.php');
         
         $result->execute(array(':email' => $email, ':pw' => $pw));
         
-        $lresult = $result->fetchAll();
+        $lresult = $result->fetch();
         
         if($lresult[0]['user_id'] == null){
             echo json_encode('user not found');

@@ -2,17 +2,17 @@ var ctrl = angular.module('allctrls', []);
 
 ctrl.controller('headerCtrl', ['$scope', function($scope){
     
-Storage.prototype.setObject = function(key, value) {
+    Storage.prototype.setObject = function(key, value) {
 
-    this.setItem(key, JSON.stringify(value));
+        this.setItem(key, JSON.stringify(value));
 
-}
+    }
 
-Storage.prototype.getObject = function(key) {
+    Storage.prototype.getObject = function(key) {
 
-    var value = this.getItem(key);
-    return value && JSON.parse(value);
-}
+        var value = this.getItem(key);
+        return value && JSON.parse(value);
+    }
 
     console.log('head');
     
@@ -24,14 +24,10 @@ Storage.prototype.getObject = function(key) {
             },
             type:'POST',
             success:function(sessinfo){
-
+            
                 console.log('sessinfo', sessinfo);
                 sessionStorage.setObject('userinfo', sessinfo);
                 console.log('html5 sto', sessionStorage.getObject('userinfo'));
-             
-                $scope.$apply(function(){
-                        $scope.info = sessinfo;
-                 });
 
             },
             error:function(sessinfo){
@@ -55,7 +51,7 @@ ctrl.controller('loginCtrl', ['$scope', function($scope){
             var pw = document.getElementById('pw');
             var subm = document.getElementById('subm');
             
-            var userinfo = sessionStorage.getObject('userinfo', sessinfo);
+            var userinfo = sessionStorage.getObject('userinfo');
                
                 if(userinfo.status == 1){
                     window.location = '#/admin'
@@ -75,6 +71,8 @@ ctrl.controller('loginCtrl', ['$scope', function($scope){
                         type:'POST',
                         success:function(lresp){
                             console.log('lresp is', lresp);
+                            sessionStorage.setObject('userinfo', lresp);
+                            
                             if(lresp == "user not found"){
 
                                 console.log('it is null');
@@ -114,9 +112,12 @@ ctrl.controller('newchatCtrl', ['$scope', function($scope){
           
                 $scope.add = function(){
                     
-                    console.log('hi', $scope.inp);
+                    var inpval = document.getElementById('crname').value;
+                    var checks = document.querySelectorAll('.check:checked');
                     
-                    if($scope.inp == undefined || $scope.inp == ''){
+                    console.log('hi', inpval);
+                    
+                    if(inpval == undefined || inpval == ''){
                         
                         console.log('no name');
                         
@@ -127,11 +128,58 @@ ctrl.controller('newchatCtrl', ['$scope', function($scope){
                             dataType:'JSON',
                             data:{
                                 method:'insertRoom',
-                                name:$scope.inp
+                                name:inpval
                             },
                             type:'POST',
                             success:function(crresp){
-
+                                console.log('crresp is', crresp);
+                                
+                                if(crresp == 'fail'){
+                                    console.log('fail');
+                                    
+                                } else {
+                                    var crid = crresp.chatroom_id;
+                                    console.log('crid', crid);
+                                    
+                                      console.log('checks' , checks);
+                                    
+                                    for(var i = 0; i < checks.length; i++){
+                                      
+                                        $.ajax({
+                                            url:'./cont/chatroom.php',
+                                            dataType:'JSON',
+                                            data:{
+                                                method:'addUserToRoom',
+                                                crid:crid,
+                                            userid:checks[i].getAttribute('data-userid')
+                                            },
+                                            type:'POST',
+                                            success:function(useraddresp){
+                                                console.log('useraddresp', useraddresp);
+                                                var div = document.createElement('div');
+                                                var button = document.createElement('button');
+                                                var p = document.createElement('p');
+                                                p.innerHTML = 'Chatroom created!';
+                                                button.innerHTML = 'View my chatrooms';
+                                                button.addEventListener('click', function(){div.remove(); window.location = '#/mychats';});
+                                                div.style.position ='fixed';
+                                                div.style.width = '40vw';
+                                                div.style.padding = '5vw';
+                                                div.style.backgroundColor = 'rgba(0, 0, 0, 0.8)'
+                                                div.style.color = '#fff';
+                                                div.style.left = '30vw';
+                                                div.style.top = '10vh';
+                                                div.appendChild(p);
+                                                div.appendChild(button);
+                                                document.body.appendChild(div);
+                                                
+                                            }, error:function(useraddresp){
+                                                console.log('error useraddresp', useraddresp);
+                                            }
+                                        });
+                                       
+                                    }
+                                }
                             },
                             error:function(crresp){
                                 console.log('crresp error', crresp);

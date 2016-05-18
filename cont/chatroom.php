@@ -26,6 +26,10 @@ if($_POST['method'] == 'updateRoom'){
      updateRoom();
       
   }
+if($_POST['method'] == 'addUserToRoom'){
+      
+    addUserToRoom();
+}
 
 if($_POST['method'] == 'deleteRoom'){
       

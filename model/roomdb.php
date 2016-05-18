@@ -31,13 +31,36 @@ include('connection.php');
         
         $result = $db->prepare($query);
         $result->execute(array(':name' => $name, ":host_id" => $host_id));
+        $result = $result->fetch();
+        $result = count($result);
         
+             $nquery = "SELECT chatroom_id FROM chatroom WHERE name = :name AND host_id = :host_id";
         
-        echo json_encode('newroom inserted');
-        
+            $nresult = $db->prepare($nquery);
+            $nresult->execute(array(':name' => $name, ":host_id" => $host_id));
+            $nn = $nresult->fetch();
+            echo json_encode($nn);
+   
     }
 
-    function update_room(){
+  function addUserToRoom(){
+  
+        global $db;
+        $crid = $_POST['crid'];
+        $userid = $_POST['userid'];
+        
+        $query = "INSERT INTO chatroom_users (chatroom_id, user_id) VALUES (:crid, :userid);";
+        
+        $result = $db->prepare($query);
+        
+        $result->execute(array(':crid' => $crid, ':userid' => $userid));
+        
+        echo json_encode('user added to chatroom');
+    }
+
+
+      function update_room(){
+        global $db;
         
         $cid = $_POST['cid'];
         $name = $_POST['name'];
