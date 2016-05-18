@@ -640,7 +640,7 @@ ctrl.controller('chatCtrl', ['$scope', function($scope){
 
                                 $("#footc").change(function(){
                                     console.log($("#footc").val())
-                                    $(".imgfoot").css({color : ""+$("#foot  c").val()+""})
+                                    $(".imgfoot").css({color : ""+$("#footc").val()+""})
                                 });
                         }
                     },
