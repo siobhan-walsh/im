@@ -287,11 +287,22 @@ body, span, input, select, textarea {
     height:80vh;
     font-size:14pt;
 }
-#exitpopup {
+#exitpopup,
+.exitupopup {
     color:#fff;
     position:absolute;
     right:10px;
     top:0;
     font-size:26pt;
     cursor:pointer;
+}
+.mychatrooms {
+    text-align:center;
+}
+.listrooms div {
+    cursor:pointer;
+    margin:16px 0;
+}
+.listrooms div:hover {
+     color: lightpink;
 }

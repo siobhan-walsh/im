@@ -92,10 +92,10 @@
         <div ng-repeat = 'user in Chatusers' >
             <p ng-click = "showmore($event)" data-user= '{{user.user_id}}'>{{user.username}}</p>
             <div id='{{user.user_id}}' class='morepop'>
+                 <i class='material-icons exitupopup'>clear</i>
                 <img src = '{{user.avi}}'>
                 <p>Username: {{user.username}}</p>
                 <p>Email: {{user.email}}</p>
-                <button data-userclose='{{user.user_id}}' ng-click = 'close($event)'>Close</button>
             </div>
         </div>
         

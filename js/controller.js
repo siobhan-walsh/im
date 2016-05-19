@@ -622,7 +622,7 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
            $('#exitpopup').click(function(){
               $(".admip").fadeOut();
            });
-          
+
      
                             
                             /*lahiru*/
@@ -898,13 +898,13 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
         console.log('thisy', thissy);
         var user = thissy.getAttribute('data-user');
         $("#" + user).fadeIn();
+        
+        $('.exitupopup').click(function(){
+              $("#" + user).fadeOut();
+          console.log('hey exit');
+        });
     };
-    $scope.close = function($event){
-        var thissy = $event.target;
-        console.log('thisy', thissy);
-        var user = thissy.getAttribute('data-userclose');
-        $("#" + user).fadeOut();
-    }
+    
     function getusers(){
             
                 //setInterval(function(){
