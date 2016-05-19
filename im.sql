@@ -11,26 +11,26 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Database: `im`
+-- Database: 'im'
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chatroom`
+-- Table structure for table 'chatroom'
 --
 
-CREATE TABLE `chatroom` (
-  `chatroom_id` int(11) NOT NULL,
-  `host_id` int(11) NOT NULL,
-  `name` varchar(500) NOT NULL
+CREATE TABLE 'chatroom' (
+  'chatroom_id' int(11) NOT NULL,
+  'host_id' int(11) NOT NULL,
+  'name' varchar(500) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `chatroom`
+-- Dumping data for table 'chatroom'
 --
 
-INSERT INTO `chatroom` (`chatroom_id`, `host_id`, `name`) VALUES
+INSERT INTO 'chatroom' ('chatroom_id', 'host_id', 'name') VALUES
 (1, 1, 'asdf'),
 (2, 1, 'test'),
 (3, 1, 'why'),
@@ -92,20 +92,20 @@ INSERT INTO `chatroom` (`chatroom_id`, `host_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chatroom_users`
+-- Table structure for table 'chatroom_users'
 --
 
-CREATE TABLE `chatroom_users` (
-  `crUser_id` int(11) NOT NULL,
-  `chatroom_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
+CREATE TABLE 'chatroom_users' (
+  'crUser_id' int(11) NOT NULL,
+  'chatroom_id' int(11) NOT NULL,
+  'user_id' int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `chatroom_users`
+-- Dumping data for table 'chatroom_users'
 --
 
-INSERT INTO `chatroom_users` (`crUser_id`, `chatroom_id`, `user_id`) VALUES
+INSERT INTO 'chatroom_users' ('crUser_id', 'chatroom_id', 'user_id') VALUES
 (1, 43, 1),
 (2, 44, 1),
 (3, 45, 1),
@@ -147,22 +147,22 @@ INSERT INTO `chatroom_users` (`crUser_id`, `chatroom_id`, `user_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `messages`
+-- Table structure for table 'messages'
 --
 
-CREATE TABLE `messages` (
-  `msg_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `chatroom_id` int(11) NOT NULL,
-  `msg` varchar(500) NOT NULL,
-  `msg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+CREATE TABLE 'messages' (
+  'msg_id' int(11) NOT NULL,
+  'user_id' int(11) NOT NULL,
+  'chatroom_id' int(11) NOT NULL,
+  'msg' varchar(500) NOT NULL,
+  'msg_time' timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `messages`
+-- Dumping data for table 'messages'
 --
 
-INSERT INTO `messages` (`msg_id`, `user_id`, `chatroom_id`, `msg`, `msg_time`) VALUES
+INSERT INTO 'messages' ('msg_id', 'user_id', 'chatroom_id', 'msg', 'msg_time') VALUES
 (1, 1, 1, 'hi', '2016-05-18 19:52:59'),
 (2, 1, 1, 'wow', '2016-05-18 19:53:17'),
 (3, 1, 50, 'teset50', '2016-05-18 21:09:19'),
@@ -199,24 +199,24 @@ INSERT INTO `messages` (`msg_id`, `user_id`, `chatroom_id`, `msg`, `msg_time`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table 'users'
 --
 
-CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `avi` varchar(500) NOT NULL,
-  `status` int(11) NOT NULL,
-  `c` varchar(7) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL
+CREATE TABLE 'users' (
+  'user_id' int(11) NOT NULL,
+  'username' varchar(100) NOT NULL,
+  'avi' varchar(500) NOT NULL,
+  'status' int(11) NOT NULL,
+  'c' varchar(7) NOT NULL,
+  'email' varchar(100) NOT NULL,
+  'password' varchar(100) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table 'users'
 --
 
-INSERT INTO `users` (`user_id`, `username`, `avi`, `status`, `c`, `email`, `password`) VALUES
+INSERT INTO 'users' ('user_id', 'username', 'avi', 'status', 'c', 'email', 'password') VALUES
 (1, 'sio', './img/default/admin-avi-default', 1, '#ffccee', 'test@test', '098f6bcd4621d373cade4e832627b4f6'),
 (2, '', './img/default/avi-default.jpg', 1, '#772457', '', 'd41d8cd98f00b204e9800998ecf8427e'),
 (3, 'arya', './img/3/08d9381.jpeg', 1, '#772457', 'arya@arya.com', '4bf84babe76dabda6c4da4d25354704d'),
@@ -240,78 +240,78 @@ INSERT INTO `users` (`user_id`, `username`, `avi`, `status`, `c`, `email`, `pass
 --
 
 --
--- Indexes for table `chatroom`
+-- Indexes for table 'chatroom'
 --
-ALTER TABLE `chatroom`
-  ADD PRIMARY KEY (`chatroom_id`),
-  ADD KEY `host_id` (`host_id`);
+ALTER TABLE 'chatroom'
+  ADD PRIMARY KEY ('chatroom_id'),
+  ADD KEY 'host_id' ('host_id');
 
 --
--- Indexes for table `chatroom_users`
+-- Indexes for table 'chatroom_users'
 --
-ALTER TABLE `chatroom_users`
-  ADD PRIMARY KEY (`crUser_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `chatroom_id` (`chatroom_id`);
+ALTER TABLE 'chatroom_users'
+  ADD PRIMARY KEY ('crUser_id'),
+  ADD KEY 'user_id' ('user_id'),
+  ADD KEY 'chatroom_id' ('chatroom_id');
 
 --
--- Indexes for table `messages`
+-- Indexes for table 'messages'
 --
-ALTER TABLE `messages`
-  ADD PRIMARY KEY (`msg_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `chatroom_id` (`chatroom_id`);
+ALTER TABLE 'messages'
+  ADD PRIMARY KEY ('msg_id'),
+  ADD KEY 'user_id' ('user_id'),
+  ADD KEY 'chatroom_id' ('chatroom_id');
 
 --
--- Indexes for table `users`
+-- Indexes for table 'users'
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
+ALTER TABLE 'users'
+  ADD PRIMARY KEY ('user_id');
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `chatroom`
+-- AUTO_INCREMENT for table 'chatroom'
 --
-ALTER TABLE `chatroom`
-  MODIFY `chatroom_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=58;
+ALTER TABLE 'chatroom'
+  MODIFY 'chatroom_id' int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=58;
 --
--- AUTO_INCREMENT for table `chatroom_users`
+-- AUTO_INCREMENT for table 'chatroom_users'
 --
-ALTER TABLE `chatroom_users`
-  MODIFY `crUser_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=38;
+ALTER TABLE 'chatroom_users'
+  MODIFY 'crUser_id' int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=38;
 --
--- AUTO_INCREMENT for table `messages`
+-- AUTO_INCREMENT for table 'messages'
 --
-ALTER TABLE `messages`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
+ALTER TABLE 'messages'
+  MODIFY 'msg_id' int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT for table 'users'
 --
-ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+ALTER TABLE 'users'
+  MODIFY 'user_id' int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `chatroom`
+-- Constraints for table 'chatroom'
 --
-ALTER TABLE `chatroom`
-  ADD CONSTRAINT `chatroom_ibfk_1` FOREIGN KEY (`host_id`) REFERENCES `users` (`user_id`);
+ALTER TABLE 'chatroom'
+  ADD CONSTRAINT 'chatroom_ibfk_1' FOREIGN KEY ('host_id') REFERENCES 'users' ('user_id');
 
 --
--- Constraints for table `chatroom_users`
+-- Constraints for table 'chatroom_users'
 --
-ALTER TABLE `chatroom_users`
-  ADD CONSTRAINT `chatroom_users_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `chatroom_users_ibfk_2` FOREIGN KEY (`chatroom_id`) REFERENCES `chatroom` (`chatroom_id`);
+ALTER TABLE 'chatroom_users'
+  ADD CONSTRAINT 'chatroom_users_ibfk_1' FOREIGN KEY ('user_id') REFERENCES 'users' ('user_id'),
+  ADD CONSTRAINT 'chatroom_users_ibfk_2' FOREIGN KEY ('chatroom_id') REFERENCES 'chatroom' ('chatroom_id');
 
 --
--- Constraints for table `messages`
+-- Constraints for table 'messages'
 --
-ALTER TABLE `messages`
-  ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`chatroom_id`) REFERENCES `chatroom` (`chatroom_id`);
+ALTER TABLE 'messages'
+  ADD CONSTRAINT 'messages_ibfk_1' FOREIGN KEY ('user_id') REFERENCES 'users' ('user_id'),
+  ADD CONSTRAINT 'messages_ibfk_2' FOREIGN KEY ('chatroom_id') REFERENCES 'chatroom' ('chatroom_id');

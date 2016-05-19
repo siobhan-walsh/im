@@ -1,39 +1,154 @@
+
+
+
+
 body {
-  
+ background-image: url('../img/bg.png');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+width: 100%;
+color: #fff;
+font-weight: 600pt;
+font-family: 'Titillium Web', sans-serif;
 }
+
+
+
+button {
+    
+   margin: auto;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+  font-size: 1rem;
+  line-height: 3rem;
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: -webkit-linear-gradient(290deg, #ff0000, #ec008c);
+  background-image: linear-gradient(160deg, #ff0000, #ec008c);
+  border-radius: 30px;
+  cursor: pointer;
+  -webkit-user-select: none;
+    moz-user-select: none;
+-ms-user-select: none;
+ user-select: none;
+  box-shadow: 0 0 0 0 #ec008c, 0.5rem 0.5rem 30px #13092d;
+  -webkit-transition: box-shadow 0.25s;
+  transition: box-shadow 0.25s;   
+    
+    
+    
+}
+
+button:hover {
+  box-shadow: 0 0 60px 2px #ec008c, 0.5rem 0.5rem 30px #13092d;
+}
+
+
+
+button:after {
+  content: '';
+
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+  left: 2px;
+  border-radius: 30px;
+  background-image: -webkit-linear-gradient(280deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+  background-image: linear-gradient(170deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+
+#filesinp {
+    
+  background-color: deeppink;
+ 
+    
+}
+
 img {
     
-    max-width:100px;
+    max-width:300px;
 }
 body, span, input, select, textarea {
-        font-family: 'Droid Sans', sans-serif;
+       font-family: 'Titillium Web', sans-serif;
         font-size: 16pt;
         font-weight: 300;
         line-height: 1.65em;
     }
+
+
+        #logo {
+
+         width: 200px;
+        margin-top: 2%;
+        margin-left: 41%;
+        margin-right: 50%;
+
+
+
+        }
+
+        #nav {
+
+
+
+        margin-left: 37%;
+        font-weight: 400;
+   
+
+
+
+        }
+    
+
+.links {
+    
+    
+  outline-width: thick;
+    
+}
+
    
 
     a {
-        color: #F60669;
-        font-weight: 200pt;
-        font-family: 'Droid Sans', sans-serif;
+        color: #fff;
+        font-weight: 600pt;
+        font-family: 'Titillium Web', sans-serif;
+           text-decoration: none;
+        
     }
+
+        a:hover {
+
+            color: lightpink;
+        }
+
+  a:active {
+
+            color: lightskyblue;
+            text-decoration: underline;
+        }
 
 #error {
     color:red;
 }
 
 .header {
-    background-color:#9C528C;
-    float:right;
-    width:100%;
+
 
 }
 
 .content {
     width:90%;
-    margin:5%;
-    float:left;
+    margin-left: 22%;
+    margin-top: 5%;
+ 
 }
 
 .hideinp {
