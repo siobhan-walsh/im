@@ -53,6 +53,10 @@ ctrl.controller('signupCtrl', ['$scope', function($scope){
             var c = '#772457';
             var status = 2;
             
+            document.getElementById('bigheader').style.display = 'block';
+            document.getElementById('adminheader').style.display = 'none';
+            document.getElementById('customerheader').style.display = 'none';
+    
             var subm = document.getElementById('subm');
             var showadmin = document.getElementById('showadmin');
             
@@ -180,6 +184,10 @@ ctrl.controller('loginCtrl', ['$scope', function($scope){
             var pw = document.getElementById('pw');
             var subm = document.getElementById('subm');
             
+            document.getElementById('bigheader').style.display = 'block';
+            document.getElementById('adminheader').style.display = 'none';
+            document.getElementById('customerheader').style.display = 'none';
+            
             var userinfo = sessionStorage.getObject('userinfo');
                
                 if(userinfo.status == 1){
@@ -237,8 +245,12 @@ ctrl.controller('newchatroomCtrl', ['$scope', function($scope){
         if(userinfo.status != 1){
             $('.restricted').remove();
             $('.message').html('You do not have permission to view this page');
+           
         } else {
-          
+           document.getElementById('bigheader').style.display = 'none';
+            document.getElementById('adminheader').style.display = 'block';
+            document.getElementById('customerheader').style.display = 'none';
+            
                 $scope.add = function(){
                     
                     var inpval = document.getElementById('crname').value;
@@ -372,6 +384,16 @@ ctrl.controller('newchatroomCtrl', ['$scope', function($scope){
 }]);
 ctrl.controller('profileCtrl', ['$scope', function($scope){
     sessiondata();
+    
+    if(sessionStorage.getObject("userinfo").status == 1){
+        document.getElementById('bigheader').style.display = 'none';
+        document.getElementById('adminheader').style.display = 'block';
+        document.getElementById('customerheader').style.display = 'none';
+    } else {
+            document.getElementById('bigheader').style.display = 'none';
+            document.getElementById('adminheader').style.display = 'none';
+            document.getElementById('customerheader').style.display = 'block';
+    }
     
     
     $scope.updateAvi = function($event){
@@ -565,6 +587,17 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
 
 ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routeParams){
  
+   
+    if(sessionStorage.getObject("userinfo").status == 1){
+        document.getElementById('bigheader').style.display = 'none';
+        document.getElementById('adminheader').style.display = 'block';
+        document.getElementById('customerheader').style.display = 'none';
+    } else {
+            document.getElementById('bigheader').style.display = 'none';
+            document.getElementById('adminheader').style.display = 'none';
+            document.getElementById('customerheader').style.display = 'block';
+    }
+    
     var currentId = $routeParams.id;
     
     var crid =  currentId.slice(15);
@@ -870,14 +903,34 @@ ctrl.controller('adminCtrl', ['$scope', function($scope){
     if(userinfo.status != 1){
         $('.restricted').remove();
         $('.message').html('You do not have permission to view this page');
-    } else {
+        document.getElementById('bigheader').style.display = 'none';
+        document.getElementById('adminheader').style.display = 'none';
+        document.getElementById('customerheader').style.display = 'block';
         
+    } else {
+       document.getElementById('bigheader').style.display = 'block';
+        document.getElementById('adminheader').style.display = 'none';
+        document.getElementById('customerheader').style.display = 'none';
     }
-
+    
+   
 }]);
 
 ctrl.controller('mychatroomsCtrl', ['$scope', function($scope){
-   
+  var userinfo =  sessionStorage.getObject('userinfo');  
+    
+    if(userinfo.status != 1){
+     
+        document.getElementById('bigheader').style.display = 'none';
+        document.getElementById('adminheader').style.display = 'none';
+        document.getElementById('customerheader').style.display = 'block';
+        
+    } else {
+       document.getElementById('bigheader').style.display = 'none';
+        document.getElementById('adminheader').style.display = 'block';
+        document.getElementById('customerheader').style.display = 'none';
+    }
+    
     var userinfo =  sessionStorage.getObject('userinfo');
     showrooms();
     

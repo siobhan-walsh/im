@@ -8,6 +8,8 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
   <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,700' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <script src = 'https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
     <script src="js/angular.min.js"></script>
     <script src="js/angular-route.js"></script>
@@ -23,15 +25,70 @@
     <body> 
      
         
+        <div class='bgimg'></div>
+        <div id="bigheader">
         
-        <div class="header">
-                <div id="logo">
-                    <img src="img/logo.png" class="logo">
-                    </div>
-    	  </div>	
-         <div ng-controller= 'headerCtrl'  id="header" class="skel-panels-fixed">
+            <img src="img/logo.png" class="logo">
+        
+    	  </div>
+        <div id = 'customerheader'>
+            <a href = '#/mychats'>
+                <div>
+                     <img src="img/logo.png" >
+                </div> 
+            </a>
+            <a href = '#/profile'>
+                <div>
+                     <i class='material-icons'>person</i><br>
+                    <span>Edit Profile</span>
+                </div>
+            </a>
+            <a href = '#/mychats'>
+                <div>
+                      <i class='material-icons'>chat</i><br>
+                    <span>My chatrooms</span>
+                </div> 
+            </a>
+            
+        </div>
+        <div id = 'adminheader'>
+            <a href = '#/admin'>
+                <div>
+                     <img src="img/logo.png" >
+                </div> 
+            </a>
+            <a href = '#/profile'>
+                <div>
+                     <i class='material-icons'>person</i><br>
+                    <span>Edit Profile</span>
+                </div>
+            </a>
+            <a href = '#/mychats'>
+                <div>
+                      <i class='material-icons'>chat</i><br>
+                    <span>My chatrooms</span>
+                </div> 
+            </a>
+            <a href = '#/new'>
+                <div>
+                    <i class='material-icons'>chat_bubble_outline</i><br>
+                    <span>Create chatroom</span>
+                </div>
+            </a>
+            <a href = '#/viewusers'>
+                <div>
+                    <i class='material-icons'>supervisor_account</i><br>
+                    <span>Manage Users</span>
+                </div> 
+            </a>
+               
+               
+                
+               
+        </div>
+         <div ng-controller= 'headerCtrl'  id="header" >
            
-        <!-- these links will be deleted, they are just for convinience for us now -->
+        <!-- these links will be deleted, they are just for convinience for us now 
              <div class = 'links' id="nav">
                  
                  <a href = '#/admin'>admin</a>
@@ -43,11 +100,11 @@
              
 
             </div>
-       
+       -->
  
              
         <div ng-view class = 'content'>
-        <div id='all_chatters'> </div>
+        
           
         </div>
            

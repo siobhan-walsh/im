@@ -2,12 +2,34 @@
         <div ng-controller= 'adminCtrl'>
             <p class='message'></p>
             <div class='restricted'>
-                <div><a href = '#/new'>Start a new chatroom</a></div>
-                <div><a href='#/mychats'>See my chats</a></div>
-                <div><a href='#/profile'>My Profile</a></div>
-                <div><a href='#/viewusers'>View Chatters</a></div>
-                 
+                <div id = 'adminpage'>
+                    <a href = '#/profile'>
+                        <div>
+                             <i class='material-icons'>person</i><br>
+                            <span>Edit Your Profile</span>
+                        </div>
+                    </a>
+                    <a href = '#/mychats'>
+                        <div>
+                              <i class='material-icons'>chat</i><br>
+                            <span>See your chatrooms</span>
+                        </div> 
+                    </a>
+                    <a href = '#/new'>
+                        <div>
+                            <i class='material-icons'>chat_bubble_outline</i><br>
+                            <span>Create a new chatroom</span>
+                        </div>
+                    </a>
+                    <a href = '#/viewusers'>
+                        <div>
+                            <i class='material-icons'>supervisor_account</i><br>
+                            <span>Manage Users</span>
+                        </div> 
+                    </a>
              
             </div>
             
         </div>
+
+</div>
