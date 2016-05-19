@@ -3,13 +3,10 @@ var ctrl = angular.module('allctrls', []);
 ctrl.controller('headerCtrl', ['$scope', function($scope){
     
     Storage.prototype.setObject = function(key, value) {
-
         this.setItem(key, JSON.stringify(value));
-
     }
 
     Storage.prototype.getObject = function(key) {
-
         var value = this.getItem(key);
         return value && JSON.parse(value);
     }
@@ -22,10 +19,8 @@ ctrl.controller('headerCtrl', ['$scope', function($scope){
             },
             type:'POST',
             success:function(sessinfo){
-
                 sessionStorage.setObject('userinfo', sessinfo);
                 console.log('html5 sto', sessionStorage.getObject('userinfo'));
-
             },
             error:function(sessinfo){
                 console.log('sessinfo', sessinfo);
@@ -188,10 +183,74 @@ ctrl.controller('loginCtrl', ['$scope', function($scope){
             document.getElementById('adminheader').style.display = 'none';
             document.getElementById('customerheader').style.display = 'none';
             
-            var userinfo = sessionStorage.getObject('userinfo');
+            
+            if (sessionStorage.length!=0){
+                if(userinfo.status == 1){
+                    window.location = '#/admin';
+                } else if (userinfo.status == 2) {
+                    window.location = '#/mychats';
+                }
+            }else{
+                    var userinfo = sessionStorage.getObject('userinfo');
+                    $scope.login = function(){
+              
+                    $.ajax({
+                        url:'./cont/user.php',
+                        dataType:'JSON',
+                        data:{
+                            email:email.value,
+                            pw:pw.value,
+                            method:'login'
+                        },
+                        type:'POST',
+                        success:function(lresp){
+                            console.log('lresp is', lresp);
+                            sessionStorage.setObject('userinfo', lresp);    
+                            
+                            if(lresp == "user not found"){
+
+                                console.log('it is null');
+                                $('#error').html('Sorry, that is the wrong email or password');
+                            } else {
+                                console.log('yes we found them');
+
+                                if(lresp.status == 1){
+                                    console.log('go to admin page');
+                                    window.location = '#/admin';
+                                } else {
+                                    window.location = '#/mychats';
+                                }
+                            }
+                        },
+                        error:function(lresp){
+                            console.log('lresp error', lresp);
+
+                        }
+                    });
+
+                };
+                    
+            }
+    
+            
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+            /*var userinfo = sessionStorage.getObject('userinfo');
                
                 if(userinfo.status == 1){
-                    window.location = '#/admin'
+                    window.location = '#/admin';
                 } else if (userinfo.status == 2) {
                     window.location = '#/mychats';
                 } else {
@@ -233,7 +292,7 @@ ctrl.controller('loginCtrl', ['$scope', function($scope){
 
                 };
                     
-            }
+            }*/
             
   
 }]);

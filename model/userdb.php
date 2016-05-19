@@ -224,7 +224,7 @@ include('connection.php');
 
         session_unset();
         session_destroy();
-
+        echo json_encode($_SESSION);
         echo json_encode('loggedout', $_SESSION['user_id']);
        
         
