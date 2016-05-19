@@ -145,9 +145,10 @@ body, span, input, select, textarea {
 }
 
 .content {
-    width:90%;
-    margin-left: 22%;
+    width:76%;
+    margin-left: 14%;
     margin-top: 5%;
+    overflow: hidden;
  
 }
 
@@ -161,7 +162,7 @@ body, span, input, select, textarea {
     
 }
 #msgcenter {
-    width:calc(60% - 22px);
+    width:calc(40vw);
     padding:8px;
     border:18px solid black;
     float:left;

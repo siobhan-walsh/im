@@ -600,10 +600,6 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
 
                                 //background
 
-                                $("#imgadd").click(function(){
-                                    $("#canvas").css({backgroundImage : "url("+$("#imgurl").val()+")"});
-                                });
-
                                 $("#sizeS").change(function(){
                                     $("#canvas").css({backgroundSize : 25+(parseFloat($("#sizeS").val()*2))+"%"})
                                 })
@@ -686,7 +682,7 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
                           
                             var path = xhr.responseText;
                             
-                            console.log('path is', path);
+                            $("#canvas").css({backgroundImage : "url("+path+")"});
                             
                           // now this path can be put in the img url for bg img of canvas
                             //then after all the changes are made in canvas, make an object
@@ -700,9 +696,36 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
                     xhr.send(formData);
                 };
 
-            };  
+            };
         }
-      
+         
+            $scope.submitpost = function($event){
+                var canvas = document.getElementById("canvas");
+                canvas.removeAttribute("id");
+                canvas.className = "canvas"
+                console.log($("#perantC").html());
+                $.ajax({
+                        url:'./cont/messages.php',
+                        dataType:'JSON',
+                        data:{
+                            msg:$("#canvasP").html(),
+                            method:'insertpost',
+                            crid:crid
+                        },
+                        type:'POST',
+                        success:function(mresp){
+                            console.log('mresp is', mresp);
+                            canvas.removeAttribute("class");
+                            canvas.id="canvas"
+                            getmsgs();
+                            $("#msgbox").val("");
+                        },
+                        error:function(mresp){
+                            console.log('mresp error', mresp);
+
+                        }
+                    });
+            }; 
     
          function getmsgs(){
             
@@ -720,13 +743,34 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
                         success:function(smresp){
                             console.log('smresp is', smresp);
                             
-                            $scope.$apply(function(){
-                                $scope.msgs = smresp;
-                            });
+                            for(var i=0;i<smresp.length;i++){
+                                var div1 = document.createElement("div");
+                                var div2 = document.createElement("div");
+                                var div3 = document.createElement("div");
+                                
+                                document.getElementById("msgcenter").appendChild(div1);
+                                    div2.innerHTML=smresp[i].msg;
+                                    div1.appendChild(div2);
+                                    /*<div ng-repeat='msg in msgs'  class='wrap'>
+                                    <div ng-if='userinfo.user_id == msg.user_id'>
+                                        {{msg.msg}}
+                                    </div>
+                                    <div ng-if='userinfo.user_id != msg.user_id'>
+                                        <img class='smallavi' src='{{msg.avi}}'>
+                                        <span style='color:{{msg.c}};'>{{msg.username}}: </span>
+                                        <p>{{msg.msg}}</p>
+                                    </div>*/
+                    
+                            }
+                            
+                            
+                            
+                            
+                            
+                            
                             $scope.userinfo = userinfo;
 
-                      
-                    },
+                        },
                     error:function(smresp){
                         console.log('smresp error', smresp);
 

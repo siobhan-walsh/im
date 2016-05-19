@@ -1,16 +1,35 @@
 <style>
     #canvas {
+        margin-top:10px; 
         overflow: hidden;
         position: relative;
         text-align: center;
         display: block;
         float: left;
         clear: both;
-        width: 89vw;
-        height: 89vw;
+        width: 76vw;
+        height: 76vw;
         background:black;
         background: linear-gradient(135deg, red, blue);
-        background-image:url("https://i.ytimg.com/vi/664VCs3c1HU/maxresdefault.jpg");
+        background-image:url("http://portfoliotheme.org/enigmatic/wp-content/uploads/sites/9/2012/07/placeholder1.jpg");
+        background-repeat :no-repeat;
+        background-position: top left;
+        background-size: contain;
+    }
+    
+    .canvas {
+        margin-top:10px;
+        overflow: hidden;
+        position: relative;
+        text-align: center;
+        display: block;
+        float: left;
+        clear: both;
+        width: 39vw;
+        height: 39vw;
+        background:black;
+        background: linear-gradient(135deg, red, blue);
+        background-image:url("http://portfoliotheme.org/enigmatic/wp-content/uploads/sites/9/2012/07/placeholder1.jpg");
         background-repeat :no-repeat;
         background-position: top left;
         background-size: contain;
@@ -27,14 +46,17 @@
     }
 
     .Ihead {
+        width: 100%;
         display: block;
         float: left;
-        clear: left;
+        clear: both;
         margin-right: 30px;
     }
     .Ifotter {
+        width: 100%;
         display: block;
         float: left;
+        clear: both;
         margin-right: 30px;
     }
     .imgfoot{
@@ -46,22 +68,19 @@
     .img{
         width: 100%
     }
-    
+    #submit{
+        clear: both;
+        width: 79%;
+        margin-top: 10px;
+    }
+    .createcont{
+        width: 96vw;
+    }
 </style>
 <h1></h1>
 <div class='chatbox'>
-    <div id = 'msgcenter'>
-        <div ng-repeat='msg in msgs' class='wrap'>
-            <div ng-if='userinfo.user_id == msg.user_id'>
-                <p style='float:right;'>{{msg.msg}}</p>
-            </div>
-            <div ng-if='userinfo.user_id != msg.user_id'>
-                <img class='smallavi' src='{{msg.avi}}'>
-                <span style='color:{{msg.c}};'>{{msg.username}}: </span>
-                <p>{{msg.msg}}</p>
-            </div>
-            
-        </div>
+    <div id='msgcenter'>
+        
     </div>
     
     <div id='cruserlist'>
@@ -100,7 +119,6 @@
                         <button ng-click = 'uploadImg($event)' id='upload'>upload</button>
 
                     </form>
-                    <input value="ADD" type="button" id="imgadd"><br>
                     <input name="size" id="sizeS" type="range" value="40"><br>
                 </label>
             </form>
@@ -160,9 +178,13 @@
             </form>
         </div>
     </div>
+    <div id="canvasP">
     <div id="canvas">
         <h1 class="imghead" ></h1>
         <div class="imgfoot"><p><P></div>
     </div>
-</div>
     </div>
+        <br>
+        <button ng-click = 'submitpost($event)' id="submit">upload</button>
+</div>
+</div>

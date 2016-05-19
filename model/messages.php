@@ -26,6 +26,29 @@ include('connection.php');
         echo json_encode('message inserted');
          
     }
+
+
+    function insert_post(){
+        
+        //insert info into users table
+        
+        global $db;
+        
+        $msg = $_POST['msg'];
+        $uid = $_SESSION['user_id'];
+        $crid = $_POST['crid'];
+       
+        //INSERT INTO chatroom (host_id, name) VALUES (1, 'joe');
+        //INSERT INTO messages (msg, user_id, chatroom_id) VALUES ('hey man', 1, 1);
+        $query = "INSERT INTO messages (msg, user_id, chatroom_id) VALUES (:msg, :uid, :crid);";
+        
+        $result = $db->prepare($query);
+        
+        $result->execute(array(':msg' => $msg, ':uid' => $uid, ':crid' => $crid));
+        
+        echo json_encode('message inserted');
+         
+    }
     
     function show_msg(){
         

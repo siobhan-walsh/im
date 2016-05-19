@@ -10,6 +10,12 @@ include('../model/messages.php');
       
   }
 
+  if($_POST['method'] == 'insertpost'){
+      
+      insert_post();
+      
+  }
+
  if($_POST['method'] == 'showmsg'){
       
       show_msg();
