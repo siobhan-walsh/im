@@ -742,15 +742,27 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
                         type:'POST',
                         success:function(smresp){
                             console.log('smresp is', smresp);
-                            
+                            document.getElementById("msgcenter").innerHTML="";
+                            $scope.userinfo = userinfo;
                             for(var i=0;i<smresp.length;i++){
                                 var div1 = document.createElement("div");
                                 var div2 = document.createElement("div");
-                                var div3 = document.createElement("div");
                                 
                                 document.getElementById("msgcenter").appendChild(div1);
-                                    div2.innerHTML=smresp[i].msg;
-                                    div1.appendChild(div2);
+
+                                    if(userinfo.user_id == smresp[i].user_id){
+                                        div2.innerHTML=smresp[i].msg;
+                                        div2.style="float:left !important"
+                                        div1.appendChild(div2);
+                                    }
+                                    else{
+                                        div2.innerHTML="<img class='smallavi' src='"+smresp[i].avi+"'><span style='color:"+smresp[i].c+";'>"+smresp[i].username+":</span>"+smresp[i].msg;
+                                        div2.style="color:black"
+                                        div1.appendChild(div2);
+                                    }
+                                
+                                
+                                
                                     /*<div ng-repeat='msg in msgs'  class='wrap'>
                                     <div ng-if='userinfo.user_id == msg.user_id'>
                                         {{msg.msg}}
@@ -762,13 +774,6 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
                                     </div>*/
                     
                             }
-                            
-                            
-                            
-                            
-                            
-                            
-                            $scope.userinfo = userinfo;
 
                         },
                     error:function(smresp){
