@@ -613,7 +613,18 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
         getmsgs();
     
        if(userinfo.status==1){
-                            $(".admip").show();
+           document.getElementById('chatctrls').style.display = 'block';
+          
+           
+           $('#meme').click(function(){
+              $(".admip").fadeIn();
+           });
+           $('#exitpopup').click(function(){
+              $(".admip").fadeOut();
+           });
+          
+     
+                            
                             /*lahiru*/
                             
                             
@@ -734,6 +745,7 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
          
             $scope.submitpost = function($event){
                 var canvas = document.getElementById("canvas");
+                $('.admip').fadeOut();
                 canvas.removeAttribute("id");
                 canvas.className = "canvas"
                 console.log($("#perantC").html());
@@ -760,6 +772,63 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
                     });
             }; 
     
+    /*
+    $scope.uploadImage = function($event){
+                var upload = document.getElementById('upload');
+                var files = document.getElementById('filesinp');
+                var sess = userinfo.user_id;
+
+
+                console.log('hi');
+                $event.preventDefault();
+
+                //upload the files here using another form of ajax
+
+                var formData = new FormData();
+                var allfiles = files.files;
+                console.log('files', allfiles);
+                var xhr = new XMLHttpRequest();
+
+                for(var i =0; i < allfiles.length; i++){
+
+                    var e_file = allfiles[i];
+
+
+                    if(!e_file.type.match('image/*')){
+                        console.log('not an image file');
+                        return false;
+                    }
+
+
+                    formData.append('images[]', e_file, e_file.name);
+                    formData.append('message', 'my post message');
+                    formData.append('userid', sess);
+
+                    xhr.open('POST', './model/imgupload.php', true);
+                    xhr.onload = function(){
+
+                        if(xhr.status == 200){
+                          
+                            var path = xhr.responseText;
+                            
+                            $("#canvas").css({backgroundImage : "url("+path+")"});
+                            
+                          // now this path can be put in the img url for bg img of canvas
+                            //then after all the changes are made in canvas, make an object
+                            // with header txt, footer txt, and img path. then stringify that object and put it in msgs table in db.
+                            // do we need a way to note if a msg is a regular message or a media msg, so we can sort it properly when we reload it?
+
+                        }
+
+                    };
+
+                    xhr.send(formData);
+                };
+
+            };
+        }
+        
+        */
          function getmsgs(){
             
                 //setInterval(function(){
@@ -782,21 +851,23 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
                                 var div2 = document.createElement("div");
                                 
                                 document.getElementById("msgcenter").appendChild(div1);
+                                
+                                        
+                                
 
                                     if(userinfo.user_id == smresp[i].user_id){
-                                        div2.innerHTML=smresp[i].msg;
-                                        div2.style="float:left !important"
-                                        div1.appendChild(div2);
+                                       div2.innerHTML="<img class='smallavi' style = 'float:right;' src='"+smresp[i].avi+"'><span style='color:"+smresp[i].c+"; margin:16px 0; float:right; font-size:12pt; '>"+smresp[i].username+"</span>"+"<div style='float:right; clear:both; margin:0 70px;padding:0 4%; color:rgba(17,36,66,0.6)'>" + smresp[i].msg + "</div>";
+                                        
                                     }
                                     else{
-                                        div2.innerHTML="<img class='smallavi' src='"+smresp[i].avi+"'><span style='color:"+smresp[i].c+";'>"+smresp[i].username+":</span>"+smresp[i].msg;
-                                        div2.style="color:black"
-                                        div1.appendChild(div2);
+                                       div2.innerHTML="<img class='smallavi' src='"+smresp[i].avi+"'><span style='color:"+smresp[i].c+"; margin:16px 0; float:left;  font-size:12pt;  '>"+smresp[i].username+"</span>"+"<div style='float:left; clear:both; margin:0 40px;padding:0 4%; color:black;'>" + smresp[i].msg + "</div>";
+                                       
                                     }
+                                 div2.style="float:left; clear:both; width:100%;"
+                                        div1.appendChild(div2);
+                                /*
                                 
-                                
-                                
-                                    /*<div ng-repeat='msg in msgs'  class='wrap'>
+                                   <div ng-repeat='msg in msgs'  class='wrap'>
                                     <div ng-if='userinfo.user_id == msg.user_id'>
                                         {{msg.msg}}
                                     </div>

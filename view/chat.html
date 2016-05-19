@@ -72,9 +72,13 @@
         clear: both;
         width: 79%;
         margin-top: 10px;
+        margin-bottom:20px;
     }
     .createcont{
         width: 96vw;
+    }
+    .imghead {
+        color:black;
     }
 </style>
 <h1></h1>
@@ -96,7 +100,24 @@
         </div>
         
     </div>
-    <input id = 'msgbox' type = 'text' placeholder = 'type a message here' >
+    <div id='chatctrls'>
+        <input id = 'msgbox' type = 'text' placeholder = 'type a message here' >
+        <div id='meme'>
+            <i class='material-icons'>border_color</i>
+            <span>Meme maker</span>
+        </div>
+        <!---->
+        <div id='imgupload'>
+            <i class='material-icons'>insert_photo</i>
+            <span>Upload Image</span>
+        </div>
+        <div id='videoupload'>
+            <i class='material-icons'>video_library</i>
+            <span>Post video link</span>
+        </div>
+        
+    </div>
+    
 
 </div>
 
@@ -107,6 +128,7 @@
 
 <div class="admip" style="display:none">
     Create Post:
+    <i id='exitpopup' class='material-icons'>clear</i>
     <div class="tools">
         <table class="img">
             <tr>

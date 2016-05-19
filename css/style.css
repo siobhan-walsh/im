@@ -1,18 +1,15 @@
 
-
-
-
 body {
-padding:0;
+    padding:0;
     margin:0;
-color: #fff;
-font-weight: 600pt;
-font-family: 'Titillium Web', sans-serif;
+    color: #fff;
+    font-weight: 600pt;
+    font-family: 'Titillium Web', sans-serif;
   
 }
 
 .bgimg {
-   background-image: url('../img/bg.png');
+    background-image: url('../img/bg.png');
     background-repeat:no-repeat;
     background-size:cover;
     -ms-background-position-x: center;
@@ -24,13 +21,12 @@ font-family: 'Titillium Web', sans-serif;
     width:100%;
     height:100%;
     z-index: -1;
- 
 }
 
 
 button {
     
-   margin: auto;
+  margin: auto;
   padding-right: 1.5rem;
   padding-left: 1.5rem;
   font-size: 1rem;
@@ -77,10 +73,15 @@ button:after {
 }
 
 #filesinp {
-    
-  background-color: deeppink;
+  font-size: 8pt;
+text-overflow: ellipsis;
+max-width: 200px;
+    margin:16px 0;
  
-    
+}
+input[type="range"]{
+    margin:16px 0;
+    background-color:rgba(255, 255, 255, 0.8);
 }
 
 img {
@@ -162,19 +163,21 @@ body, span, input, select, textarea {
     
 }
 #msgcenter {
-    width:calc(40vw);
+    width:80%;
     padding:8px;
     border:18px solid black;
     float:left;
     height:400px;
     overflow-y: scroll;
+    background-color:rgba(255, 255, 255, 0.6);
 }
 #msgcenter img {
     width:40px;
     height:auto;
     border-radius: 20px;
-    margin:4px;
+    margin:14px;
     vertical-align: middle;
+    float:left;
 }
 #msgcenter p {
     margin-left:20px;
@@ -186,9 +189,9 @@ body, span, input, select, textarea {
 
 #cruserlist {
     float:left;
-    background-color:lightgrey;
-    width:30%;
+    width:10%;
     padding:8px;
+    font-size: 10pt;
 }
 #msgbox {
     clear:both;
@@ -204,6 +207,8 @@ body, span, input, select, textarea {
     padding:8px;
     background-color:black;
     color:white;
+    text-align: center;
+    padding: 10% 0px;
 }
 #login{
     text-align: center;
@@ -232,11 +237,13 @@ body, span, input, select, textarea {
     margin:6px;
 }
 #adminheader i,
-#customerheader i {
+#customerheader i,
+#chatctrls i {
     font-size:42pt;
 }
 #adminheader span,
-#customerheader span {
+#customerheader span,
+#chatctrls span {
     font-size:10pt;
     margin:0 4px;
     display:block;
@@ -256,4 +263,35 @@ body, span, input, select, textarea {
 }
 #adminpage i {
     font-size:42pt;
+}
+
+#chatctrls {
+    width:100%;
+    float:left;
+    clear:both;
+    padding:2%;
+}
+#chatctrls > div {
+    float:left;
+    margin:14px;
+    cursor: pointer;
+}
+.admip {
+    position:fixed;
+    top:5%;
+    left:5%;
+    width:80%;
+    background-color:black;
+    padding:5%;
+    overflow-y:scroll;
+    height:80vh;
+    font-size:14pt;
+}
+#exitpopup {
+    color:#fff;
+    position:absolute;
+    right:10px;
+    top:0;
+    font-size:26pt;
+    cursor:pointer;
 }
