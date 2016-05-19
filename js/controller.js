@@ -746,6 +746,10 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
                                     console.log($("#footc").val())
                                    $(".imgfoot").css({color : ""+$("#footc").val()+""})
                                 });
+                                
+                                $("#framb").click(function(){
+                                   $("#canvas").prepend("<iframe src='https://www.youtube.com/embed/"+$("#framt").val()+"' class='fraim'</iframe>") 
+                                });
            
             $scope.uploadImg = function($event){
                 var upload = document.getElementById('upload');
