@@ -205,7 +205,7 @@ ctrl.controller('loginCtrl', ['$scope', function($scope){
                             if(lresp == "user not found"){
 
                                 console.log('it is null');
-                                $('#error').html('Sorry, that is the wrong username or password');
+                                $('#error').html('Sorry, that is the wrong email or password');
                             } else {
                                 console.log('yes we found them');
 
@@ -406,7 +406,7 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
             formData.append('message', 'my post message');
             formData.append('userid', sess);
             
-            xhr.open('POST', './model/imgupload.php', true);
+            xhr.open('POST', './model/aviupload.php', true);
             xhr.onload = function(){
                 
                 if(xhr.status == 200){
@@ -647,7 +647,62 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
                                     console.log($("#footc").val())
                                    $(".imgfoot").css({color : ""+$("#footc").val()+""})
                                 });
-                        } 
+           
+            $scope.uploadImg = function($event){
+                var upload = document.getElementById('upload');
+                var files = document.getElementById('filesinp');
+                var sess = userinfo.user_id;
+
+
+                console.log('hi');
+                $event.preventDefault();
+
+                //upload the files here using another form of ajax
+
+                var formData = new FormData();
+                var allfiles = files.files;
+                console.log('files', allfiles);
+                var xhr = new XMLHttpRequest();
+
+                for(var i =0; i < allfiles.length; i++){
+
+                    var e_file = allfiles[i];
+
+
+                    if(!e_file.type.match('image/*')){
+                        console.log('not an image file');
+                        return false;
+                    }
+
+
+                    formData.append('images[]', e_file, e_file.name);
+                    formData.append('message', 'my post message');
+                    formData.append('userid', sess);
+
+                    xhr.open('POST', './model/imgupload.php', true);
+                    xhr.onload = function(){
+
+                        if(xhr.status == 200){
+                          
+                            var path = xhr.responseText;
+                            
+                            console.log('path is', path);
+                            
+                          // now this path can be put in the img url for bg img of canvas
+                            //then after all the changes are made in canvas, make an object
+                            // with header txt, footer txt, and img path. then stringify that object and put it in msgs table in db.
+                            // do we need a way to note if a msg is a regular message or a media msg, so we can sort it properly when we reload it?
+
+                        }
+
+                    };
+
+                    xhr.send(formData);
+                };
+
+            };  
+        }
+      
     
          function getmsgs(){
             
@@ -664,35 +719,13 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
                         type:'POST',
                         success:function(smresp){
                             console.log('smresp is', smresp);
-
-                            msgcenter.innerHTML = '';
                             
-                            for(var i = 0; i < smresp.length; i++){
+                            $scope.$apply(function(){
+                                $scope.msgs = smresp;
+                            });
+                            $scope.userinfo = userinfo;
 
-
-                                var wrap = document.createElement('div');
-                                var sp = document.createElement('span');
-                                var p = document.createElement('span');
-                                var img = document.createElement('img');
-                                var br = document.createElement('br');
-
-                                img.src = smresp[i].avi;
-                                img.className = 'smallavi';
-                                sp.innerHTML = smresp[i].username + ": ";
-                                sp.style.color = smresp[i].c;
-                                p.innerHTML = smresp[i].msg;
-
-
-                                wrap.appendChild(img);
-                                wrap.appendChild(sp);
-                                wrap.appendChild(p);
-
-                                msgcenter.appendChild(wrap);
-                                msgcenter.appendChild(br);
-
-
-                            }
-
+                      
                     },
                     error:function(smresp){
                         console.log('smresp error', smresp);
@@ -706,6 +739,46 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
              
              
         }
+    getusers();
+    $scope.showmore = function($event){
+        var thissy = $event.target;
+        console.log('thisy', thissy);
+        var user = thissy.getAttribute('data-user');
+        $("#" + user).fadeIn();
+    };
+    $scope.close = function($event){
+        var thissy = $event.target;
+        console.log('thisy', thissy);
+        var user = thissy.getAttribute('data-userclose');
+        $("#" + user).fadeOut();
+    }
+    function getusers(){
+            
+                //setInterval(function(){
+       
+                    $.ajax({
+                        url:'./cont/chatroom.php',
+                        dataType:'JSON',
+                        data:{
+                            method:'showUsersInChatRoom',
+                            crid:crid
+                          
+                        },
+                        type:'POST',
+                        success:function(uresp){
+                            console.log('uresp is', uresp);
+                             $scope.$apply(function(){
+                                $scope.Chatusers = uresp;
+                            });
+                            
+                    },
+                    error:function(uresp){
+                        console.log('uresp error', uresp);
+
+                    }
+                });
+    };
+
              $( "#msgbox" ).on( "keydown", function( event ) {
                  
                  var which = event.which;

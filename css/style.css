@@ -1,6 +1,5 @@
 body {
-    
-    padding:4%;
+  
 }
 img {
     
@@ -39,4 +38,54 @@ body, span, input, select, textarea {
 
 .hideinp {
     display:none;
+}
+.createcont {
+    width:100%;
+    float:left;
+    margin:10% 0;
+    
+}
+#msgcenter {
+    width:calc(60% - 22px);
+    padding:8px;
+    border:18px solid black;
+    float:left;
+    height:400px;
+    overflow-y: scroll;
+}
+#msgcenter img {
+    width:40px;
+    height:auto;
+    border-radius: 20px;
+    margin:4px;
+    vertical-align: middle;
+}
+#msgcenter p {
+    margin-left:20px;
+}
+.wrap {
+    width:100%;
+    float:left;
+}
+
+#cruserlist {
+    float:left;
+    background-color:lightgrey;
+    width:30%;
+    padding:8px;
+}
+#msgbox {
+    clear:both;
+    float:left;
+    margin:20px 0;
+}
+.morepop {
+    display:none;
+    position:fixed;
+    left:10vw;
+    width:80vw;
+    top:10vh;
+    padding:8px;
+    background-color:black;
+    color:white;
 }

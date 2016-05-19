@@ -36,6 +36,14 @@ if($_POST['method'] == 'deleteRoom'){
     deleteRoom();
       
   }
+
+if($_POST['method'] == 'showUsersInChatRoom'){
+      
+    showUsersInChatRoom();
+      
+  }
+
+
    
    
 ?>

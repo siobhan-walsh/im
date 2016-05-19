@@ -33,6 +33,25 @@ include('connection.php');
         
     }
     
+    function showUsersInChatRoom(){
+         
+        global $db;
+       
+        
+        $crid = $_POST['crid'];
+        
+        $query = "SELECT users.username, users.user_id, users.avi, users.email, users.c FROM users LEFT JOIN chatroom_users ON users.user_id = chatroom_users.user_id WHERE chatroom_users.chatroom_id = :crid";
+        
+        $result = $db->prepare($query);
+        
+        $result->execute(array(":crid" => $crid));
+        
+        $messages = $result->fetchAll(PDO::FETCH_ASSOC);
+        
+        echo json_encode($messages);
+    }
+
+
     function insertRoom(){
         
         //for admin list

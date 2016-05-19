@@ -47,32 +47,59 @@
         width: 100%
     }
     
-    .adminp {
-
-        position:absolute;
-    }
-    .createcont {
-                margin:10%;
-        position:relative;
-    }
-    
 </style>
-<div id = 'msgcenter'>
+<h1></h1>
+<div class='chatbox'>
+    <div id = 'msgcenter'>
+        <div ng-repeat='msg in msgs' class='wrap'>
+            <div ng-if='userinfo.user_id == msg.user_id'>
+                <p style='float:right;'>{{msg.msg}}</p>
+            </div>
+            <div ng-if='userinfo.user_id != msg.user_id'>
+                <img class='smallavi' src='{{msg.avi}}'>
+                <span style='color:{{msg.c}};'>{{msg.username}}: </span>
+                <p>{{msg.msg}}</p>
+            </div>
+            
+        </div>
+    </div>
+    
+    <div id='cruserlist'>
+      <h4>Users in this chat:</h4>
+        <div ng-repeat = 'user in Chatusers' >
+            <p ng-click = "showmore($event)" data-user= '{{user.user_id}}'>{{user.username}}</p>
+            <div id='{{user.user_id}}' class='morepop'>
+                <img src = '{{user.avi}}'>
+                <p>Username: {{user.username}}</p>
+                <p>Email: {{user.email}}</p>
+                <button data-userclose='{{user.user_id}}' ng-click = 'close($event)'>Close</button>
+            </div>
+        </div>
+        
+    </div>
+    <input id = 'msgbox' type = 'text' placeholder = 'type a message here' >
+
 </div>
-<input id = 'msgbox' type = 'text' placeholder = 'type a message here' >
+
+
 
 
 <div class ='createcont'>
 
 <div class="admip" style="display:none">
-    
+    Create Post:
     <div class="tools">
         <table class="img">
             <tr>
             <td>
             <form class="imglinke">
                 <label>Img<br>
-                    <input id="imgurl" type="text">
+                    <form id='myform'>
+
+                        <input  type='file' id='filesinp' multiple >
+                        <button ng-click = 'uploadImg($event)' id='upload'>upload</button>
+
+                    </form>
                     <input value="ADD" type="button" id="imgadd"><br>
                     <input name="size" id="sizeS" type="range" value="40"><br>
                 </label>
