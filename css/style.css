@@ -306,3 +306,6 @@ body, span, input, select, textarea {
 .listrooms div:hover {
      color: lightpink;
 }
+#meme {
+    display:none;
+}

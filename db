@@ -25,7 +25,7 @@ CREATE TABLE chatroom(
     host_id INT NOT NULL,
     name VARCHAR (500) NOT NULL,
     PRIMARY KEY (chatroom_id),
-    FOREIGN KEY (host_id) REFERENCES users(user_id)
+    FOREIGN KEY (host_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
 CREATE TABLE messages(
@@ -35,8 +35,8 @@ CREATE TABLE messages(
     msg VARCHAR (500) NOT NULL,
     msg_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (msg_id),
-    FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (chatroom_id) REFERENCES chatroom(chatroom_id)
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (chatroom_id) REFERENCES chatroom(chatroom_id) ON DELETE CASCADE
 );
 
 
@@ -47,6 +47,6 @@ CREATE TABLE chatroom_users(
     chatroom_id INT NOT NULL,
     user_id INT NOT NULL,
     PRIMARY KEY (crUser_id),
-    FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (chatroom_id) REFERENCES chatroom(chatroom_id)
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (chatroom_id) REFERENCES chatroom(chatroom_id) ON DELETE CASCADE
 );

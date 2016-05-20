@@ -3,9 +3,8 @@
 include('connection.php');
 
 
-    function showAllRooms(){
-        
-        //for admin list
+    function showAllChatrooms(){
+      
         global $db;
        
             $query = "SELECT * FROM chatroom";
@@ -92,17 +91,17 @@ include('connection.php');
     }
 
 
-      function update_room(){
+      function updateChatroom(){
         global $db;
         
-        $cid = $_POST['cid'];
+        $cid = $_POST['crid'];
         $name = $_POST['name'];
         
-        $query = "UPDATE chat SET name = :name, WHERE id =:cid";
+        $query = "UPDATE chatroom SET name = :name WHERE chatroom_id =:cid";
         
         $result = $db->prepare($query);
         
-        $result->execute(array(':name' => $name, ':cid' => $id));
+        $result->execute(array(':name' => $name, ':cid' => $cid));
         
         echo json_encode('updated chatroom name');
         
@@ -110,12 +109,12 @@ include('connection.php');
     }
 
 
-    function deleteRoom(){
+    function deleteChatroom(){
 
-        //for admin list
+      
         global $db;
-        $ID = $_POST['roomID'];
-        $query = "DELETE FROM chatRoom WHERE id = :ID";
+        $ID = $_POST['crid'];
+        $query = "DELETE FROM chatroom WHERE chatroom_id = :ID";
         $result = $db->prepare($query);
         $result->execute(array(':ID' => $ID));
         echo json_encode('deleted user');

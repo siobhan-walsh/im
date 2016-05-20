@@ -20,7 +20,7 @@ ctrl.controller('headerCtrl', ['$scope', function($scope){
             type:'POST',
             success:function(sessinfo){
                 sessionStorage.setObject('userinfo', sessinfo);
-                console.log('html5 sto', sessionStorage.getObject('userinfo'));
+              //  console.log('html5 sto', sessionStorage.getObject('userinfo'));
             },
             error:function(sessinfo){
                 console.log('sessinfo', sessinfo);
@@ -45,7 +45,7 @@ ctrl.controller('signupCtrl', ['$scope', function($scope){
             var pw = document.getElementById('pw');
             var email = document.getElementById('email');
             var avi = './img/default/avi-default.jpg';
-            var c = '#772457';
+            var c = document.getElementById('c');
             var status = 2;
             
             document.getElementById('bigheader').style.display = 'block';
@@ -106,6 +106,7 @@ ctrl.controller('signupCtrl', ['$scope', function($scope){
                                
              
                 email = email.value;
+                c = c.value;
                 
                 $.ajax({
                     url:'./cont/user.php',
@@ -121,16 +122,14 @@ ctrl.controller('signupCtrl', ['$scope', function($scope){
                     },
                     type:'POST',
                     success:function(resp){
-                        console.log('resp is', resp);
+                      //  console.log('resp is', resp);
                         
                         if(resp.account == 'hasaccount'){
-                            console.log('you already have an account bro');
+                    
                             
                             alert('you already have an account with that email');
                         } else {
-                            console.log('ok thne new account');
-                            
-                        
+                 
                             $.ajax({
                                 url:'./cont/user.php',
                                 dataType:'JSON',
@@ -142,7 +141,7 @@ ctrl.controller('signupCtrl', ['$scope', function($scope){
                                 type:'POST',
                                 success:function(sessresp){
                                     
-                                    console.log('sessresp', sessresp);
+                                  //  console.log('sessresp', sessresp);
                                 
                                     if(status == 1){
                                         sessionStorage.setObject('userinfo', sessresp);
@@ -150,7 +149,7 @@ ctrl.controller('signupCtrl', ['$scope', function($scope){
                                         window.location = '#/admin'
                                     } else{
                                        
-                                        window.location = '#/signup';
+                                        window.location = '#/mychats';
                                     }
                             
                                  
@@ -174,7 +173,9 @@ ctrl.controller('signupCtrl', ['$scope', function($scope){
   
 }]);
 ctrl.controller('viewusersCtrl', ['$scope', function($scope){
-
+    document.getElementById('bigheader').style.display = 'none';
+            document.getElementById('adminheader').style.display = 'block';
+            document.getElementById('customerheader').style.display = 'none';
     $.ajax({
         url:'./cont/user.php',
         dataType:'JSON',
@@ -183,28 +184,53 @@ ctrl.controller('viewusersCtrl', ['$scope', function($scope){
         },
         type:'POST',
         success:function(alluser){
+            
+          //  console.log('alluser', alluser);
            for(x=0;x<alluser.length;x++){
                var div = document.createElement("div");
                var br = document.createElement("br");
+               var br2 = document.createElement("br");
                var h = document.createElement("h5");
+               var e = document.createElement('h5');
+               var inp = document.createElement('input');
+               var inp2 = document.createElement('input');
                var but = document.createElement("button");
+               var but2 = document.createElement("button");
                
-               
+             
                div.dataset.id = alluser[x].user_id;
                
                h.innerHTML=alluser[x].username
                h.style.color=alluser[x].c
                
-               but.innerHTML = "X"
+               e.innerHTML = alluser[x].email;
+               inp.placeholder = 'new username';
+               inp2.placeholder = 'new email';
+               
+               inp.id = 'u' + alluser[x].user_id;
+               inp2.id = 'e' + alluser[x].user_id;
+               inp2.type = 'email';
+              
+               but.innerHTML = "Delete User"
                but.dataset.id = alluser[x].user_id;
                but.onclick = function(){deleteuser(this)}
                
+               but2.innerHTML = "Update User"
+               but2.dataset.id = alluser[x].user_id;
+               but2.onclick = function(){updateuser(this)}
+               
                div.appendChild(h)
+              
+               
+               div.appendChild(e);
+                div.appendChild(br2);
+                div.appendChild(inp);
+               div.appendChild(inp2);
+               div.appendChild(but2);
                div.appendChild(but)
-               if(alluser[x].status != 1){
                $("#content").append(div)
                $("#content").append(br)
-               }else{}
+         
            }         
         },
         error:function(allUsers){
@@ -213,22 +239,158 @@ ctrl.controller('viewusersCtrl', ['$scope', function($scope){
         }
     });
     
+    function updateuser(uid){
+        
+     
+        var thisid = uid.dataset.id
+   
+         $.ajax({
+            url:'./cont/user.php',
+            dataType:'JSON',
+            data:{
+                un:$('#u' + thisid).val(),
+                email:$('#e' + thisid).val(),
+                method:'updateUser'
+            },
+            type:'POST',
+            success:function(unup){
+         //       console.log('unup', unup);
+                location.reload();
+            },
+            error:function(unup){
+                console.log('unup error', unup);
+            }
+         });
+    
+    };
     function deleteuser(rr){
-        console.log(rr.dataset.id)
+    
         $.ajax({
             url:'./cont/user.php',
             dataType:'JSON',
             data:{
-                U:rr.dataset.id,
-                method:'deletU'
+                uid:rr.dataset.id,
+                method:'deleteUser'
             },
             type:'POST',
             success:function(lresp){
+       //             console.log('lresp', lresp);
+                location.reload();
+            },
+            error:function(lresp){
+                console.log('error', lresp);
             }
         });
     }
   
 }]);
+
+
+ctrl.controller('viewcrCtrl', ['$scope', function($scope){
+    document.getElementById('bigheader').style.display = 'none';
+            document.getElementById('adminheader').style.display = 'block';
+            document.getElementById('customerheader').style.display = 'none';
+    $.ajax({
+        url:'./cont/chatroom.php',
+        dataType:'JSON',
+        data:{
+            method:'showAllChatrooms'
+        },
+        type:'POST',
+        success:function(allcr){
+            
+   //         console.log('allcr', allcr);
+            if(allcr == ''){
+                $('#chatrooms').append('<p>There are no chatrooms</p>');
+            }
+            
+           for(x=0;x<allcr.length;x++){
+               var div = document.createElement("div");
+               var br = document.createElement("br");
+               var h = document.createElement("h5");
+               var inp = document.createElement('input');
+               var but = document.createElement("button");
+               var but2 = document.createElement("button");
+         
+               div.dataset.id = allcr[x].chatroom_id;
+               
+               h.innerHTML=allcr[x].name;
+               h.style.color=allcr[x].c;
+               
+               inp.placeholder = 'new chatroom name';
+                inp.id = 'cr' + allcr[x].chatroom_id;
+            
+               but.innerHTML = "Delete Chatroom"
+               but.dataset.id = allcr[x].chatroom_id;
+               but.onclick = function(){deletecr(this)}
+               
+               but2.innerHTML = "Update Chatroom"
+               but2.dataset.id = allcr[x].chatroom_id;
+               but2.onclick = function(){updatecr(this)}
+               
+               div.appendChild(h)
+             
+                div.appendChild(inp);
+               div.appendChild(but2);
+                 div.appendChild(but)
+               $("#chatrooms").append(div)
+               $("#chatrooms").append(br)
+            
+           }         
+        },
+        error:function(allcr){
+            console.log('allcr error', allcr);
+
+        }
+    });
+        function updatecr(cr){
+        
+   //     console.log('this', cr.dataset.id);
+        var thisid = cr.dataset.id
+       var name = $('#cr' + thisid).val();
+         
+         $.ajax({
+            url:'./cont/chatroom.php',
+            dataType:'JSON',
+            data:{
+                crid:thisid,
+                name:$('#cr' + thisid).val(),
+                method:'updateChatroom'
+            },
+            type:'POST',
+            success:function(unup){
+         //       console.log('unup', unup);
+                location.reload();
+            },
+            error:function(unup){
+                console.log('unup error', unup);
+            }
+         });
+    
+    };
+    
+    function deletecr(rr){
+      
+        $.ajax({
+            url:'./cont/chatroom.php',
+            dataType:'JSON',
+            data:{
+                crid:rr.dataset.id,
+                method:'deleteChatroom'
+            },
+            type:'POST',
+            success:function(lresp){
+                    console.log('lresp', lresp);
+                location.reload();
+            },
+            error:function(lresp){
+                console.log('error', lresp);
+            }
+        });
+    }
+  
+}]);
+
 ctrl.controller('loginCtrl', ['$scope', function($scope){
 
             var email = document.getElementById('email');
@@ -238,73 +400,16 @@ ctrl.controller('loginCtrl', ['$scope', function($scope){
             document.getElementById('bigheader').style.display = 'block';
             document.getElementById('adminheader').style.display = 'none';
             document.getElementById('customerheader').style.display = 'none';
-            
+      
             var userinfo = sessionStorage.getObject('userinfo');
-            console.log('userinfo is', userinfo);
-
-            if (userinfo != null){
-                if(userinfo.status == 1){
-                    window.location = '#/admin';
-                } else if (userinfo.status == 2) {
-                    window.location = '#/mychats';
-                }
-            }else{
-                 
-                    $scope.login = function(){
-              
-                    $.ajax({
-                        url:'./cont/user.php',
-                        dataType:'JSON',
-                        data:{
-                            email:email.value,
-                            pw:pw.value,
-                            method:'login'
-                        },
-                        type:'POST',
-                        success:function(lresp){
-                            console.log('lresp is', lresp);
-                               
-                            
-                            if(lresp == "user not found"){
-
-                                console.log('it is null');
-                                $('#error').html('Sorry, that is the wrong email or password');
-                            } else {
-                                console.log('yes we found them');
-                                 sessionStorage.setObject('userinfo', lresp);
-
-                                if(lresp.status == 1){
-                                    console.log('go to admin page');
-                                    window.location = '#/admin';
-                                } else {
-                                    window.location = '#/mychats';
-                                }
-                            }
-                        },
-                        error:function(lresp){
-                            console.log('lresp error', lresp);
-
-                        }
-                    });
-
-                };
-                
-                    
+            if(userinfo == null){
+                sessionStorage.setObject('userinfo', 'nouser');
+                userinfo = sessionStorage.getObject('userinfo');
             }
-  
     
-    
-    
-            /*var userinfo = sessionStorage.getObject('userinfo');
-               
-                if(userinfo.status == 1){
-                    window.location = '#/admin';
-                } else if (userinfo.status == 2) {
-                    window.location = '#/mychats';
-                } else {
-                    $scope.login = function(){
-              
-                    $.ajax({
+        $scope.login = function(){
+               if(userinfo == 'nouser'){
+                   $.ajax({
                         url:'./cont/user.php',
                         dataType:'JSON',
                         data:{
@@ -314,17 +419,14 @@ ctrl.controller('loginCtrl', ['$scope', function($scope){
                         },
                         type:'POST',
                         success:function(lresp){
-                            console.log('lresp is', lresp);
+                      //      console.log('lresp is', lresp);
                             sessionStorage.setObject('userinfo', lresp);    
                             
                             if(lresp == "user not found"){
 
-                                console.log('it is null');
                                 $('#error').html('Sorry, that is the wrong email or password');
                             } else {
-                                console.log('yes we found them');
-
-                                if(lresp.status == 1){
+                               if(lresp.status == 1){
                                     console.log('go to admin page');
                                     window.location = '#/admin';
                                 } else {
@@ -337,16 +439,19 @@ ctrl.controller('loginCtrl', ['$scope', function($scope){
 
                         }
                     });
-
-                };
-                    
-            }*/
-            
-  
+               } else {
+                   if(userinfo.status == 1){
+                       window.location = '#/admin';
+                    } else if (userinfo.status == 2) {
+                        window.location = '#/mychats';
+                    }
+               }
+    };
+          
 }]);
 
 ctrl.controller('newchatroomCtrl', ['$scope', function($scope){
-        console.log('newchat');
+    
         var userinfo =  sessionStorage.getObject('userinfo');
 
         if(userinfo.status != 1){
@@ -362,12 +467,8 @@ ctrl.controller('newchatroomCtrl', ['$scope', function($scope){
                     
                     var inpval = document.getElementById('crname').value;
                     var checks = document.querySelectorAll('.check:checked');
-                    
-                    console.log('hi', inpval);
-                    
+                
                     if(inpval == undefined || inpval == ''){
-                        
-                        console.log('no name');
                         
                     } else {
                         
@@ -380,17 +481,13 @@ ctrl.controller('newchatroomCtrl', ['$scope', function($scope){
                             },
                             type:'POST',
                             success:function(crresp){
-                                console.log('crresp is', crresp);
+                  //              console.log('crresp is', crresp);
                                 
                                 if(crresp == 'fail'){
-                                    console.log('fail');
-                                    
+                                
                                 } else {
                                     var crid = crresp.chatroom_id;
-                                    console.log('crid', crid);
                                     
-                                      console.log('checks' , checks);
-                            
                                     $.ajax({
                                             url:'./cont/chatroom.php',
                                             dataType:'JSON',
@@ -401,7 +498,7 @@ ctrl.controller('newchatroomCtrl', ['$scope', function($scope){
                                             },
                                             type:'POST', 
                                             success:function(thisuseraddresp){
-                                                console.log('thisuseraddresp', thisuseraddresp);
+                                          //      console.log('thisuseraddresp', thisuseraddresp);
                                                
                                             }, 
                                             error:function(thisuseraddresp){
@@ -410,24 +507,30 @@ ctrl.controller('newchatroomCtrl', ['$scope', function($scope){
                                         });
                                     
                                     for(var i = 0; i < checks.length; i++){
-                                      
-                                        $.ajax({
-                                            url:'./cont/chatroom.php',
-                                            dataType:'JSON',
-                                            data:{
-                                                method:'addUserToRoom',
-                                                crid:crid,
-                                            userid:checks[i].getAttribute('data-userid')
-                                            },
-                                            type:'POST',
-                                            success:function(useraddresp){
-                                                console.log('useraddresp', useraddresp);
-                                                
-                                            }, error:function(useraddresp){
-                                                console.log('error useraddresp', useraddresp);
-                                            }
-                                        });
+                                        
+                                        if(checks[i].getAttribute('data-userid') == userinfo.user_id){
+                                            
+                                        } else {
+                                            $.ajax({
+                                                url:'./cont/chatroom.php',
+                                                dataType:'JSON',
+                                                data:{
+                                                    method:'addUserToRoom',
+                                                    crid:crid,
+                                                userid:checks[i].getAttribute('data-userid')
+                                                },
+                                                type:'POST',
+                                                success:function(useraddresp){
+                                     //               console.log('useraddresp', useraddresp);
+
+                                                }, error:function(useraddresp){
+                                                    console.log('error useraddresp', useraddresp);
+                                                }
+                                            });
                                        
+                                        }
+                                      
+                                        
                                     }
                                     var div = document.createElement('div');
                                     var button = document.createElement('button');
@@ -470,7 +573,7 @@ ctrl.controller('newchatroomCtrl', ['$scope', function($scope){
                     },
                     type:'POST',
                     success:function(allUsers){
-                        console.log('allUsers is', allUsers);
+                     //   console.log('allUsers is', allUsers);
 
                         $scope.$apply(function(){
 
@@ -510,10 +613,8 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
         var sess = $scope.info.user_id;
         
         
-        console.log('hi');
+     
         $event.preventDefault();
-        
-        //upload the files here using another form of ajax
       
         var formData = new FormData();
         var allfiles = files.files;
@@ -526,7 +627,7 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
             
            
             if(!e_file.type.match('image/*')){
-                console.log('not an image file');
+               
                 return false;
             }
             
@@ -539,7 +640,7 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
             xhr.onload = function(){
                 
                 if(xhr.status == 200){
-                    console.log('loaded properly');
+                  
                     location.reload(); 
                    
                 }
@@ -574,7 +675,7 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
         var thish = document.querySelector('#hname');
         
         thish.innerHTML = thiss.value;
-        console.log('this cal', thiss.value);
+       
         thish.style.display = 'block';
          
     };
@@ -611,7 +712,7 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
         var un = document.getElementById('un').value;
         var email = document.getElementById('email').value;
         
-        console.log('u', un);
+        
          $.ajax({
             url:'./cont/user.php',
             dataType:'JSON',
@@ -622,7 +723,7 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
             },
             type:'POST',
             success:function(unup){
-                console.log('unup', unup);
+         //       console.log('unup', unup);
             },
             error:function(unup){
                 console.log('unup error', unup);
@@ -642,7 +743,7 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
             type:'POST',
             success:function(sessionid){
                 
-                console.log('sessionid', sessionid);
+             //   console.log('sessionid', sessionid);
                 
                 $scope.$apply(function(){
                         $scope.info = sessionid;
@@ -668,8 +769,9 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
                     type:'POST',
                     success:function(logoutresp){
 
-                        console.log('logoutresp', logoutresp);
+                      
                          sessionStorage.setObject('userinfo', 'nouser');
+                       window.location.reload(true);
 
                         $scope.$apply(function(){
                                 $scope.logoutresp = logoutresp;
@@ -690,7 +792,7 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
 
 }]);
 
-ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routeParams){
+ctrl.controller('chatCtrl', ['$scope', '$routeParams', '$interval',  function($scope, $routeParams, $interval){
  
    
     if(sessionStorage.getObject("userinfo").status == 1){
@@ -706,7 +808,6 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
     var currentId = $routeParams.id;
     
     var crid =  currentId.slice(15);
-    console.log('crid is', crid);
     
    var userinfo = sessionStorage.getObject('userinfo');
    
@@ -719,10 +820,12 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
     
        if(userinfo.status==1){
            document.getElementById('chatctrls').style.display = 'block';
+             document.getElementById('meme').style.display = 'block';
           
            
            $('#meme').click(function(){
               $(".admip").fadeIn();
+             
            });
            $('#exitpopup').click(function(){
               $(".admip").fadeOut();
@@ -802,11 +905,8 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
                 var files = document.getElementById('filesinp');
                 var sess = userinfo.user_id;
 
-
-                console.log('hi');
                 $event.preventDefault();
 
-                //upload the files here using another form of ajax
 
                 var formData = new FormData();
                 var allfiles = files.files;
@@ -836,12 +936,6 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
                             var path = xhr.responseText;
                             
                             $("#canvas").css({backgroundImage : "url("+path+")"});
-                            
-                          // now this path can be put in the img url for bg img of canvas
-                            //then after all the changes are made in canvas, make an object
-                            // with header txt, footer txt, and img path. then stringify that object and put it in msgs table in db.
-                            // do we need a way to note if a msg is a regular message or a media msg, so we can sort it properly when we reload it?
-
                         }
 
                     };
@@ -868,7 +962,7 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
                         },
                         type:'POST',
                         success:function(mresp){
-                            console.log('mresp is', mresp);
+                     //       console.log('mresp is', mresp);
                             canvas.removeAttribute("class");
                             canvas.id="canvas"
                             getmsgs();
@@ -881,66 +975,13 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
                     });
             }; 
     
-    /*
-    $scope.uploadImage = function($event){
-                var upload = document.getElementById('upload');
-                var files = document.getElementById('filesinp');
-                var sess = userinfo.user_id;
-
-
-                console.log('hi');
-                $event.preventDefault();
-
-                //upload the files here using another form of ajax
-
-                var formData = new FormData();
-                var allfiles = files.files;
-                console.log('files', allfiles);
-                var xhr = new XMLHttpRequest();
-
-                for(var i =0; i < allfiles.length; i++){
-
-                    var e_file = allfiles[i];
-
-
-                    if(!e_file.type.match('image/*')){
-                        console.log('not an image file');
-                        return false;
-                    }
-
-
-                    formData.append('images[]', e_file, e_file.name);
-                    formData.append('message', 'my post message');
-                    formData.append('userid', sess);
-
-                    xhr.open('POST', './model/imgupload.php', true);
-                    xhr.onload = function(){
-
-                        if(xhr.status == 200){
-                          
-                            var path = xhr.responseText;
-                            
-                            $("#canvas").css({backgroundImage : "url("+path+")"});
-                            
-                          // now this path can be put in the img url for bg img of canvas
-                            //then after all the changes are made in canvas, make an object
-                            // with header txt, footer txt, and img path. then stringify that object and put it in msgs table in db.
-                            // do we need a way to note if a msg is a regular message or a media msg, so we can sort it properly when we reload it?
-
-                        }
-
-                    };
-
-                    xhr.send(formData);
-                };
-
-            };
-        }
-        
-        */
+   
+     $interval(getmsgs, 10000);
          function getmsgs(){
-            
-                //setInterval(function(){
+          
+             var element = document.getElementById("msgcenter");
+                        element.scrollTop = element.scrollHeight;
+         
        
                     $.ajax({
                         url:'./cont/messages.php',
@@ -952,7 +993,7 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
                         },
                         type:'POST',
                         success:function(smresp){
-                            console.log('smresp is', smresp);
+                          //  console.log('smresp is', smresp);
                             document.getElementById("msgcenter").innerHTML="";
                             $scope.userinfo = userinfo;
                             for(var i=0;i<smresp.length;i++){
@@ -961,9 +1002,6 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
                                 
                                 document.getElementById("msgcenter").appendChild(div1);
                                 
-                                        
-                                
-
                                     if(userinfo.user_id == smresp[i].user_id){
                                        div2.innerHTML="<img class='smallavi' style = 'float:right;' src='"+smresp[i].avi+"'><span style='color:"+smresp[i].c+"; margin:16px 0; float:right; font-size:12pt; '>"+smresp[i].username+"</span>"+"<div style='float:right; clear:both; margin:0 70px;padding:0 4%; color:rgba(17,36,66,0.6)'>" + smresp[i].msg + "</div>";
                                         
@@ -974,18 +1012,7 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
                                     }
                                  div2.style="float:left; clear:both; width:100%;"
                                         div1.appendChild(div2);
-                                /*
-                                
-                                   <div ng-repeat='msg in msgs'  class='wrap'>
-                                    <div ng-if='userinfo.user_id == msg.user_id'>
-                                        {{msg.msg}}
-                                    </div>
-                                    <div ng-if='userinfo.user_id != msg.user_id'>
-                                        <img class='smallavi' src='{{msg.avi}}'>
-                                        <span style='color:{{msg.c}};'>{{msg.username}}: </span>
-                                        <p>{{msg.msg}}</p>
-                                    </div>*/
-                    
+                        
                             }
 
                         },
@@ -995,28 +1022,22 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
                     }
                 });
 
-                //},
-
-            //1000);
-             
-             
         }
     getusers();
     $scope.showmore = function($event){
         var thissy = $event.target;
-        console.log('thisy', thissy);
+      
         var user = thissy.getAttribute('data-user');
         $("#" + user).fadeIn();
         
         $('.exitupopup').click(function(){
               $("#" + user).fadeOut();
-          console.log('hey exit');
+        
         });
     };
     
     function getusers(){
             
-                //setInterval(function(){
        
                     $.ajax({
                         url:'./cont/chatroom.php',
@@ -1028,7 +1049,7 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
                         },
                         type:'POST',
                         success:function(uresp){
-                            console.log('uresp is', uresp);
+                        //    console.log('uresp is', uresp);
                              $scope.$apply(function(){
                                 $scope.Chatusers = uresp;
                             });
@@ -1058,7 +1079,7 @@ ctrl.controller('chatCtrl', ['$scope', '$routeParams', function($scope, $routePa
                         },
                         type:'POST',
                         success:function(mresp){
-                            console.log('mresp is', mresp);
+                         //   console.log('mresp is', mresp);
                             
                             getmsgs();
                             $("#msgbox").val("");
@@ -1124,7 +1145,17 @@ ctrl.controller('mychatroomsCtrl', ['$scope', function($scope){
                 },
                 type:'POST',
                 success:function(myrooms){
-                    console.log('myrooms is', myrooms);
+                //    console.log('myrooms is', myrooms);
+                    
+                    if(myrooms == ''){
+                        
+                        if(userinfo.status ==1){
+                             $('.mychatrooms').append("<p>You haven't made any chatrooms yet! <p><a href='#/new'>Make a new chatroom</a>");
+                        } else {
+                             $('.mychatrooms').append("<p>You haven't been invited to any chats yet. <a href = '#/profile'>Edit your profile while you wait!</a>");
+                        }
+                       
+                    }
 
                     $scope.$apply(function(){
 
@@ -1143,7 +1174,7 @@ ctrl.controller('mychatroomsCtrl', ['$scope', function($scope){
    $scope.goToRoom = function($event){
         
        var thiss = $event.target;
-       console.log('this is', thiss.getAttribute('data-roomid'));
+      
        var crid = thiss.getAttribute('data-roomid');
        var en =  btoa("hello world");
        en = en.replace("=", crid);
@@ -1151,6 +1182,4 @@ ctrl.controller('mychatroomsCtrl', ['$scope', function($scope){
        
     };
     
-   
-
 }]);

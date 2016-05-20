@@ -10,9 +10,9 @@ if($_POST['method'] == 'insertRoom'){
       
 }
 
-if($_POST['method'] == 'showAllRooms'){
+if($_POST['method'] == 'showAllChatrooms'){
       
-    showAllRooms();
+    showAllChatrooms();
       
   }
 if($_POST['method'] == 'showMyRooms'){
@@ -21,9 +21,9 @@ if($_POST['method'] == 'showMyRooms'){
       
   }
 
-if($_POST['method'] == 'updateRoom'){
+if($_POST['method'] == 'updateChatroom'){
       
-     updateRoom();
+     updateChatroom();
       
   }
 if($_POST['method'] == 'addUserToRoom'){
@@ -31,9 +31,9 @@ if($_POST['method'] == 'addUserToRoom'){
     addUserToRoom();
 }
 
-if($_POST['method'] == 'deleteRoom'){
+if($_POST['method'] == 'deleteChatroom'){
       
-    deleteRoom();
+    deleteChatroom();
       
   }
 

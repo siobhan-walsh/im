@@ -61,6 +61,13 @@ im.config([
                 controller:'viewusersCtrl'
                 
             }
+        ).when(
+            '/viewchatrooms',
+            {
+                templateUrl:'view/viewchatrooms.html',
+                controller:'viewcrCtrl'
+                
+            }
         )
     }
 ]);

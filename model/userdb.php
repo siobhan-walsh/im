@@ -226,26 +226,17 @@ include('connection.php');
         
     }
     
-    function delete_user(){
-        
-        $uid = $_POST['user_id'];
-       
-        
+    function deleteUser(){
+         global $db;
+        $uid = $_POST['uid'];
+      
         $query = "DELETE FROM users WHERE user_id = :uid";
         
         $result = $db->prepare($query);
         
         $result->execute(array(':uid' => $uid));
         
-        echo json_encode('deleted user');
-        
-    }
-    function deletU(){
-        
-        global $db;
-        $query = "DELETE FROM `requests` WHERE `user_id` = '".$_POST['U']."'";
-        $result = $db->query($query);  
-        echo json_encode('deleted user');
+        echo json_encode('byeeyeye');
         
     }
 
