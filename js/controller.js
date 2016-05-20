@@ -183,15 +183,17 @@ ctrl.controller('loginCtrl', ['$scope', function($scope){
             document.getElementById('adminheader').style.display = 'none';
             document.getElementById('customerheader').style.display = 'none';
             
-            
-            if (sessionStorage.length!=0){
+            var userinfo = sessionStorage.getObject('userinfo');
+            console.log('userinfo is', userinfo);
+
+            if (userinfo != 'nouser'){
                 if(userinfo.status == 1){
                     window.location = '#/admin';
                 } else if (userinfo.status == 2) {
                     window.location = '#/mychats';
                 }
             }else{
-                    var userinfo = sessionStorage.getObject('userinfo');
+                 
                     $scope.login = function(){
               
                     $.ajax({
@@ -205,7 +207,7 @@ ctrl.controller('loginCtrl', ['$scope', function($scope){
                         type:'POST',
                         success:function(lresp){
                             console.log('lresp is', lresp);
-                            sessionStorage.setObject('userinfo', lresp);    
+                               
                             
                             if(lresp == "user not found"){
 
@@ -213,6 +215,7 @@ ctrl.controller('loginCtrl', ['$scope', function($scope){
                                 $('#error').html('Sorry, that is the wrong email or password');
                             } else {
                                 console.log('yes we found them');
+                                 sessionStorage.setObject('userinfo', lresp);
 
                                 if(lresp.status == 1){
                                     console.log('go to admin page');
@@ -229,21 +232,10 @@ ctrl.controller('loginCtrl', ['$scope', function($scope){
                     });
 
                 };
+                
                     
             }
-    
-            
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+  
     
     
     
@@ -609,9 +601,6 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
         });
     };
     
-    
-    
-    
            $scope.logout = function(){
 
                $.ajax({
@@ -624,12 +613,13 @@ ctrl.controller('profileCtrl', ['$scope', function($scope){
                     success:function(logoutresp){
 
                         console.log('logoutresp', logoutresp);
+                         sessionStorage.setObject('userinfo', 'nouser');
 
                         $scope.$apply(function(){
                                 $scope.logoutresp = logoutresp;
                          });
                         
-                        window.location = '/#/';
+                        window.location = '#/';
 
                     },
                     error:function(logoutresp){
