@@ -186,7 +186,7 @@ ctrl.controller('loginCtrl', ['$scope', function($scope){
             var userinfo = sessionStorage.getObject('userinfo');
             console.log('userinfo is', userinfo);
 
-            if (userinfo != 'nouser'){
+            if (userinfo != null){
                 if(userinfo.status == 1){
                     window.location = '#/admin';
                 } else if (userinfo.status == 2) {
