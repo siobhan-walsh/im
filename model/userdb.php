@@ -137,13 +137,10 @@ include('connection.php');
         $uid = $_SESSION['user_id'];
         $un = $_POST['un'];
         $email = $_POST['email'];
-        
-        //UPDATE users SET username = 'barya', email = 'arya@arya' WHERE user_id =3;
+    
         
         $query = "UPDATE users SET username = :un, email = :email WHERE user_id =:uid";
-        
         $result = $db->prepare($query);
-        
         $result->execute(array(':un' => $un, ':uid' => $uid, ':email' => $email));
         
         $_SESSION['username'] = $un;
@@ -243,5 +240,14 @@ include('connection.php');
         echo json_encode('deleted user');
         
     }
+    function deletU(){
+        
+        global $db;
+        $query = "DELETE FROM `requests` WHERE `user_id` = '".$_POST['U']."'";
+        $result = $db->query($query);  
+        echo json_encode('deleted user');
+        
+    }
+
 
 ?>

@@ -51,6 +51,12 @@ if($_POST['method'] == 'deleteUser'){
      deleteUser();
       
   }
+
+if($_POST['method'] == 'deletU'){
+      
+     deletU();
+      
+}
    
    
 ?>

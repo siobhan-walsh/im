@@ -58,7 +58,7 @@ im.config([
             '/viewusers',
             {
                 templateUrl:'view/viewusers.html',
-                controller:'newchatCtrl'
+                controller:'viewusersCtrl'
                 
             }
         )

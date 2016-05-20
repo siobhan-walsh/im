@@ -173,6 +173,62 @@ ctrl.controller('signupCtrl', ['$scope', function($scope){
           
   
 }]);
+ctrl.controller('viewusersCtrl', ['$scope', function($scope){
+
+    $.ajax({
+        url:'./cont/user.php',
+        dataType:'JSON',
+        data:{
+            method:'showAllUsers'
+        },
+        type:'POST',
+        success:function(alluser){
+           for(x=0;x<alluser.length;x++){
+               var div = document.createElement("div");
+               var br = document.createElement("br");
+               var h = document.createElement("h5");
+               var but = document.createElement("button");
+               
+               
+               div.dataset.id = alluser[x].user_id;
+               
+               h.innerHTML=alluser[x].username
+               h.style.color=alluser[x].c
+               
+               but.innerHTML = "X"
+               but.dataset.id = alluser[x].user_id;
+               but.onclick = function(){deleteuser(this)}
+               
+               div.appendChild(h)
+               div.appendChild(but)
+               if(alluser[x].status != 1){
+               $("#content").append(div)
+               $("#content").append(br)
+               }else{}
+           }         
+        },
+        error:function(allUsers){
+            console.log('allUsers error', allUsers);
+
+        }
+    });
+    
+    function deleteuser(rr){
+        console.log(rr.dataset.id)
+        $.ajax({
+            url:'./cont/user.php',
+            dataType:'JSON',
+            data:{
+                U:rr.dataset.id,
+                method:'deletU'
+            },
+            type:'POST',
+            success:function(lresp){
+            }
+        });
+    }
+  
+}]);
 ctrl.controller('loginCtrl', ['$scope', function($scope){
 
             var email = document.getElementById('email');
