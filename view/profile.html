@@ -1,6 +1,5 @@
 
-        
-        <div class='content'>
+  
             
             <div ng-controller= 'profileCtrl' class='userinfo'>
                 
@@ -8,7 +7,7 @@
                 
                 
                 
-                <img class = 'profilepic' ng-click = 'update()' src='{{info.avi}}'>
+                <img class = 'profilepic' src='{{info.avi}}'>
                 
                 
                 <form id='myform'>
@@ -23,9 +22,9 @@
                 
                 <div class="box">
                     
-                    <h3 id='hname' ng-click='showInp($event)' class="boxclick">{{info.name}}</h3>
+                    <h3 id='hname' ng-click='showInp($event)' class="boxclick">{{info.username}}</h3>
                     
-                    <input ng-blur='showH($event);' type='text' id='un' class=" hideinp boxclick" value='{{info.name}}'>
+                    <input ng-blur='showH($event);' type='text' id='un' class=" hideinp boxclick" value='{{info.username}}'>
                     
                 </div>
                 
@@ -43,18 +42,4 @@
             
             </div>
      
-            
-            
-            
-
-        </div>
-
-<script>
-    
-    
-    
-    
-    
-
-        </script>
-  
+   

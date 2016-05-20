@@ -36,8 +36,7 @@ if($_POST['method'] == 'updateUser'){
 
 if($_POST['method'] == 'login'){
       
-      loginUser();
-      
+     loginUser();
   }
 
 if($_POST['method'] == 'logout'){
@@ -49,7 +48,7 @@ if($_POST['method'] == 'logout'){
 
 if($_POST['method'] == 'deleteUser'){
       
-     // deleteUser();
+     deleteUser();
       
   }
    

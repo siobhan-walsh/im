@@ -1,0 +1,32 @@
+<div ng-controller= 'newchatroomCtrl'>
+    <p class='message'></p>
+    <div class='restricted'>
+        <div>chatroom name:</div>
+        
+        <div class = 'addnew'>
+            
+              <input id='crname' class = 'listinp' type = 'text' placeholder='name' autofocus>
+              <button ng-click = 'add()'>Create Chat</button>
+        </div> 
+        
+        <div>
+            <br>
+            Select from users:
+            <div class='userlist'>
+            
+            <div ng-repeat='user in allUsers'>
+            
+                <div>
+                    <input type='checkbox' class='check' data-userid = '{{user.user_id}}'>
+                    <img src='{{user.avi}}' class = 'smallavi'>
+                    <span style='color:{{user.c}}'>{{user.username}}</span>
+                   
+                </div>
+            
+            </div>
+            
+            </div>
+        </div>
+        
+    </div>   
+</div>

@@ -1,11 +1,35 @@
 
-
-
-
-        <div ng-controller= 'adminloginCtrl' id = 'login'>
-            <input id='un' class='ty' type='text' placeholder = 'username'>
-            <input id='pw' class='ty' type='password' placeholder = 'password'>
-            <button id='subm' ng-click = 'login()'>Join the chat!</button>
-            
+        <div ng-controller= 'adminCtrl'>
+            <p class='message'></p>
+            <div class='restricted'>
+                <div id = 'adminpage'>
+                    <a href = '#/profile'>
+                        <div>
+                             <i class='material-icons'>person</i><br>
+                            <span>Edit Your Profile</span>
+                        </div>
+                    </a>
+                    <a href = '#/mychats'>
+                        <div>
+                              <i class='material-icons'>chat</i><br>
+                            <span>See your chatrooms</span>
+                        </div> 
+                    </a>
+                    <a href = '#/new'>
+                        <div>
+                            <i class='material-icons'>chat_bubble_outline</i><br>
+                            <span>Create a new chatroom</span>
+                        </div>
+                    </a>
+                    <a href = '#/viewusers'>
+                        <div>
+                            <i class='material-icons'>supervisor_account</i><br>
+                            <span>Manage Users</span>
+                        </div> 
+                    </a>
+             
+            </div>
             
         </div>
+
+</div>

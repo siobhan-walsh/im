@@ -1,18 +1,158 @@
-
-<div id = 'msgcenter'>
-</div>
-<input id = 'msgbox' type = 'text' placeholder = 'type a message here' >
-<div class="admip" style="display:none">
+<style>
+    #canvas {
+        margin-top:10px; 
+        overflow: hidden;
+        position: relative;
+        text-align: center;
+        display: block;
+        float: left;
+        clear: both;
+        width: 76vw;
+        height: 76vw;
+        background:black;
+        background: linear-gradient(135deg, red, blue);
+        background-image:url("http://portfoliotheme.org/enigmatic/wp-content/uploads/sites/9/2012/07/placeholder1.jpg");
+        background-repeat :no-repeat;
+        background-position: top left;
+        background-size: contain;
+    }
     
+    .canvas {
+        margin-top:10px;
+        overflow: hidden;
+        position: relative;
+        text-align: center;
+        display: block;
+        float: right;
+        clear: both;
+        width: 39vw;
+        height: 39vw;
+        background:black;
+        background: linear-gradient(135deg, red, blue);
+        background-image:url("http://portfoliotheme.org/enigmatic/wp-content/uploads/sites/9/2012/07/placeholder1.jpg");
+        background-repeat :no-repeat;
+        background-position: top left;
+        background-size: contain;
+    }
+    
+    .tools form {
+        display:block;
+        clear: none;
+        float: left;
+    }
+
+    .imglinke {
+        width: 140px;
+    }
+
+    .Ihead {
+        width: 100%;
+        display: block;
+        float: left;
+        clear: both;
+        margin-right: 30px;
+    }
+    .Ifotter {
+        width: 100%;
+        display: block;
+        float: left;
+        clear: both;
+        margin-right: 30px;
+    }
+    .imgfoot{
+        color:black;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        
+    }
+    .img{
+        width: 100%
+    }
+    #submit{
+        clear: both;
+        width: 79%;
+        margin-top: 10px;
+        margin-bottom:20px;
+    }
+    .createcont{
+        width: 96vw;
+    }
+    .imghead {
+        width: 100%;
+        position: absolute;
+        color:black;
+        top: 0;
+    }
+    .fraim{
+        width: 100%;
+        height: 100%;
+    }
+</style>
+<h1></h1>
+<div class='chatbox'>
+    <div id='msgcenter'>
+        
+    </div>
+    
+    <div id='cruserlist'>
+      <h4>Users in this chat:</h4>
+        <div ng-repeat = 'user in Chatusers' >
+            <p ng-click = "showmore($event)" data-user= '{{user.user_id}}'>{{user.username}}</p>
+            <div id='{{user.user_id}}' class='morepop'>
+                 <i class='material-icons exitupopup'>clear</i>
+                <img src = '{{user.avi}}'>
+                <p>Username: {{user.username}}</p>
+                <p>Email: {{user.email}}</p>
+            </div>
+        </div>
+        
+    </div>
+    <div id='chatctrls'>
+        <input id = 'msgbox' type = 'text' placeholder = 'type a message here' >
+        <div id='meme'>
+            <i class='material-icons'>border_color</i>
+            <span>Meme maker</span>
+        </div>
+        <!---->
+        <div id='imgupload'>
+            <i class='material-icons'>insert_photo</i>
+            <span>Upload Image</span>
+        </div>
+        <div id='videoupload'>
+            <i class='material-icons'>video_library</i>
+            <span>Post video link</span>
+        </div>
+        
+    </div>
+    
+
+</div>
+
+
+
+
+<div class ='createcont'>
+
+<div class="admip" style="display:none">
+    Create Post:
+    <i id='exitpopup' class='material-icons'>clear</i>
     <div class="tools">
-        <div class="img">
+        <table class="img">
+            <tr>
+            <td>
             <form class="imglinke">
                 <label>Img<br>
-                    <input id="imgurl" type="text">
-                    <input value="ADD" type="button" id="imgadd"><br>
+                    <form id='myform'>
+
+                        <input  type='file' id='filesinp' multiple >
+                        <button ng-click = 'uploadImg($event)' id='upload'>upload</button>
+
+                    </form>
                     <input name="size" id="sizeS" type="range" value="40"><br>
                 </label>
             </form>
+            <td>
             <form id="size">
                 <label>Size<br>
                     <input name="size" checked class="size" type="radio" value="0">contain<br>
@@ -20,6 +160,8 @@
                     <input name="size" class="size" type="radio" value="2">cover
                 </label>
             </form>
+            </td>
+            <td>
             <form class="alignment">
                 <label>Alignment<br>
                 <input name="alignmentO" checked class="alignmentO" type="radio" value="0">
@@ -33,8 +175,9 @@
                 <input name="alignmentO" class="alignmentO" type="radio" value="8">
                 </label>
             </form>
-            <br>
-        </div> <br>  
+            </td> 
+            </tr>
+        </table> <br>  
 
         <div class="Ihead">HEADER<br>
             <form>
@@ -64,10 +207,22 @@
                 </label>
             </form>
         </div>
+        <div class="Ifram">EMBED Youtube<br>
+            <form>
+                <label>ADD WATHC CODE<br>
+                    <input id="framt" type="text">
+                    <input id="framb" value="ADD" type="button" ><br>
+                </label>
+            </form>
+        </div>
     </div>
+    <div id="canvasP">
     <div id="canvas">
         <h1 class="imghead" ></h1>
-        <div class="imgfoot"><p><P></div>
+        <div class="imgfoot"></div>
     </div>
-
+    </div>
+        <br>
+        <button ng-click = 'submitpost($event)' id="submit">upload</button>
+</div>
 </div>

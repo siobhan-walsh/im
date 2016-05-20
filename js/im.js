@@ -9,16 +9,17 @@ im.config([
     '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
         
         $routeProvider.when(
-            '/newadmin',
+            
+            '/',
             {
-                templateUrl:'view/newadmin.html',
-                controller:'adminSignupCtrl'
+                templateUrl:'view/login.html',
+                controller:'loginCtrl'
             }
         ).when(
             '/admin',
             {
                 templateUrl:'view/admin.html',
-                controller:'adminloginCtrl'
+                controller:'adminCtrl'
             }
         ).when(
             '/signup',
@@ -27,7 +28,7 @@ im.config([
                 controller:'signupCtrl'
             }
         ).when(
-            '/chat',
+            '/chat/:id',
             {
                 templateUrl:'view/chat.html',
                 controller:'chatCtrl'
@@ -39,10 +40,25 @@ im.config([
                 controller:'profileCtrl'
             }
         ).when(
-            '/dashboard',
+            '/mychats',
             {
-                templateUrl:'view/dashboard.html',
-                controller:'chatroomCtrl'
+                templateUrl:'view/mychatrooms.html',
+                controller:'mychatroomsCtrl'
+                
+            }
+        ).when(
+            '/new',
+            {
+                templateUrl:'view/newchatroom.html',
+                controller:'newchatroomCtrl'
+                
+           
+                }
+        ).when(
+            '/viewusers',
+            {
+                templateUrl:'view/viewusers.html',
+                controller:'newchatCtrl'
                 
             }
         )
